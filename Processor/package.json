@@ -1,0 +1,27 @@
+{
+  "name": "easywebUtilServer",
+  "version": "1.0.0",
+  "description": "This server will process coffee, scss, etc. preprocessor for the application",
+  "main": "index.js",
+  "dependencies": {
+    "coffee": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-coffee": "^2.3.1",
+    "scss": "^0.2.4",
+    "unzip": "^0.1.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/sagarrabadiya/easyweb.git"
+  },
+  "author": "Sagar Rabadiya <sam.coolone70@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sagarrabadiya/easyweb/issues"
+  },
+  "homepage": "https://github.com/sagarrabadiya/easyweb"
+}
