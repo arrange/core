@@ -24,7 +24,7 @@ class Organization extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = array( 'name' , 'sub_domain' , 'email' , 'logo' , 'base_path' );
+	protected $fillable = array( 'name' , 'subdomain' , 'email' , 'logo' , 'base_path' );
 
 	public function Users()
 	{

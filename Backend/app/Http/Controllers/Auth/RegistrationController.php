@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\DB;
 
 class RegistrationController extends Controller
 {
@@ -19,11 +20,11 @@ class RegistrationController extends Controller
 	public function store( SignUpRequest $request )
 	{
 		$aInputOrganizationData = $request->only( array( 'name' , 'subdomain' , 'email' ) );
-		$aInputUserData = $request->only( array( 'email' , 'password' ) );
 
 		// Insert Organization
 		$oOrganization = Organization::create( $aInputOrganizationData );
 		if ( $oOrganization ) {
+			$aInputUserData = $request->only( array( 'email' , 'password' ) );
 			$aInputUserData[ 'organization_id' ] = $oOrganization->id;
 			$aInputUserData[ 'firstname' ] = $request->input( 'name' );
 			$aInputUserData[ 'password' ] = bcrypt( $aInputUserData[ 'password' ] );
