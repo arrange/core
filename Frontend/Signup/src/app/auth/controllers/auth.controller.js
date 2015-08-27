@@ -12,7 +12,23 @@
     .controller('SigninController',function(){
           console.log("signIn");
     })
-    .controller('SignupController',function(){
-         console.log("signup");
-    });
+    // .controller('SignupController',function(){
+    //       console.log("signup....");
+    // })
+    .controller('SignupController',['$scope', 'Organization', function( $scope, Organization ){
+         console.log("signup...");
+        $scope.organization = new Organization(); 
+
+        $scope.signupForm = function()
+        {
+          $scope.organization.$save(function(data){
+              toastr.success('organization created successfully!','Success');
+          },function(data){
+             console.log(data);          
+          })
+        }
+
+    }]);
+
+   
 })();
