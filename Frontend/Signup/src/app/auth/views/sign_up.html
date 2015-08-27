@@ -1,0 +1,29 @@
+<div class="container" id="wrap">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form ng-submit="signupForm()" method="post" accept-charset="utf-8" class="form" role="form" name="form1">   
+              <legend>Sign Up</legend>
+                <h4>Start your free 14 day trial.</h4>
+                <div class="row">
+                  <div class="col-xs-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control input-lg" id="domain_url" name="domain_url" placeholder="Pick a url for your account" ng-model="organization.subdomain">
+                      <div class="input-group-addon input-lg">.notrie.com</div>
+                    </div>
+                  </div>
+                </div>
+                <input type="text" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="organization.email" required />
+
+                <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password" ng-model="organization.password" required />
+                
+                <input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password" ng-model="organization.password_confirmation"  />
+                
+                <input type="text" name="company_name" value="" class="form-control input-lg" placeholder="Your / Company name" ng-model="organization.name" required  />         
+                
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                        Create account</button>
+            </form>          
+          </div>
+</div>            
+</div>
+</div>
