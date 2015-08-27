@@ -24,7 +24,9 @@
           $scope.organization.$save(function(data){
               toastr.success('Organization created successfully!','Success');
           },function(data){
-             console.log(data);          
+            angular.forEach(data.data, function(value, index){
+              toastr.error(value); 
+            })
           })
         }
 
