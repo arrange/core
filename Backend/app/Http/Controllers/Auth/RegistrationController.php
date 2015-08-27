@@ -62,7 +62,9 @@ class RegistrationController extends Controller
 				}
 			}*/
 
-			$oOrganization = Organization::where('id','=',$oOrganization->id)->first();
+			$oOrganization = Organization::where('id','=',$oOrganization->id)->with(array('Users'=>function($q){
+				$q->with('Roles');
+			}))->first();
 
 
 		}

@@ -28,7 +28,7 @@ class Organization extends Model{
 
 	public function Users()
 	{
-		return $this->hasMany('User','organization_id');
+		return $this->hasMany('App\Models\User','organization_id');
 	}
 
 }

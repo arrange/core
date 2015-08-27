@@ -15,12 +15,12 @@ Route::get( '/' , 'WelcomeController@index' );
 
 Route::get( 'home' , 'HomeController@index' );
 
-Route::controllers( [
-	'auth' => 'Auth\AuthController' ,
-	'password' => 'Auth\PasswordController' ,
-] );
-
 Route::group(['middleware' => 'cors'], function(Illuminate\Routing\Router $router){
 	Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
+	Route::controllers( [
+		'auth' => 'Auth\AuthController' ,
+		'password' => 'Auth\PasswordController' ,
+	] );
+	Route::get('/valid-subdomain','Auth\AuthController@getValidSubdomain');
 });
 
