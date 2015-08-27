@@ -9,16 +9,14 @@
           vm.signinurl = $config.url+"/#/"+'signin';
           vm.signupurl = $config.url+"/#/"+'signup';
     }])
+    // Signin (Login Controller)
     .controller('SigninController',function(){
           console.log("signIn");
     })
-    // .controller('SignupController',function(){
-    //       console.log("signup....");
-    // })
+    // Singup (Registration Form Controller)
     .controller('SignupController',['$scope', 'Organization', function( $scope, Organization ){
          console.log("signup...");
         $scope.organization = new Organization(); 
-
         $scope.signupForm = function()
         {
           $scope.organization.$save(function(data){
