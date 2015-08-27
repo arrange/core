@@ -110,6 +110,8 @@ return [
 
 	'providers' => [
 
+		'Barryvdh\Cors\ServiceProvider',
+
 		/*
 		 * Laravel Framework Service Providers...
 		 */
@@ -144,6 +146,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+
 
 	],
 

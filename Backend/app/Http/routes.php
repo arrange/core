@@ -20,4 +20,7 @@ Route::controllers( [
 	'password' => 'Auth\PasswordController' ,
 ] );
 
-Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
+Route::group(['middleware' => 'cors'], function(Illuminate\Routing\Router $router){
+	Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
+});
+
