@@ -14,6 +14,15 @@
 }
 
 /************* Registration CSS Start *****************/
+.validation-invalid
+{
+  color: #f00;
+}
+.validation-valid
+{
+  display: none;
+}
+
 legend{
 	color:#141823;
 	font-size:25px;

@@ -22,7 +22,7 @@
         $scope.signupForm = function()
         {
           $scope.organization.$save(function(data){
-              toastr.success('organization created successfully!','Success');
+              toastr.success('Organization created successfully!','Success');
           },function(data){
              console.log(data);          
           })
