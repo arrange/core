@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -44,5 +46,33 @@ class AuthController extends Controller
 			return response()->json( array( 'error' => "couldn't find organization" ) , 500 );
 
 		return response()->json( $oOrganization->toArray() , 200 );
+	}
+
+	public function postLogin( Request $reqeust )
+	{
+		$this->validate( $reqeust , [
+			'email' => 'required|email' , 'password' => 'required' , 'subdomain' => 'required'
+		] );
+
+		$oOrganization = Organization::where( 'subdomain' , $reqeust->input( 'subdomain' ) )->first();
+		if ( !$oOrganization )
+			return response()->json( array( 'error' => "Invalid subdomain" ) , 500 );
+
+		$credentials = $reqeust->only( 'email' , 'password' );
+		$credentials[ 'organization_id' ] = $oOrganization->id;
+		if ( $this->auth->attempt( $credentials , $reqeust->has( 'remember' ) ) ) {
+			$oUsr = $this->auth->user();
+			$oUsr->last_logged_in = date( 'Y-m-d H:i:s' );
+			if( !$oUsr->token )
+			{
+				$oUsr->token = str_random(120);
+			}
+			$oUsr->save();
+			$oUsr = User::where( 'id' , $oUsr->id )
+				->with( array( 'Organization' , 'Roles' ) )
+				->first();
+			return response()->json( $oUsr->toArray() );
+		}
+		return response()->json( array( 'error' => "Invalid username or password" ) , 500 );
 	}
 }
