@@ -4,7 +4,7 @@
     angular
         .module('easywebapp')
         .config(config);
-
+        
     /** @ngInject */
     function config($logProvider, toastr) {
         // Enable log
