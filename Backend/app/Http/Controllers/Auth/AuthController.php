@@ -75,4 +75,15 @@ class AuthController extends Controller
 		}
 		return response()->json( array( 'error' => "Invalid username or password" ) , 500 );
 	}
+
+	public function getTokenInfo($token)
+	{
+		$oUser = User::where('token',$token)->first();
+		if( ! $oUser )
+			return $this->error('Invalid Token',403);
+
+		$oUser->token = $token->token;
+
+		return response()->json($oUser->toArray());
+	}
 }

@@ -10,19 +10,16 @@ label.has-error.control-label {
 <div class="container" id="wrap">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  method="post" accept-charset="utf-8" class="form" role="form" name="form1" novalidate>   
-              <legend>Sign In</legend>                
+            <form  method="post" accept-charset="utf-8" class="form" role="form" name="form1" novalidate>
+                <legend>Sign In</legend>
                 <div class="row">
-                  <div class="col-xs-12 col-md-12">
-                    <input type="email" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="credentials.email" validator="email"  email-error-message="email address required."/>
-              
-                    <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password (min 6 charector)" ng-model="credentials.password" required  validator="required" password-error-message="password required." />
-                  </div>
+                    <div class="col-xs-12 col-md-12">
+                        <input type="email" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="credentials.email" validator="email" email-error-message="email address required.">
+                        <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password " ng-model="credentials.password"   validator="required" required-error-message="password required." />
+                    </div>
+                    <button class="btn btn-block btn-success" type="submit" validation-submit="form1" ng-click="signIn()">Sign In</button>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" validation-submit="form1" ng-click="login()">
-                        Sign In</button>
-            </form>          
-          </div>
-</div>            
-</div>
+            </form>
+        </div>
+    </div>
 </div>
