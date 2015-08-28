@@ -8,8 +8,9 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('$config',{
-            // url : "http://localhost:8000/",
-            url : "http://localhost/notrierepo/Backend/public/",
+            url : "http://localhost:3000/",
+            api : "http://localhost/notrierepo/Backend/public/",
+            domain: "notrie.com",
             module : {
                 auth : {
                     controller : 'app/auth/controllers',

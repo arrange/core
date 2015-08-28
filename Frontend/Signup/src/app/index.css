@@ -14,6 +14,13 @@
 }
 
 /************* Registration CSS Start *****************/
+.ng-invalid.ng-dirty{
+    .has-error .form-control;
+}
+label.has-error.control-label {
+    .has-error .control-label;
+}
+
 .validation-invalid
 {
   color: #f00;
