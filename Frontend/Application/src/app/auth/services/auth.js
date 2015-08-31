@@ -5,16 +5,17 @@ angular.module('easywebapp')
 	.service('Auth', ['$rootScope', '$cookies', '$cookieStore', '$http', '$config', '$q', '$log' ,
 	function ($rootScope, $cookie, $cookieStore, $http, $config, $q , $log) {
 		var setUser = function (User) {
-            angular.forEach(User,function(value,index){
-                $cookieStore.put(index,value);
-            });
-
+            $cookieStore.put('user',JSON.stringify(User));
 			$rootScope.User = User;
 			$http.defaults.headers.common.Token = User.token;
 		};
 
         var getValue = function (key){
-            return  $cookieStore.get(key);
+            if($cookieStore.get('user')) {
+                var user = JSON.parse($cookieStore.get('user'));
+                return user[key];
+            }
+            return false;
         };
 
         this.getValue = getValue;
@@ -64,6 +65,17 @@ angular.module('easywebapp')
 
         this.setUserByParams = function(data){
            setUser(data);
+        };
+
+        this.checkSubdomain = function (subdomain) {
+            //$log.debug(credentials);
+            var defer = $q.defer();
+            $http.get($config.api + 'valid-subdomain?subdomain='+subdomain).success(function (data) {
+                defer.resolve(data);
+            }).error(function (data) {
+                defer.reject(data);
+            });
+            return defer.promise;
         };
 	}]);
 })();

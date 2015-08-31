@@ -3,11 +3,16 @@
 
   angular
     .module('easywebapp')        
-    .controller('LoginCtrl',['$scope','Auth','$state','toastr',function($scope,Auth,$state,toastr){
-            if( Auth.isLoggedIn() ) {
-                $state.go('dashboard');
-            }
-          $scope.credentials = { subdomain : "qwe" };
+    .controller('LoginCtrl',['$scope','Auth','$state','toastr','$location',function($scope,Auth,$state,toastr,$location){
+
+          /*var host = $location.host();
+          var subdomain = "";
+          if (host.indexOf('.') < 0)
+              subdomain = host.split('.')[0];
+        */
+          var subdomain = "qwe";
+
+          $scope.credentials = { subdomain : subdomain };
           $scope.signIn = function() {
 			Auth.login( $scope.credentials ).then(function(response){
                 toastr.success('You are successfully login','Success');
@@ -25,9 +30,8 @@
 		$scope.User = $rootScope.User;
         $scope.getlogout = function()
         {
-            Auth.removeUser(function(){
-                $state.go('home');
-            });
+            Auth.removeUser();
+            $state.go('login');
         };
 	}]);
 })();

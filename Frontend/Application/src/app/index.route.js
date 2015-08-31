@@ -8,7 +8,7 @@
     /** @ngInject */
     function routeConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('home', {
+            .state('login', {
                 url: '/',
                 templateUrl: 'app/auth/views/sign_in.html',
                 controller: 'LoginCtrl',
@@ -20,7 +20,7 @@
                 controller: 'dashboardCtrl',
                 controllerAs: 'dashboard'
             });
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
     }
 
 })();
