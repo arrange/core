@@ -3,32 +3,41 @@
 
   angular
     .module('easywebapp')
-    .controller('AuthController',[ '$scope' , '$config' , 'toastr' , function( $scope , $config , toastr ){
-          console.log("option");
+    .controller('AuthController',[ '$scope' , '$config' , function( $scope , $config ){
+          //console.log("option");
           var vm = this;
-          vm.signinurl = $config.url+"/#/"+'signin';
-          vm.signupurl = $config.url+"/#/"+'signup';
+          
     }])
-    .controller('SigninController',function(){
-          console.log("signIn");
-    })
-    // .controller('SignupController',function(){
-    //       console.log("signup....");
-    // })
-    .controller('SignupController',['$scope', 'Organization', function( $scope, Organization ){
-         console.log("signup...");
-        $scope.organization = new Organization(); 
+    // Signin (Login Controller)
+    .controller('SigninController',['$scope', 'Authservice', 'toastr', '$config' , function( $scope, Authservice, toastr, $config ){
+        //console.log("signIn");
 
+        $scope.signinForm = function() {
+          //var credentials = {'subdomain':$scope.subdomain};
+          $scope.credentials = {subdomain:$scope.subdomain};
+          // console.log($scope.credentials);
+          Authservice.checkSubdomain($scope.credentials).then(function() {
+            window.location = 'http://' + $scope.subdomain + '.' + $config.domain;
+            toastr.success('Valid Domain....','Success');
+          },function(data){    
+              toastr.error(data.error); 
+            });
+        };
+    }])
+
+    // Singup (Registration Form Controller)
+    .controller('SignupController',['$scope', 'Organization', 'toastr', function( $scope, Organization, toastr ){
+        $scope.organization = new Organization(); 
         $scope.signupForm = function()
         {
-          $scope.organization.$save(function(data){
+          $scope.organization.$save(function(){
               toastr.success('Organization created successfully!','Success');
           },function(data){
-            angular.forEach(data.data, function(value, index){
+            angular.forEach(data.data, function(value){
               toastr.error(value); 
-            })
-          })
-        }
+            });
+          });
+        };
 
     }]);
 
