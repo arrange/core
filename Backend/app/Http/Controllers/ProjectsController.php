@@ -61,20 +61,20 @@ class ProjectsController extends Controller
 			return response()->json( array( 'error' => "Unable to create project" ) , 500 );
 
 		$sProjectFolder = $request->input( 'folder_name' , $oProject->id );
-		$sDestinationPath = base_path() . "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder;
+		$sDestinationPath = base_path() . "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder."/";
 
 		// Create Destination Dir
 		if ( !file_exists( $sDestinationPath ) )
 			File::makeDirectory( $sDestinationPath , 0777 , true );
 
-		$oProject->location = url(). "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder;
+		$oProject->location = url(). "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder."/";
 
-		// Extract preset's rar file in project_id folder
+		// Extract preset's zip file in project_id folder
 		if ( $request->has( 'preset_id' ) ) {
 			$oPreset = Preset::find( $request->input( 'preset_id' ) );
 			if ( $oPreset ) {
 				$oProject->preset_id = $request->input( 'preset_id' );
-				$sSource = $oPreset->location;
+				$sSource = $oPreset->zip_location;
 				$oExtractor = new Extractor( $sSource , $sDestinationPath );
 				if ( !$oExtractor ) {
 					$oProject->delete();

@@ -16,7 +16,7 @@ class Preset extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = "Presets";
+	protected $table = "presets";
 
 	/**
 	 * The attributes that are mass assignable.
