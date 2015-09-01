@@ -20,7 +20,7 @@
                 controller: 'dashboardCtrl',
                 controllerAs: 'dashboard'
             });
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/');
     }
 
 })();
