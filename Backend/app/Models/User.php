@@ -1,4 +1,5 @@
 <?php namespace App\Models;
+
 /**
  * Created by PhpStorm.
  * User: Temp
@@ -12,9 +13,10 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Model implements AuthenticatableContract , CanResetPasswordContract
+{
 
-	use Authenticatable, CanResetPassword;
+	use Authenticatable , CanResetPassword;
 	use SoftDeletes;
 
 	/**
@@ -29,22 +31,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['firstname' , 'lastname' , 'organization_id' , 'date_of_birth' , 'email', 'password'];
+	protected $fillable = [ 'firstname' , 'lastname' , 'organization_id' , 'date_of_birth' , 'email' , 'password' ];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = [ 'password' , 'remember_token' ];
 
 	public function Organization()
 	{
-		return $this->belongsTo('App\Models\Organization','organization_id');
+		return $this->belongsTo( 'App\Models\Organization' , 'organization_id' );
 	}
 
 	public function Roles()
 	{
-		return $this->belongsToMany('App\Models\Role','user_roles','user_id','role_id');
+		return $this->belongsToMany( 'App\Models\Role' , 'user_roles' , 'user_id' , 'role_id' );
+	}
+
+	public function Projects()
+	{
+		return $this->hasMany( 'App\Models\Project' , 'user_id' );
 	}
 }
