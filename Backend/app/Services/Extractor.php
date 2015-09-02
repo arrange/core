@@ -54,10 +54,15 @@ class Extractor
 	protected function extractZip()
 	{
 		$oZipArchive = new \ZipArchive();
-		if ( $oZipArchive->open( $this->source ) === TRUE ) {
-			$oZipArchive->extractTo( $this->destination );
-			$oZipArchive->close();
-			return true;
+		if ( $oZipArchive->open( $this->source ) ) {
+			try{
+				$oZipArchive->extractTo( $this->destination );
+				$oZipArchive->close();
+				return true;
+			}
+			catch(\Exception $e) {
+				var_dump($e->getMessage());
+			}
 		}
 		return false;
 	}

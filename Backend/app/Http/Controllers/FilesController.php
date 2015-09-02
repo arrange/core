@@ -16,7 +16,7 @@ class FilesController extends Controller {
 	{
 		$fileManager = app('FileHandler');
 		$fileManager->connect();
-		dd($fileManager->listFilesRaw('/'));
+		dd($fileManager->listFilesRaw('/Backend/app'));
 	}
 
 	/**

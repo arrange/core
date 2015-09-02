@@ -33,8 +33,8 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->singleton('FileHandler',function(){
 			return new FileManager(array(
-				'hostname' => '',
-				'username' => '',
+				'hostname' => 'localhost',
+				'username' => 'tps',
 				'password' => ''
 			));
 		});

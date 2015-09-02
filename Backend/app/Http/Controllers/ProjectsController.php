@@ -75,7 +75,6 @@ class ProjectsController extends Controller
 			if ( $oPreset ) {
 				$oProject->preset_id = $request->input( 'preset_id' );
 				$sSource = $oPreset->zip_location;
-				$sSource = str_replace('/','\\',$sSource);
 				$oExtractor = new Extractor( $sSource , $sDestinationPath );
 				$oExtractor->extract( $sSource , $sDestinationPath );
 				//dd($oExtractor);
