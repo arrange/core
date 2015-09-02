@@ -14,7 +14,9 @@ class FilesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$fileManager = app('FileHandler');
+		$fileManager->connect();
+		dd($fileManager->listFilesRaw('/'));
 	}
 
 	/**

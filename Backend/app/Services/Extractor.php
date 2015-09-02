@@ -22,11 +22,18 @@ class Extractor
 		}
 	}
 
-	public function extract( $destination = '' )
+	public function extract( $source = '' , $destination = '' )
 	{
-
 		if ( empty( $destination ) && empty( $this->destination ) ) {
 			return false;
+		}
+
+		if ( empty( $source ) && empty( $this->source ) ) {
+			return false;
+		}
+
+		if ( !empty( $source ) ) {
+			$this->source = $source;
 		}
 
 		if ( !empty( $destination ) ) {
