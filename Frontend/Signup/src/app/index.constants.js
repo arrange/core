@@ -9,8 +9,8 @@
         .constant('moment', moment)
         .constant('$config',{
             url : "http://localhost:3000/",
-            api : "http://localhost/notrierepo/Backend/public/",
-            //api : "http://api.notrie.com/",
+            //api : "http://localhost/notrierepo/Backend/public/",
+            api : "http://api.notrie.com/",
             domain: "notrie.com",
             module : {
                 auth : {
