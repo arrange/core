@@ -2,13 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: Temp
- * Date: 25-Aug-15
- * Time: 3:59 PM
+ * Date: 01-Sep-15
+ * Time: 3:43 PM
  */
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Organization extends Model{
+class Preset extends Model{
 
 	use SoftDeletes;
 
@@ -17,23 +16,17 @@ class Organization extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = "organizations";
+	protected $table = "presets";
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = array( 'name' , 'subdomain' , 'email' , 'logo' , 'base_path' );
-
-	public function Users()
-	{
-		return $this->hasMany('App\Models\User','organization_id');
-	}
+	protected $fillable = array( 'name' , 'zip_location' , 'thumb' );
 
 	public function Projects()
 	{
-		return $this->hasMany('App\Models\Project','organization_id');
+		return $this->hasMany('App\Models\Project','preset_id');
 	}
-
 }

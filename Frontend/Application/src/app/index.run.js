@@ -15,7 +15,11 @@
             var subdomain = "";
             if (host.indexOf('.') > 0)
                 subdomain = host.split('.')[0];
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> ba2b54c1954364748bd56378dbe07a08928f3ffb
             console.log(subdomain);
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){

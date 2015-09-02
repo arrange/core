@@ -15,14 +15,19 @@ Route::get( '/' , 'WelcomeController@index' );
 
 Route::get( 'home' , 'HomeController@index' );
 
-Route::group(['middleware' => 'cors'], function(Illuminate\Routing\Router $router){
+Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router $router ) {
 	Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
 
-	Route::post('auth','Auth\AuthController@postLogin');
-	Route::post('forgot-password','Auth\PasswordController@postEmail');
-	Route::get('user/{token}','Auth\AuthController@getTokenInfo');
-	Route::post('reset','Auth\PasswordController@postReset');
+	Route::post( 'auth' , 'Auth\AuthController@postLogin' );
+	Route::post( 'forgot-password' , 'Auth\PasswordController@postEmail' );
+	Route::get( 'user/{token}' , 'Auth\AuthController@getTokenInfo' );
+	Route::post( 'reset' , 'Auth\PasswordController@postReset' );
 
-	Route::get('valid-subdomain','Auth\AuthController@getValidSubdomain');
-});
+	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
+
+	Route::resource( 'projects' , 'ProjectsController' , array( 'middleware' => array( 'Token' ) ) );
+	Route::resource( 'files' , 'FilesController' , array( 'middleware' => array( 'Token' ) ) );
+	Route::resource( 'admin-presets' , 'PresetsController' , array( 'middleware' => array( 'Token' ) ) );
+
+} );
 
