@@ -10,6 +10,7 @@
         .constant('$config',{
             url : "http://localhost:3000/",
             api : "http://localhost/notrierepo/Backend/public/",
+           // api : "http://api.notrie.com/",
             module : {
                 auth : {
                     controller : 'app/auth/controllers',
