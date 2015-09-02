@@ -15,10 +15,11 @@
             var subdomain = "";
             if (host.indexOf('.') > 0)
                 subdomain = host.split('.')[0];
-           
+            
             console.log(subdomain);
+            
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
-                window.location = "http://notrie.com";
+               window.location = "http://notrie.com";
             });
 
 
