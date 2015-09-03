@@ -25,9 +25,11 @@ Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router 
 
 	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
 
-	Route::resource( 'projects' , 'ProjectsController' , array( 'middleware' => array( 'Token' ) ) );
-	Route::resource( 'files' , 'FilesController' , array( 'middleware' => array( 'Token' ) ) );
-	Route::resource( 'admin-presets' , 'PresetsController' , array( 'middleware' => array( 'Token' ) ) );
+	Route::group(['middleware'=>'token'],function(){
+		Route::resource( 'projects' , 'ProjectsController' );
+		Route::controller( 'files' , 'FilesController');
+		Route::resource( 'admin-presets' , 'PresetsController' , array( 'middleware' => 'token' ) );
+	});
 
 } );
 

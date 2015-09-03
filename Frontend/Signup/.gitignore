@@ -3,5 +3,4 @@ bower_components/
 .sass-cache/
 .idea/
 .tmp/
-dist/
-src/app/index.constants.js
+
