@@ -20,8 +20,8 @@ class FilesController extends Controller
 		$this->filemanager->connect();
 		$this->user = $guard->user();
 		$this->base = base_path() . DIRECTORY_SEPARATOR;
-		$this->base = str_replace("Backend/",'',$this->base);
-		$this->base = str_replace("Backend\\",'',$this->base);
+		$this->base = str_replace( "Backend/" , '' , $this->base );
+		$this->base = str_replace( "Backend\\" , '' , $this->base );
 
 		$this->path = "Backend" . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
 
@@ -48,12 +48,12 @@ class FilesController extends Controller
 
 		switch ( $mode ) {
 			case "list" :
-				$this->path .=  $this->url;
+				$this->path .= $this->url;
 				$bOnlyFolders = $request->input( 'onlyFolders' , false );
 				$response = $this->filemanager->listFilesRaw( $this->path , $bOnlyFolders );
 				break;
 			case "addFolder" :
-				$this->path .= $this->url.DIRECTORY_SEPARATOR.urldecode( $request->input( 'name' ) );
+				$this->path .= $this->url . DIRECTORY_SEPARATOR . urldecode( $request->input( 'name' ) );
 				$response = $this->filemanager->mkdir( $this->path );
 				break;
 			case "removeFolder" :
@@ -62,11 +62,14 @@ class FilesController extends Controller
 				break;
 			case "addFile" :
 				$path = $this->base . $this->path . $this->url;
-				if ( $request->hasFile( 'newfile' ) ) {
-					$oFile = $request->file( 'newfile' );
-					$this->moveFile( $oFile , $path );
-					$response = array( 'success' => true );
-				}
+
+				if ( !$request->hasFile( 'newfile' ) )
+					return response()->json( array( 'error' => 'File is required' ) , 500 );
+
+				$oFile = $request->file( 'newfile' );
+				$this->moveFile( $oFile , $path );
+				$response = true;
+
 				break;
 			case "editFile" :
 				$this->path .= $this->url;
@@ -74,11 +77,13 @@ class FilesController extends Controller
 				break;
 			case "saveFile" :
 				$path = $this->base . $this->path . $this->url;
-				if ( $request->has( 'text' ) ) {
-					$text = urldecode( $request->input( 'text' ) );
-					file_put_contents( $path , $text );
-					$response = array( 'success' => true );
-				}
+
+				if ( !$request->has( 'text' ) )
+					return response()->json( array( 'error' => 'Provide file content' ) , 500 );
+
+				$text = urldecode( $request->input( 'text' ) );
+				file_put_contents( $path , $text );
+				$response = true;
 				break;
 			case "removeFile" :
 				$this->path .= $this->url;
@@ -88,7 +93,8 @@ class FilesController extends Controller
 
 				if ( !$request->has( 'new' ) OR !$request->has( 'old' ) )
 					return response()->json( array( 'error' => 'Old name and New name both required' ) , 500 );
-				$path = $this->path.$this->url.DIRECTORY_SEPARATOR;
+
+				$path = $this->path . $this->url . DIRECTORY_SEPARATOR;
 				$oldpath = $path . urldecode( $request->input( 'old' ) );
 				$newpath = $path . urldecode( $request->input( 'new' ) );
 
@@ -102,7 +108,10 @@ class FilesController extends Controller
 				break;
 		}
 
-		return response()->json( $response );
+		if ( $response )
+			return response()->json( array( 'success' => $response ) );
+
+		return response()->json( array( 'error' => $response ));
 	}
 
 	private function moveFile( $oFile , $path )
