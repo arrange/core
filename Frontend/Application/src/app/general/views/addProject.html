@@ -1,0 +1,53 @@
+<style type="text/css">
+    .ng-invalid.ng-dirty{
+    .has-error .form-control;
+    }
+
+    label.has-error.control-label {
+    .has-error .control-label;
+    }
+</style>
+<div class="container" id="wrap">
+    <div class="row">
+        <button class="btn btn-md btn-success pull-right" ng-click="getlogout()">
+            Sign Out</button>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 style="text-align:center;">Add Project</h1>
+            <form class="form-horizontal form" method="post" accept-charset="utf-8" name="form1" id="form1" role="form" novalidate>
+                <div class="form-group">
+                    <label class="col-md-4">Title</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="Project.name" class="form-control" validator="required" required-error-message="Title of project is required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12">Template</label>
+                    <div class="col-md-12">
+                        <div class="col-md-3" ng-repeat="preset in presets">
+                            <img src="{{ preset_thumb_url + '?name=' + preset.thumb + '&token=' + token }}" ng-click="setPreset(preset.id)">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4">Folder Name:</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="Project.folder_name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4">Thumb:</label>
+                    <div class="col-md-8">
+                        <input type="file" ng-model="Project.thumb" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-md pull-right" validation-submit="form1" ng-click="saveProject()" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

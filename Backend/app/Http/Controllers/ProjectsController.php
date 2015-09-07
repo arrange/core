@@ -49,7 +49,7 @@ class ProjectsController extends Controller
 			return response()->json( array( 'error' => "Invalid token" ) , 500 );
 
 		if ( !$request->input( 'name' ) )
-			return response()->json( array( 'error' => "Project name required" ) , 500 );
+			return response()->json( array( 'error' => "Project title required" ) , 500 );
 
 		$aInputData = $request->only( 'name' );
 		$aInputData[ 'organization_id' ] = $oUser->Organization->id;

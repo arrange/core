@@ -65,7 +65,7 @@ class PresetsController extends Controller
 					$sThumbFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
 
 				$request->file( 'thumb' )->move( $sDestinationPath , $sThumbFile );
-				$aInputData[ 'thumb' ] = url().'/presets/'. $sThumbFile;
+				$aInputData[ 'thumb' ] = $sThumbFile;
 			}
 
 			$oPreset = Preset::create( $aInputData );

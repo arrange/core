@@ -13,6 +13,7 @@ class FilesController extends Controller
 	private $filemanager;
 	private $base;
 	private $url;
+	private $ftpPath;
 
 	public function __construct( Request $request , Guard $guard )
 	{
@@ -20,10 +21,11 @@ class FilesController extends Controller
 		$this->filemanager->connect();
 		$this->user = $guard->user();
 		$this->base = base_path() . DIRECTORY_SEPARATOR;
-		$this->base = str_replace( "Backend/" , '' , $this->base );
-		$this->base = str_replace( "Backend\\" , '' , $this->base );
+		$this->base = str_replace( env('FTP_BASEPATH_PREFIX') , '' , $this->base );
 
-		$this->path = "Backend" . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
+		$this->ftpPath = env('FTP_BASEPATH_PREFIX');
+
+		$this->path = $this->ftpPath . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
 
 	}
 
@@ -49,6 +51,7 @@ class FilesController extends Controller
 		switch ( $mode ) {
 			case "list" :
 				$this->path .= $this->url;
+				//dd($this->path);
 				$bOnlyFolders = $request->input( 'onlyFolders' , false );
 				$response = $this->filemanager->listFilesRaw( $this->path , $bOnlyFolders );
 				break;
