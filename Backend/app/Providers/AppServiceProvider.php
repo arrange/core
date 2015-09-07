@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use App\Services\FileManager\FileManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -29,6 +30,14 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+
+		$this->app->singleton('FileHandler',function(){
+			return new FileManager(array(
+				'hostname' => 'localhost',
+				'username' => env('FTP_USERNAME'),
+				'password' => env('FTP_PASSWORD')
+			));
+		});
 	}
 
 }

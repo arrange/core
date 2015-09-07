@@ -10,20 +10,23 @@
 			$rootScope.$state = $state;
 			$rootScope.Auth = Auth;
 			$rootScope.config = $config;
-
-            var host = $location.host();
+            /*var host = $location.host();
             var subdomain = "";
             if (host.indexOf('.') > 0)
-                subdomain = host.split('.')[0];
+                subdomain = host.split('.')[0];*/
 
-            console.log(subdomain);
+            var subdomain = "qwe1";
+            
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
-                window.location = "http://notrie.com";
+               window.location = "http://notrie.com";
             });
-
 
             if( Auth.isLoggedIn() ) {
                 $state.go('dashboard');
+                $http.defaults.headers.common.Token = Auth.getValue('token');
+                $http.get($config.api + 'user/'+ Auth.getValue('token') ).then(function(response){
+                    Auth.setUser(response.data);
+                });
             }
 
             $rootScope.$on( '$stateChangeStart' ,
@@ -45,6 +48,12 @@
                         $state.transitionTo('dashboard');
                     }
                 } );
+
+            $rootScope.getlogout = function()
+            {
+                Auth.removeUser();
+                $state.go('login');
+            };
 		} ] );
 
   /** @ngInject */

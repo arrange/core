@@ -22,11 +22,18 @@ class Extractor
 		}
 	}
 
-	public function extract( $destination = '' )
+	public function extract( $source = '' , $destination = '' )
 	{
-
 		if ( empty( $destination ) && empty( $this->destination ) ) {
 			return false;
+		}
+
+		if ( empty( $source ) && empty( $this->source ) ) {
+			return false;
+		}
+
+		if ( !empty( $source ) ) {
+			$this->source = $source;
 		}
 
 		if ( !empty( $destination ) ) {
@@ -47,10 +54,15 @@ class Extractor
 	protected function extractZip()
 	{
 		$oZipArchive = new \ZipArchive();
-		if ( $oZipArchive->open( $this->source ) === TRUE ) {
-			$oZipArchive->extractTo( $this->destination );
-			$oZipArchive->close();
-			return true;
+		if ( $oZipArchive->open( $this->source ) ) {
+			try{
+				$oZipArchive->extractTo( $this->destination );
+				$oZipArchive->close();
+				return true;
+			}
+			catch(\Exception $e) {
+				var_dump($e->getMessage());
+			}
 		}
 		return false;
 	}

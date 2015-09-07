@@ -7,7 +7,8 @@ angular.module('easywebapp')
 		var setUser = function (User) {
             $cookieStore.put('user',JSON.stringify(User));
 			$rootScope.User = User;
-			$http.defaults.headers.common.Token = User.token;
+            $http.defaults.headers.common['Token'] = User.token;
+            //$log.debug($http.defaults.headers);
 		};
 
         var getValue = function (key){
@@ -19,13 +20,13 @@ angular.module('easywebapp')
         };
 
         this.getValue = getValue;
+        this.setUser = setUser;
 
 		this.login = function (credentials) {
 			var defer = $q.defer();
 			$http.post($config.api + 'auth', credentials).success(function (data) {
 				defer.resolve(data);
 				setUser(data);
-                $log.debug($cookie);
 			}).error(function (data) {
 				defer.reject(data);
 			});

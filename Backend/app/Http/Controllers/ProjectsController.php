@@ -48,8 +48,8 @@ class ProjectsController extends Controller
 		if ( !$oUser )
 			return response()->json( array( 'error' => "Invalid token" ) , 500 );
 
-		if ( !$request->input('name') )
-			return response()->json( array( 'error' => "Project name required" ) , 500 );
+		if ( !$request->input( 'name' ) )
+			return response()->json( array( 'error' => "Project title required" ) , 500 );
 
 		$aInputData = $request->only( 'name' );
 		$aInputData[ 'organization_id' ] = $oUser->Organization->id;
@@ -61,13 +61,13 @@ class ProjectsController extends Controller
 			return response()->json( array( 'error' => "Unable to create project" ) , 500 );
 
 		$sProjectFolder = $request->input( 'folder_name' , $oProject->id );
-		$sDestinationPath = base_path() . "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder."/";
+		$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . DIRECTORY_SEPARATOR;
 
 		// Create Destination Dir
 		if ( !file_exists( $sDestinationPath ) )
 			File::makeDirectory( $sDestinationPath , 0777 , true );
 
-		$oProject->location = url(). "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder."/";
+		$oProject->location = url() . "/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/";
 
 		// Extract preset's zip file in project_id folder
 		if ( $request->has( 'preset_id' ) ) {
@@ -76,6 +76,8 @@ class ProjectsController extends Controller
 				$oProject->preset_id = $request->input( 'preset_id' );
 				$sSource = $oPreset->zip_location;
 				$oExtractor = new Extractor( $sSource , $sDestinationPath );
+				$oExtractor->extract( $sSource , $sDestinationPath );
+				//dd($oExtractor);
 				if ( !$oExtractor ) {
 					$oProject->delete();
 					File::deleteDirectory( $sDestinationPath );
@@ -89,14 +91,14 @@ class ProjectsController extends Controller
 		if ( $request->hasFile( 'thumb' ) AND $oUser->Organization ) {
 			if ( $request->file( 'thumb' )->isValid() ) {
 
-				$sDestinationPath = base_path() . "/clients/" . $oUser->Organization->id . "/projects/";
+				$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR;
 
 				$file = $request->file( 'thumb' );
 				$sExtension = $file->getClientOriginalExtension();
 
 				$request->file( 'thumb' )->move( $sDestinationPath , $sProjectFolder . "." . $sExtension );
 
-				$oProject->thumb = url() . "/clients/" . $oUser->Organization->id . "/projects/" . $sProjectFolder . "." . $sExtension;
+				$oProject->thumb = url() . "/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "." . $sExtension;
 			}
 		}
 

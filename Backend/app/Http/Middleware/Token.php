@@ -2,7 +2,7 @@
 use Closure;
 use Illuminate\Auth\Guard;
 use App\Models\User;
-class Token{
+class Token {
 	/**
 	 * The Guard implementation.
 	 *
@@ -35,7 +35,6 @@ class Token{
 		{
 			return response()->json ( [ 'status'=>'error', 'error'=>['message' => 'token is missing' ]] , 403 );
 		}
-
 		$this->auth->setUser( $oUser );
 		return $next($request);
 	}
