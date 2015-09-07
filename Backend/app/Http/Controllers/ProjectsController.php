@@ -67,7 +67,7 @@ class ProjectsController extends Controller
 		if ( !file_exists( $sDestinationPath ) )
 			File::makeDirectory( $sDestinationPath , 0777 , true );
 
-		$oProject->location = url() . "/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/";
+		$oProject->location = base_path(). DIRECTORY_SEPARATOR. "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . DIRECTORY_SEPARATOR;
 
 		// Extract preset's zip file in project_id folder
 		if ( $request->has( 'preset_id' ) ) {
@@ -83,12 +83,17 @@ class ProjectsController extends Controller
 					File::deleteDirectory( $sDestinationPath );
 					return response()->json( array( 'error' => "Unable to extract template" ) , 500 );
 				}
+				/*$oSnpShotGenerator = new SnapshotGenerator();
+				$sDest = base_path(). DIRECTORY_SEPARATOR. "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR;
+				$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $oProject->location , $sDest );
+				if( $sThumbPath ) {
+					$oProject->thumb = $sThumbPath;
+				}*/
 			}
-
 		}
 
 		// Save thumb in projects folder
-		if ( $request->hasFile( 'thumb' ) AND $oUser->Organization ) {
+		/*if ( $request->hasFile( 'thumb' ) AND $oUser->Organization ) {
 			if ( $request->file( 'thumb' )->isValid() ) {
 
 				$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR;
@@ -100,7 +105,8 @@ class ProjectsController extends Controller
 
 				$oProject->thumb = url() . "/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "." . $sExtension;
 			}
-		}
+		}*/
+
 
 		$oProject->save();
 
