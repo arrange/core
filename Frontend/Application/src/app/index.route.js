@@ -6,19 +6,25 @@
         .config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($stateProvider, $urlRouterProvider) {
+    function routeConfig($stateProvider, $urlRouterProvider ,$config) {
         $stateProvider
             .state('login', {
                 url: '/',
-                templateUrl: 'app/auth/views/sign_in.html',
+                templateUrl: $config.module.auth.view + 'sign_in.html',
                 controller: 'LoginCtrl',
                 controllerAs: 'login'
             })
             .state('dashboard', {
                 url: '/dashboard',
-                templateUrl: 'app/auth/views/dashboard.html',
+                templateUrl: $config.module.general.view + "dashboard.html",
                 controller: 'dashboardCtrl',
                 controllerAs: 'dashboard'
+            })
+            .state('add-project',{
+                url : '/project/add' ,
+                templateUrl : $config.module.general.view + 'addProject.html',
+                controller : 'addProjectCtrl',
+                controllerAs : 'project'
             });
         $urlRouterProvider.otherwise('/');
     }

@@ -10,11 +10,17 @@
         .constant('$config',{
             url : "http://localhost:3000/",
             api : "http://localhost/notrierepo/Backend/public/",
+            preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
            // api : "http://api.notrie.com/",
+           // preset_thumb_url :  "http://api.notrie.com/preset-thumb",
             module : {
                 auth : {
-                    controller : 'app/auth/controllers',
-                    view : 'app/auth/views'
+                    controller : 'app/auth/controllers/',
+                    view : 'app/auth/views/'
+                },
+                general : {
+                    controller : 'app/general/controller/',
+                    view : 'app/general/views/'
                 }
             }
         });

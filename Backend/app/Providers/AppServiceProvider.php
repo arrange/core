@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider {
 		$this->app->singleton('FileHandler',function(){
 			return new FileManager(array(
 				'hostname' => 'localhost',
-				'username' => 'tps',
-				'password' => ''
+				'username' => env('FTP_USERNAME'),
+				'password' => env('FTP_PASSWORD')
 			));
 		});
 	}
