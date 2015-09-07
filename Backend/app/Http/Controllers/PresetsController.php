@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Preset;
+use App\Services\FileManager\SnapshotGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -60,6 +61,9 @@ class PresetsController extends Controller
 
 				$oFile = $request->file( 'thumb' );
 				$sThumbFile = $request->file( 'thumb' )->getClientOriginalName();
+				$counter = 1;
+				while( File::exists($sDestinationPath.$sThumbFile) )
+					$sThumbFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);$sThumbFile = $request->file( 'thumb' )->getClientOriginalName();
 				$counter = 1;
 				while( File::exists($sDestinationPath.$sThumbFile) )
 					$sThumbFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
