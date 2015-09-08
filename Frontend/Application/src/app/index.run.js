@@ -10,12 +10,12 @@
 			$rootScope.$state = $state;
 			$rootScope.Auth = Auth;
 			$rootScope.config = $config;
-            /*var host = $location.host();
+            var host = $location.host();
             var subdomain = "";
             if (host.indexOf('.') > 0)
-                subdomain = host.split('.')[0];*/
+                subdomain = host.split('.')[0];
 
-            var subdomain = "qwe1";
+           /* var subdomain = "qwe1";*/
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
                window.location = "http://notrie.com";
@@ -26,6 +26,7 @@
                 $http.defaults.headers.common.Token = Auth.getValue('token');
                 $http.get($config.api + 'user/'+ Auth.getValue('token') ).then(function(response){
                     Auth.setUser(response.data);
+                    $rootScope.$broadcast('userInitialized', { message: "hello" });
                 });
             }
 
