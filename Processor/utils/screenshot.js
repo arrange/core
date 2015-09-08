@@ -7,7 +7,8 @@ function capture(source, destination) {
     //     return false;
     // }
     webshot(source, destination, {
-        siteType: 'url'
+        siteType: 'url',
+        defaultWhiteBackground: true
     }, function(err) {
         if (err) {
             console.log(err);
