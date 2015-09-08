@@ -4,32 +4,11 @@ use Illuminate\Support\Facades\File;
 
 class SnapshotGenerator
 {
-
-	public function getPreview( $source )
-	{
-		$client = new GuzzleHttp\Client();
-		$res = $client->request( 'POST' , 'screenshot.local' , [
-			'source' => $source
-		] );
-		if ( $res->getStatusCode() ) {
-			$aResp = json_decode( $res->getBody() , true );
-			if ( isset( $aResp[ 'screenshot' ] ) ) {
-				return $aResp[ 'screenshot' ];
-			}
-		}
-		return false;
-	}
-
 	public function hasIndexFile( $source )
 	{
 		if ( file_exists( $source . "index.html" ) )
 			return $source . "index.html";
 		return false;
-	}
-
-	public function saveSnapshot( $source , $snapshot )
-	{
-		return file_put_contents( $source , $snapshot );
 	}
 
 	public function getFileUniqueName( $sDestinationPath , $sFileName , $sExtension )
@@ -44,14 +23,9 @@ class SnapshotGenerator
 
 	public function getAndSavePreview( $source , $destination )
 	{
-		if ( $this->hasIndexFile( $source ) ) {
-			if ( $screenShot = $this->getPreview( $source ) ) {
-				$filename = $this->getFileUniqueName( $destination , str_random() , ".jpeg" );
-				$destination .= $filename;
-				$this->saveSnapshot( $destination , $screenShot );
-				return $destination;
-			}
-		}
+		$aResponse = json_decode( file_get_contents( env('SS_SERVER_URL') . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination ) ,true );
+		if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
+			return $aResponse[ 'success' ];
 		return false;
 	}
 }

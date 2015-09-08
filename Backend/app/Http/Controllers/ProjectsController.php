@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use App\Services\Extractor;
 use App\Models\Preset;
 use App\Models\Project;
+use App\Services\FileManager\SnapshotGenerator;
+use Illuminate\Auth\Guard;
 
 class ProjectsController extends Controller
 {
@@ -18,9 +20,11 @@ class ProjectsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index( Guard $auth )
 	{
-
+		$oUser = $auth->user();
+		$aProjects = Project::where( 'user_id' , '=' , $oUser->id )->get();
+		return response()->json( $aProjects );
 	}
 
 	/**
@@ -38,21 +42,22 @@ class ProjectsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store( Request $request )
+	public function store( Request $request , Guard $auth )
 	{
-		$token = $request->header( 'Token' );
+		/*$token = $request->header( 'Token' );
 
 		// get user and organization using token
 		$oUser = User::where( 'token' , '=' , $token )->with( array( 'organization' ) )->first();
 
 		if ( !$oUser )
-			return response()->json( array( 'error' => "Invalid token" ) , 500 );
+			return response()->json( array( 'error' => "Invalid token" ) , 500 );*/
+		$oUser = $auth->user();
 
 		if ( !$request->input( 'name' ) )
 			return response()->json( array( 'error' => "Project title required" ) , 500 );
 
 		$aInputData = $request->only( 'name' );
-		$aInputData[ 'organization_id' ] = $oUser->Organization->id;
+		$aInputData[ 'organization_id' ] = $oUser->organization_id;
 		$aInputData[ 'user_id' ] = $oUser->id;
 
 		// Save project data in project table
@@ -65,48 +70,34 @@ class ProjectsController extends Controller
 
 		// Create Destination Dir
 		if ( !file_exists( $sDestinationPath ) )
-			File::makeDirectory( $sDestinationPath , 0777 , true );
+			File::makeDirectory( $sDestinationPath , $permissions = intval( "0777" , 8 ) , true );
 
-		$oProject->location = base_path(). DIRECTORY_SEPARATOR. "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . DIRECTORY_SEPARATOR;
+		$oProject->location = $sProjectFolder . DIRECTORY_SEPARATOR;
 
 		// Extract preset's zip file in project_id folder
 		if ( $request->has( 'preset_id' ) ) {
 			$oPreset = Preset::find( $request->input( 'preset_id' ) );
 			if ( $oPreset ) {
 				$oProject->preset_id = $request->input( 'preset_id' );
-				$sSource = $oPreset->zip_location;
+				$sSource = base_path() . DIRECTORY_SEPARATOR . "presets" . DIRECTORY_SEPARATOR . $oPreset->zip_location;
 				$oExtractor = new Extractor( $sSource , $sDestinationPath );
 				$oExtractor->extract( $sSource , $sDestinationPath );
-				//dd($oExtractor);
 				if ( !$oExtractor ) {
 					$oProject->delete();
 					File::deleteDirectory( $sDestinationPath );
 					return response()->json( array( 'error' => "Unable to extract template" ) , 500 );
 				}
-				/*$oSnpShotGenerator = new SnapshotGenerator();
-				$sDest = base_path(). DIRECTORY_SEPARATOR. "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR;
-				$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $oProject->location , $sDest );
-				if( $sThumbPath ) {
-					$oProject->thumb = $sThumbPath;
-				}*/
 			}
 		}
 
-		// Save thumb in projects folder
-		/*if ( $request->hasFile( 'thumb' ) AND $oUser->Organization ) {
-			if ( $request->file( 'thumb' )->isValid() ) {
-
-				$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR;
-
-				$file = $request->file( 'thumb' );
-				$sExtension = $file->getClientOriginalExtension();
-
-				$request->file( 'thumb' )->move( $sDestinationPath , $sProjectFolder . "." . $sExtension );
-
-				$oProject->thumb = url() . "/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "." . $sExtension;
-			}
-		}*/
-
+		// Extract thumb
+		$oSnpShotGenerator = new SnapshotGenerator();
+		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/";
+		$sDest = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
+		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
+		if ( $sThumbPath ) {
+			$oProject->thumb = $sProjectFolder . ".png";
+		}
 
 		$oProject->save();
 
@@ -119,9 +110,13 @@ class ProjectsController extends Controller
 	 * @param  int $id
 	 * @return Response
 	 */
-	public function show( $id )
+	public function show( $id , Guard $auth )
 	{
-		//
+		$oUser = $auth->user();
+		$oProject = Project::where( 'user_id' , '=' , $oUser->id )->where( 'id' , '=' , $id )->first();
+		if ( !$oProject )
+			return response()->json( array( 'error' => "Unable to find project" ) , 404 );
+		return response()->json( $oProject );
 	}
 
 	/**

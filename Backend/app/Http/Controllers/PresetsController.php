@@ -55,7 +55,7 @@ class PresetsController extends Controller
 				$sZipFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
 
 			$request->file( 'zip' )->move( $sDestinationPath , $sZipFile );
-			$aInputData[ 'zip_location' ] = $sDestinationPath . $sZipFile;
+			$aInputData[ 'zip_location' ] = $sZipFile;
 
 			if( $request->hasFile( 'thumb' ) ) {
 
