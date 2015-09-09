@@ -1,0 +1,44 @@
+<style>
+    .full-width{
+        width:100%;
+    }
+    .fifty-per-height{
+        height: 100%;
+    }
+    #wrap{
+        margin:1%;
+    }
+</style>
+<div class="" id="wrap">
+    <div class="row">
+        <div class="col-sm-6"><h3>{{ Project.name }}</h3></div>
+        <div class="col-sm-5"><h3 class="pull-right"><button class="btn btn-md btn-success" ng-click="saveFile({{ Project }})">
+            Save</button> Welcome {{ User.firstname }}</h3></div>
+        <div class="col-sm-1"><h3><button class="btn btn-md btn-success pull-right" ng-click="getlogout()">
+            Sign Out</button></h3></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>HTML</h3>
+            <textarea class="full-width" ng-model="editHtml" rows="15"></textarea>
+        </div>
+        <div class="col-sm-4">
+            <h3>CSS</h3>
+            <textarea class="full-width" ng-model="editCss" rows="15"></textarea>
+        </div>
+        <div class="col-sm-4">
+            <h3>JS</h3>
+            <textarea class="full-width" ng-model="editJs" rows="15"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Preview</h3>
+            <iframe name="preview" id="preview" class="full-width" height="500px;"></iframe>
+        </div>
+    </div>
+</div>

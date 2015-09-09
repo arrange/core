@@ -10,6 +10,9 @@
                 query : {
                     method : 'GET',
                     isArray : true
+                },
+                show : {
+                    method : 'GET'
                 }
             });
         }]);

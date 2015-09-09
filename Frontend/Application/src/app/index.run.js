@@ -14,8 +14,7 @@
             var subdomain = "";
             if (host.indexOf('.') > 0)
                 subdomain = host.split('.')[0];
-
-           /* var subdomain = "qwe1";*/
+            /*var subdomain = "qwe1";*/
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
                window.location = "http://notrie.com";

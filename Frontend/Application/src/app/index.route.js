@@ -24,7 +24,13 @@
                 url : '/project/add' ,
                 templateUrl : $config.module.general.view + 'addProject.html',
                 controller : 'addProjectCtrl',
-                controllerAs : 'project'
+                controllerAs : 'addproject'
+            })
+            .state('edit-project',{
+                url : '/project/edit/:projectId' ,
+                templateUrl : $config.module.general.view + 'editProject.html',
+                controller : 'editProjectCtrl',
+                controllerAs : 'editProject'
             });
         $urlRouterProvider.otherwise('/');
     }

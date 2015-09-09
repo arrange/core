@@ -9,8 +9,8 @@
           var subdomain = "";
           if (host.indexOf('.') > 0)
               subdomain = host.split('.')[0];
-          /*var subdomain = "qwe1";*/
-
+          /*var subdomain = "qwe1";
+*/
           $scope.credentials = { subdomain : subdomain };
           $scope.signIn = function() {
 			Auth.login( $scope.credentials ).then(function(response){

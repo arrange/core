@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -21,9 +20,9 @@ class FilesController extends Controller
 		$this->filemanager->connect();
 		$this->user = $guard->user();
 		$this->base = base_path() . DIRECTORY_SEPARATOR;
-		$this->base = str_replace( env('FTP_BASEPATH_PREFIX') , '' , $this->base );
+		$this->base = str_replace( env( 'FTP_BASEPATH_PREFIX' ) , '' , $this->base );
 
-		$this->ftpPath = env('FTP_BASEPATH_PREFIX');
+		$this->ftpPath = env( 'FTP_BASEPATH_PREFIX' );
 
 		$this->path = $this->ftpPath . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
 
@@ -34,7 +33,7 @@ class FilesController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function postIndex( Request $request )
+	public function anyIndex( Request $request )
 	{
 		if ( !$request->has( 'path' ) )
 			return response()->json( array( 'error' => 'Path is required' ) , 404 );
@@ -75,8 +74,11 @@ class FilesController extends Controller
 
 				break;
 			case "editFile" :
-				$this->path .= $this->url;
-				$response = array( 'text' => $this->filemanager->getContent( $this->path ) );
+				$this->path = $this->base . $this->path;
+				$this->path .= $this->url ;
+				if( file_exists($this->path) )
+					return file_get_contents( $this->path );
+				$response = false;
 				break;
 			case "saveFile" :
 				$path = $this->base . $this->path . $this->url;
@@ -114,7 +116,7 @@ class FilesController extends Controller
 		if ( $response )
 			return response()->json( array( 'success' => $response ) );
 
-		return response()->json( array( 'error' => $response ));
+		return response()->json( array( 'error' => $response ) , 500 );
 	}
 
 	private function moveFile( $oFile , $path )

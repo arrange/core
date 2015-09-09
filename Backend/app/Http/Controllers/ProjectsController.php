@@ -92,7 +92,7 @@ class ProjectsController extends Controller
 
 		// Extract thumb
 		$oSnpShotGenerator = new SnapshotGenerator();
-		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/";
+		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/index1.html";
 		$sDest = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
 		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
 		if ( $sThumbPath ) {
