@@ -5,7 +5,9 @@ function capture(source, destination) {
     // if (!fs.existsSync(source)) {
     //     console.error('could not find file specified!');
     //     return false;
-    // }
+    // }   
+    console.log(source);
+    console.log(destination);
     webshot(source, destination, {
         siteType: 'url',
         defaultWhiteBackground: true

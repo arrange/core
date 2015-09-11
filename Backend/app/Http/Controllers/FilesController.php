@@ -24,7 +24,7 @@ class FilesController extends Controller
 
 		$this->ftpPath = env( 'FTP_BASEPATH_PREFIX' );
 
-		$this->path = $this->ftpPath . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
+		$this->path = $this->ftpPath . DIRECTORY_SEPARATOR . CLIENT_FOLDER . DIRECTORY_SEPARATOR . $this->user->organization_id . DIRECTORY_SEPARATOR . $this->user->id . DIRECTORY_SEPARATOR;
 
 	}
 
@@ -50,7 +50,6 @@ class FilesController extends Controller
 		switch ( $mode ) {
 			case "list" :
 				$this->path .= $this->url;
-				//dd($this->path);
 				$bOnlyFolders = $request->input( 'onlyFolders' , false );
 				$response = $this->filemanager->listFilesRaw( $this->path , $bOnlyFolders );
 				break;

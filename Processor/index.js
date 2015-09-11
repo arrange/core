@@ -4,6 +4,7 @@ var unzipper = require('./utils/unzip');
 var coffeeProcessor = require('./utils/coffee');
 var screenshot = require('./utils/screenshot');
 http.createServer(function(req, res) {
+    console.log(req.url);
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     if (query.mode == 'unzip') {

@@ -38,7 +38,7 @@ class PresetsController extends Controller
 	public function store( Request $request )
 	{
 		if ( $request->has( 'name' ) ) {
-			$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "presets" . DIRECTORY_SEPARATOR;
+			$sDestinationPath = PRESETS_BASE_PATH;
 
 			if( !file_exists($sDestinationPath) )
 				File::makeDirectory( $sDestinationPath , 0777 , true );

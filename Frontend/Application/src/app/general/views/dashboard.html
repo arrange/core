@@ -1,26 +1,18 @@
-<div class="container" id="wrap">
+<div id="wrap">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-sm-6"><h3><button class="btn btn-md btn-primary" ng-click="addProject()">
+            Add Project</button> </h3></div>
+        <div class="col-sm-5"><h3 class="pull-right">Welcome {{ User.firstname }}</h3></div>
+        <div class="col-sm-1"><h3><button class="btn btn-md btn-danger pull-right" ng-click="getlogout()">
+            Sign Out</button></h3></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <form  method="post" accept-charset="utf-8" class="form" role="form" name="form1" novalidate>
-                <h4>Welcome {{ User.firstname }}</h4>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-4">
-                        <button class="btn btn-md btn-primary" ng-click="addProject()">
-                            Add Project</button>
-                    </div>
-                    <div class="col-sm-2">
-                        <button class="btn btn-md btn-success" ng-click="getlogout()">
-                        Sign Out</button>
-                    </div>
-                    <div class="col-sm-3"></div>
-                </div>
-                <div class="row">
                     <div class="col-sm-3"  data-ng-repeat="project in projects">
                         <div class="col-sm-12">{{ project.name }}</div>
-                        <div class="col-sm-12"><img src="{{ project_thumb_url }}?name={{ project.thumb }}&token={{ token }}" ng-click="editProject(project.id)" height="100" width="100" style="border:2px solid #999999;cursor:pointer;"></div>
+                        <div class="col-sm-12"><img src="{{ project_thumb_url }}?name={{ project.thumb }}&token={{ token }}" ng-click="editProject(project.id)" class="img-responsive" style="border:2px solid #999999;cursor:pointer;"></div>
                     </div>
-                </div>
             </form>
         </div>
     </div>

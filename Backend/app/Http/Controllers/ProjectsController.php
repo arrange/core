@@ -44,17 +44,21 @@ class ProjectsController extends Controller
 	 */
 	public function store( Request $request , Guard $auth )
 	{
-		/*$token = $request->header( 'Token' );
-
-		// get user and organization using token
-		$oUser = User::where( 'token' , '=' , $token )->with( array( 'organization' ) )->first();
-
-		if ( !$oUser )
-			return response()->json( array( 'error' => "Invalid token" ) , 500 );*/
 		$oUser = $auth->user();
 
 		if ( !$request->input( 'name' ) )
 			return response()->json( array( 'error' => "Project title required" ) , 500 );
+
+		$aProject = Project::where( 'name' , '=' , $request->input( 'name' ) )->where( 'user_id' , '=' , $oUser->id )->get();
+
+		if ( count($aProject) > 0 )
+			return response()->json( array( 'error' => 'Project name already exists' ) , 500 );
+
+		if( $request->has('folder_name') )
+			$aProject = Project::Where('location','LIKE','%'.$request->input('folder_name').'%')->where( 'user_id' , '=' , $oUser->id )->get();
+
+		if ( count($aProject) > 0 )
+			return response()->json( array( 'error' => 'Folder name already exists' ) , 500 );
 
 		$aInputData = $request->only( 'name' );
 		$aInputData[ 'organization_id' ] = $oUser->organization_id;
@@ -66,7 +70,7 @@ class ProjectsController extends Controller
 			return response()->json( array( 'error' => "Unable to create project" ) , 500 );
 
 		$sProjectFolder = $request->input( 'folder_name' , $oProject->id );
-		$sDestinationPath = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . DIRECTORY_SEPARATOR;
+		$sDestinationPath = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . DIRECTORY_SEPARATOR;
 
 		// Create Destination Dir
 		if ( !file_exists( $sDestinationPath ) )
@@ -79,7 +83,7 @@ class ProjectsController extends Controller
 			$oPreset = Preset::find( $request->input( 'preset_id' ) );
 			if ( $oPreset ) {
 				$oProject->preset_id = $request->input( 'preset_id' );
-				$sSource = base_path() . DIRECTORY_SEPARATOR . "presets" . DIRECTORY_SEPARATOR . $oPreset->zip_location;
+				$sSource = PRESETS_BASE_PATH . $oPreset->zip_location;
 				$oExtractor = new Extractor( $sSource , $sDestinationPath );
 				$oExtractor->extract( $sSource , $sDestinationPath );
 				if ( !$oExtractor ) {
@@ -92,8 +96,8 @@ class ProjectsController extends Controller
 
 		// Extract thumb
 		$oSnpShotGenerator = new SnapshotGenerator();
-		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/index1.html";
-		$sDest = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
+		$sSrc = env( 'FTP_BASEPATH_PREFIX' ) . "/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/index1.html";
+		$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
 		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
 		if ( $sThumbPath ) {
 			$oProject->thumb = $sProjectFolder . ".png";

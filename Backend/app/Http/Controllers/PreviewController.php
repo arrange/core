@@ -11,7 +11,7 @@ class PreviewController extends Controller
 	{
 		$oUser = $auth->user();
 		$name = $request->input( 'name' );
-		$sFile = base_path() . DIRECTORY_SEPARATOR . 'clients' . DIRECTORY_SEPARATOR . $oUser->organization_id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $name;
+		$sFile = CLIENTS_BASE_PATH. $oUser->organization_id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $name;
 		if ( file_exists( $sFile ) )
 			return file_get_contents( $sFile );
 		return response()->json( array( 'error' => 'File not found' ) , 500 );
@@ -25,7 +25,7 @@ class PreviewController extends Controller
 		$iProjectId = $request->input( 'id' );
 		$oProject = Project::where( 'id' , '=' , $iProjectId )->first();
 		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . str_replace("\\","",str_replace('/',"",$oProject->location)) . "/index1.html";
-		$sDest = base_path() . DIRECTORY_SEPARATOR . "clients" . DIRECTORY_SEPARATOR . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . str_replace("\\","",str_replace('/',"",$oProject->location)) . ".png";		//return response()->json([$sSrc,$sDest]);
+		$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . str_replace("\\","",str_replace('/',"",$oProject->location)) . ".png";		//return response()->json([$sSrc,$sDest]);
 		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
 		return response()->json(array($sThumbPath));
 	}

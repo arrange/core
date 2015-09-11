@@ -6,7 +6,7 @@
         .config(config);
         
     /** @ngInject */
-    function config($logProvider, toastr) {
+    function config($logProvider, toastr , GooglePlusProvider) {
         // Enable log
         $logProvider.debugEnabled(true);
 
@@ -15,6 +15,14 @@
         toastr.options.positionClass = 'toast-top-right';
         toastr.options.preventDuplicates = true;
         toastr.options.progressBar = true;
+
+
+        GooglePlusProvider.init({
+            clientId: '936897214783-ish3fnhk0h57a0rb9ilpvu7crt05e1qg.apps.googleusercontent.com',
+            apiKey: '0uV5UjdHUMOAObLXHLcjHqFN'
+        });
+
+
     }
 
 })();

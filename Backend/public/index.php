@@ -37,6 +37,10 @@ require __DIR__.'/../bootstrap/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+DEFINE('CLIENT_FOLDER' , 'clients' );
+DEFINE('PRESET_FOLDER' , 'presets' );
+DEFINE('CLIENTS_BASE_PATH' , base_path() . DIRECTORY_SEPARATOR . CLIENT_FOLDER . DIRECTORY_SEPARATOR);
+DEFINE('PRESETS_BASE_PATH' , base_path() . DIRECTORY_SEPARATOR . PRESET_FOLDER . DIRECTORY_SEPARATOR );
 /*
 |--------------------------------------------------------------------------
 | Run The Application

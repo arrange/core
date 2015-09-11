@@ -1,6 +1,5 @@
-<?php
+<?php namespace App\Services\FileManager;
 
-namespace App\Services\FileManager;
 
 class FileManager extends Ftp {
 

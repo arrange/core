@@ -30,6 +30,12 @@
                 templateUrl: 'app/auth/views/sign_up.html',
                 controller: 'SignupController',
                 controllerAs: 'signup'
+            })
+            .state('Google',{
+                url : '/google',
+                templateUrl: 'app/auth/views/google.html',
+                controller: 'SignupWithGoogle',
+                controllerAs: 'sgoogle'
             });
 
         $urlRouterProvider.otherwise('/');

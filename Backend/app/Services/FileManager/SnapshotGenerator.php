@@ -23,7 +23,7 @@ class SnapshotGenerator
 
 	public function getAndSavePreview( $source , $destination )
 	{
-		$aResponse = json_decode( file_get_contents( 'http://localhost:5000?mode=screenshot&input=http://screenshot.server/' . $source . "&output=" . $destination ) ,true );
+		$aResponse = json_decode( file_get_contents( env('SS_SERVER_URL') . '?mode=screenshot&input='. env('SS_BASE_URL') .  $source . "&output=" . $destination ) ,true );
 		if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
 			return $aResponse[ 'success' ];
 		return false;

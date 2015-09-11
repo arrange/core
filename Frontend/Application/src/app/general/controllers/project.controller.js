@@ -28,7 +28,10 @@
                             toastr.success('Project created successfully!', 'Success');
                             $state.go('edit-project', {projectId: data.id});
                         }, function (data) {
-                            toastr.error(data);
+                            console.log();
+                            if( data.data )
+                                if ( data.data.error )
+                                    toastr.error(data.data.error);
                         })
                     };
 
@@ -54,6 +57,38 @@
                 $scope.editHtml = "";
                 $scope.editCss = "";
                 $scope.editJs = "";
+                $scope.ShowHtml = true;
+                $scope.ShowCss = true;
+                $scope.ShowJs = true;
+
+                $scope.editorOptions1 = {
+                    lineWrapping : true,
+                    lineNumbers: true,
+                    theme:'abcdef',
+                    mode:'htmlmixed',
+                    htmlMode : true
+                };
+                $scope.editorOptions2 = {
+                    lineWrapping : true,
+                    lineNumbers: true,
+                    theme:'abcdef',
+                    mode:'css'
+                };
+                $scope.editorOptions3 = {
+                    lineWrapping : true,
+                    lineNumbers: true,
+                    theme:'abcdef',
+                    mode:'javascript'
+                };
+                $scope.toggleHtml = function(){
+                    $scope.ShowHtml = !$scope.ShowHtml;
+                };
+                $scope.toggleCss = function(){
+                    $scope.ShowCss = !$scope.ShowCss;
+                };
+                $scope.toggleJs = function(){
+                    $scope.ShowJs = !$scope.ShowJs;
+                };
                 function executeProject() {
                     function generatePreview() {
                         var ifrm = document.getElementById('preview');
@@ -87,13 +122,14 @@
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index.html' , 'text': $scope.editHtml }).then(function (resp) {}, function () {});
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'style.css' , 'text': $scope.editCss }).then(function (resp) {}, function () {});
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'main.js' , 'text': $scope.editJs }).then(function (resp) {}, function () {});
-                        File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index1.html' , 'text': content }).then(function (resp) {}, function () {});
-                        File.saveSnapShot({ 'id': $scope.Project.id }).then(function () {
-                            toastr.success("Project saved successfully");
-                        }, function () {
-                            toastr.error("Unable to save file");
-                        });
-                    }
+                        File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index1.html' , 'text': content }).then(function (resp) {
+                            File.saveSnapShot({ 'id': $scope.Project.id }).then(function () {
+                                toastr.success("Project saved successfully");
+                            }, function () {
+                                toastr.error("Unable to save file");
+                            });
+                        }, function () {});
+                    };
 
                     if (!$stateParams.projectId)
                         $state.go('dashboard');
@@ -117,6 +153,10 @@
                     $scope.$watch('editJs', function (oldVal,newVal) {
                         generatePreview();
                     });
+
+                    $scope.goHome = function(){
+                        $state.go('dashboard');
+                    }
                 }
 
 
