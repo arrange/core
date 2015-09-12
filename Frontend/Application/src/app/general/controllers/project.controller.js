@@ -28,7 +28,6 @@
                             toastr.success('Project created successfully!', 'Success');
                             $state.go('edit-project', {projectId: data.id});
                         }, function (data) {
-                            console.log();
                             if( data.data )
                                 if ( data.data.error )
                                     toastr.error(data.data.error);

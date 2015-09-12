@@ -28,7 +28,6 @@ class SignUpRequest extends Request {
 		return [
 			'name'	=>	'required',
 			'email'		=>	'required|email|unique:users,email',
-			'password'	=>	'required|confirmed',
 			'subdomain' =>  'required|unique:organizations,subdomain'
 		];
 	}

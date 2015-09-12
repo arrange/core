@@ -22,6 +22,7 @@ Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router 
 	Route::post( 'forgot-password' , 'Auth\PasswordController@postEmail' );
 	Route::get( 'user/{token}' , 'Auth\AuthController@getTokenInfo' );
 	Route::post( 'reset' , 'Auth\PasswordController@postReset' );
+	Route::controller( 'users' , 'UsersController' );
 
 	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
 

@@ -10,11 +10,11 @@
 			$rootScope.$state = $state;
 			$rootScope.Auth = Auth;
 			$rootScope.config = $config;
-           /* var host = $location.host();
+            var host = $location.host();
             var subdomain = "";
             if (host.indexOf('.') > 0)
-                subdomain = host.split('.')[0];*/
-            var subdomain = "qwe1";
+                subdomain = host.split('.')[0];
+           /* var subdomain = "qwe1";*/
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
                window.location = "http://notrie.com";
@@ -27,6 +27,23 @@
                     Auth.setUser(response.data);
                     $rootScope.$broadcast('userInitialized', { message: "hello" });
                 });
+            }
+
+            var url = window.location.href;
+            var arr = url.split('?');
+            if( arr.length > 1 )
+            {
+                var tokens = arr[1].split('=');
+                if( tokens.length > 1 )
+                {
+                    if( tokens[0] == "token" )
+                    {
+                        $http.get($config.api + 'user/'+ tokens[1] ).then(function(response){
+                            Auth.setUser(response.data);
+                            window.location = arr[0];
+                        });
+                    }
+                }
             }
 
             $rootScope.$on( '$stateChangeStart' ,

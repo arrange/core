@@ -29,7 +29,12 @@
                 url: '/signup',
                 templateUrl: 'app/auth/views/sign_up.html',
                 controller: 'SignupController',
-                controllerAs: 'signup'
+                controllerAs: 'signup',
+                params:{
+                    'user_name' : null,
+                    'email' : null,
+                    'google_sign_up' : false
+                }
             })
             .state('Google',{
                 url : '/google',

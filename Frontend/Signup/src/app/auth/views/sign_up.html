@@ -18,13 +18,13 @@
               
                 <input type="email" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="organization.email" validator="email"  email-error-message="email address required."/>
               
-                <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password (min 6 charector)" ng-model="organization.password" required  validator="required" password-error-message="email address required." />
+                <input type="password" name="password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Password (min 6 charector)" ng-model="organization.password"  validator="required" password-error-message="email address required." />
                                
               
-                <input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password" ng-model="organization.password_confirmation" validator="required" />
+                <input type="password" name="confirm_password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Confirm Password" ng-model="organization.password_confirmation" validator="required" />
                 
                 <input type="text" name="company_name" value="" class="form-control input-lg" placeholder="Your / Company name" ng-model="organization.name" validator="required" />         
-                
+                <input name="google_sign_up" type="hidden" model="Organization.google_sign_up">
                 <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" validation-submit="form1" ng-click="signupForm()">
                         Create account</button>
             </form>          

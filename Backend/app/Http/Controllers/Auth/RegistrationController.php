@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Http\Request;
@@ -19,7 +20,15 @@ class RegistrationController extends Controller
 	public function store( SignUpRequest $request )
 	{
 		$aInputOrganizationData = $request->only( array( 'name' , 'subdomain' , 'email' ) );
-		$aInputUserData = $request->only( array( 'email' , 'password' ) );
+
+		if ( $request->has( 'google_sign_up' ) ) {
+			$aInputUserData = $request->only( 'email' );
+			$aInputUserData[ 'google_sign_up' ] = 1;
+		} else {
+			$aInputUserData = $request->only( 'email' , 'password' );
+			$aInputUserData[ 'google_sign_up' ] = 0;
+			$aInputUserData[ 'password' ] = bcrypt( $aInputUserData[ 'password' ] );
+		}
 
 		// Insert Organization
 		$oOrganization = Organization::create( $aInputOrganizationData );
@@ -28,7 +37,8 @@ class RegistrationController extends Controller
 
 		$aInputUserData[ 'organization_id' ] = $oOrganization->id;
 		$aInputUserData[ 'firstname' ] = $request->input( 'name' );
-		$aInputUserData[ 'password' ] = bcrypt( $aInputUserData[ 'password' ] );
+		$aInputUserData[ 'token' ] = str_random( 120 );
+
 		// Get Owner role's row
 		$oRole = Role::where( 'role_name' , 'Owner' )->first();
 
@@ -40,31 +50,11 @@ class RegistrationController extends Controller
 			if ( $oRole )
 				$oUser->roles()->attach( $oRole->id );
 
-			/*// Save Logo
-			if ( $request->hasFile( 'logo' ) ) {
-				if ( $request::file( 'logo' )->isValid() ) {
-					$sDestinationPath = public_path() . "client/" . $oOrganization->id . "/logo/";
-
-					// Create Destination Dir
-					$bMakeDir = File::makeDirectory( $sDestinationPath , 0775 , true );
-
-					// Move logo to server
-					if ( $bMakeDir ) {
-
-						// Upload logo
-						$request->file( 'logo' )->move( $sDestinationPath );
-
-						// Save logo name in organization table
-						$sFileName = $request->file( 'logo' )->getClientOriginalName();
-						$oOrganization->logo = $sDestinationPath . $sFileName;
-						$oOrganization->save();
-					}
+			$oOrganization = Organization::where( 'id' , '=' , $oOrganization->id )->with( array(
+				'Users' => function ( $q ) {
+					$q->with( 'Roles' );
 				}
-			}*/
-
-			$oOrganization = Organization::where('id','=',$oOrganization->id)->with(array('Users'=>function($q){
-				$q->with('Roles');
-			}))->first();
+			) )->first();
 
 
 		}
