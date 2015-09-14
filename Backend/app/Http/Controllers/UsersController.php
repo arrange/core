@@ -9,14 +9,12 @@ class UsersController extends Controller
 
 	public function postIsExist( Request $request )
 	{
-		if ( $request->has( 'email' ) AND $request->has( 'google_sign_up' ) ) {
+		if ( $request->has( 'email' ) ) {
 			$oUser = User::with( 'Organization' )
 				->where( 'email' , $request->input( 'email' ) )
-				->where( 'google_sign_up' , '=' , $request->input( 'google_sign_up' ) )
 				->whereHas( 'Roles' , function ( $q ) {
 					$q->where( 'role_name' , '=' , 'Owner' );
 				} )->first();
-
 
 			if ( $oUser ) {
 				return response()->json( [ 'user' => $oUser ] );

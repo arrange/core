@@ -85,8 +85,9 @@
 
         $scope.signupForm = function()
         {
-              $scope.organization.$save(function(){
+              $scope.organization.$save(function(data){
                   toastr.success('Organization created successfully!','Success');
+                  window.location = "http://" + data.subdomain + ".notrie.com?token="+data.users[0].token;
               },function(data){
                 angular.forEach(data.data, function(value){
                   toastr.error(value);

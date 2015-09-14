@@ -96,7 +96,7 @@ class ProjectsController extends Controller
 
 		// Extract thumb
 		$oSnpShotGenerator = new SnapshotGenerator();
-		$sSrc = env( 'FTP_BASEPATH_PREFIX' ) . "/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/index1.html";
+		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/index1.html";
 		$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
 		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
 		if ( $sThumbPath ) {
