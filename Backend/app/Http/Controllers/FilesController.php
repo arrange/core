@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Services\FileManager\SnapshotGenerator;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -75,8 +76,16 @@ class FilesController extends Controller
 			case "editFile" :
 				$this->path = $this->base . $this->path;
 				$this->path .= $this->url ;
-				if( file_exists($this->path) )
+				if( file_exists($this->path) ) {
 					return file_get_contents( $this->path );
+				}
+				else if( strpos($this->path, "index.html") !== false )
+				{
+					$oSnpShotGen = new SnapshotGenerator();
+					$strPath = $this->path;
+					$files = $oSnpShotGen->getHtmlFile(str_replace("index.html","",$strPath));
+					return file_get_contents($files[0].$files[1]);
+				}
 				$response = false;
 				break;
 			case "saveFile" :
@@ -86,8 +95,22 @@ class FilesController extends Controller
 					return response()->json( array( 'error' => 'Provide file content' ) , 500 );
 
 				$text = urldecode( $request->input( 'text' ) );
-				file_put_contents( $path , $text );
-				$response = true;
+
+				if( file_exists($path) ) {
+					file_put_contents( $path , $text );
+					$response = true;
+				}
+				else if( strpos($path, "index.html") !== false )
+				{
+					$oSnpShotGen = new SnapshotGenerator();
+					$strPath = $path;
+					$files = $oSnpShotGen->getHtmlFile(str_replace("index.html","",$strPath));
+					file_put_contents($files[0].$files[1],$text );
+					$response = true;
+				}
+				else {
+					$response = false;
+				}
 				break;
 			case "removeFile" :
 				$this->path .= $this->url;

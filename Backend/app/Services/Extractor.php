@@ -1,5 +1,7 @@
 <?php namespace App\Services;
 
+use App\Services\FileManager\SnapshotGenerator;
+
 class Extractor
 {
 
@@ -55,15 +57,51 @@ class Extractor
 	{
 		$oZipArchive = new \ZipArchive();
 		if ( $oZipArchive->open( $this->source ) ) {
-			try{
+			try {
 				$oZipArchive->extractTo( $this->destination );
 				$oZipArchive->close();
+				$this->arrangeStructure( $this->destination );
 				return true;
-			}
-			catch(\Exception $e) {
-				var_dump($e->getMessage());
+			} catch ( \Exception $e ) {
+				var_dump( $e->getMessage() );
 			}
 		}
 		return false;
+	}
+
+	public function  arrangeStructure( $destination )
+	{
+		if ( empty( $destination ) ) {
+			return false;
+		}
+
+		if ( !glob( $destination . '*.html' ) ) {
+			$files = array_diff( scandir( $destination ) , array( '.' , '..' ) );
+			if ( count( $files ) == 1 ) {
+				foreach( $files as $file ) {
+					$folder = $file;
+					break;
+				}
+				$this->recurse_copy( $destination . $folder . DIRECTORY_SEPARATOR , $destination );
+				$oSnapshot = new SnapshotGenerator();
+				$oSnapshot->removeFolder( $destination . $folder );
+			}
+		}
+	}
+
+	public function recurse_copy( $src , $dst )
+	{
+		$dir = opendir( $src );
+		@mkdir( $dst );
+		while ( false !== ( $file = readdir( $dir ) ) ) {
+			if ( ( $file != '.' ) && ( $file != '..' ) ) {
+				if ( is_dir( $src . '/' . $file ) ) {
+					$this->recurse_copy( $src . '/' . $file , $dst . '/' . $file );
+				} else {
+					copy( $src . '/' . $file , $dst . '/' . $file );
+				}
+			}
+		}
+		closedir( $dir );
 	}
 }

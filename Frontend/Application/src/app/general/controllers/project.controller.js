@@ -2,18 +2,31 @@
     'use strict';
 
     angular.module('easywebapp')
-        .controller('addProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', 'Preset', '$config', 'Auth', 'Project', 'toastr',
-            function ($stateParams, $scope, $state, $rootScope, Preset, $config, Auth, Project, toastr) {
+        .controller('addProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', 'Preset', '$config', 'Auth', 'Project', 'toastr','Upload',
+            function ($stateParams, $scope, $state, $rootScope, Preset, $config, Auth, Project, toastr,Upload) {
 
                 function executeProject() {
                     $scope.Project = new Project();
                     $scope.presets = [];
                     $scope.preset_thumb_url = $config.preset_thumb_url;
                     $scope.token = Auth.getValue('token');
-                    $scope.Project.preset_id = 0;
+                    $scope.Project.preset_id = -1;
                     $scope.Project.user_id = Auth.getValue('id');
                     $scope.Project.organization_id = Auth.getValue('organization_id');
-
+                    $scope.zipFile = null;
+                    $scope.uploadFiles = function(file) {
+                        if( file ) {
+                            console.log(file.name.split('.')[1]);
+                            if (file.name.split('.')[1] == "zip" || file.name.split('.')[1] == "ZIP") {
+                                $scope.zipFile = file;
+                            }
+                            else
+                            {
+                                toastr.error("Only zip files allowed");
+                                return false;
+                            }
+                        }
+                    };
                     Preset.query().$promise.then(function (aPresets) {
                         $scope.presets = aPresets;
                     }, function () {
@@ -24,14 +37,54 @@
                     };
 
                     $scope.saveProject = function () {
-                        $scope.Project.$save(function (data) {
-                            toastr.success('Project created successfully!', 'Success');
-                            $state.go('edit-project', {projectId: data.id});
-                        }, function (data) {
-                            if( data.data )
-                                if ( data.data.error )
-                                    toastr.error(data.data.error);
-                        })
+                        var valid = false;
+                        if( $scope.Project.type == "zip" ){
+                            if( $scope.zipFile )
+                                valid = true;
+                            else{
+                                toastr.error('Zip file is required');
+                            }
+                        }
+                        else if( $scope.Project.type == "template" ){
+                            $scope.zipFile = null;
+                            if( $scope.Project.preset_id > 0 ) {
+                                valid = true;
+                            }
+                            else
+                                toastr.error("Select Preset");
+                        }
+                        else if( $scope.Project.type == "blank" ){
+                            $scope.zipFile = null;
+                            valid = true;
+                        }
+                        if( valid ) {
+                            if( $scope.zipFile ) {
+                                Upload.upload({
+                                    url: $config.api + 'projects',
+                                    method: 'POST',
+                                    headers: {'token': Auth.getValue('token')},
+                                    fields: ($scope.Project).toJSON(),
+                                    file: $scope.zipFile,
+                                    fileFormDataName: 'zipFile'
+                                }).then(function(data){
+                                    toastr.success('Project created successfully!', 'Success');
+                                    $state.go('edit-project', {projectId: data.id});
+                                },function(data){
+
+                                })
+                            }
+                            else {
+                                $scope.Project.$save(function (data) {
+                                    toastr.success('Project created successfully!', 'Success');
+                                    $state.go('edit-project', {projectId: data.id});
+
+                                }, function (data) {
+                                    if (data.data)
+                                        if (data.data.error)
+                                            toastr.error(data.data.error);
+                                })
+                            }
+                        }
                     };
 
                     $scope.goBack = function () {
@@ -52,7 +105,8 @@
     angular.module('easywebapp')
         .controller('editProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', '$config', 'Auth', 'Project', 'toastr', 'File',
             function ($stateParams, $scope, $state, $rootScope, $config, Auth, Project, toastr, File) {
-
+                var user_id = Auth.getValue('id');
+                var organization_id = Auth.getValue('organization_id');
                 $scope.editHtml = "";
                 $scope.editCss = "";
                 $scope.editJs = "";
@@ -99,7 +153,23 @@
 
                     function getFile(project) {
                         File.index({mode: 'editFile', 'path': project.location + 'index.html'}).then(function (resp) {
-                            $scope.editHtml = resp;
+                            var div = $('<div>');
+                            div.html(resp);
+                            div.find('*').each(function(){
+                                var href = $(this).attr('href');
+                                var src = $(this).attr('src');
+                                if( $(this).is('a') )
+                                {
+                                    if( $(this).attr('href') != "#" && $(this).attr('href').substr(0,4) != "http")
+                                        $(this).attr("href","#");
+                                }
+                                else if( href && href != "#" && href.substr(0,2) != "//" && href.substr(0,4) != "http" )
+                                    $(this).attr('href',$config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.location + href );
+                                else if( src && src != "#" && src.substr(0,2) != "//" && src.substr(0,4) != "http")
+                                    $(this).attr('src',$config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.location + src );
+                            });
+                            $scope.editHtml = div.html();
+                            //console.log($scope.editHtml);
                             generatePreview();
                         }, function () {
                         });
@@ -121,13 +191,13 @@
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index.html' , 'text': $scope.editHtml }).then(function (resp) {}, function () {});
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'style.css' , 'text': $scope.editCss }).then(function (resp) {}, function () {});
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'main.js' , 'text': $scope.editJs }).then(function (resp) {}, function () {});
-                        File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index1.html' , 'text': content }).then(function (resp) {
-                            File.saveSnapShot({ 'id': $scope.Project.id }).then(function () {
-                                toastr.success("Project saved successfully");
-                            }, function () {
-                                toastr.error("Unable to save file");
-                            });
-                        }, function () {});
+                        //File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index1.html' , 'text': content }).then(function (resp) {
+                        //}, function () {});
+                        File.saveSnapShot({ 'id': $scope.Project.id }).then(function () {
+                            toastr.success("Project saved successfully");
+                        }, function () {
+                            toastr.error("Unable to save file");
+                        });
                     };
 
                     if (!$stateParams.projectId)

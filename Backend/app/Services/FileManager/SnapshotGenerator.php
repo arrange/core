@@ -23,9 +23,46 @@ class SnapshotGenerator
 
 	public function getAndSavePreview( $source , $destination )
 	{
-		$aResponse = json_decode( file_get_contents( env('SS_SERVER_URL') . '?mode=screenshot&input='. env('SS_BASE_URL') .  $source . "&output=" . $destination ) ,true );
+		$aResponse = json_decode( file_get_contents( env( 'SS_SERVER_URL' ) . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination ) , true );
 		if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
 			return $aResponse[ 'success' ];
+		return false;
+	}
+
+	public function getHtmlFile( $path )
+	{
+		if ( file_exists( $path . "index.html" ) )
+			return array( $path , "index.html" );
+		else if ( file_exists( $path . "home.html" ) )
+			return array( $path , "home.html" );
+		else {
+			$files = glob( $path . '*.html' );
+			foreach( $files as $file ) {
+				return array( $path , $file );
+			}
+		}
+		return array();
+	}
+
+	public function removeFolder($path)
+	{
+		if (is_dir($path) === true)
+		{
+			$files = array_diff(scandir($path), array('.', '..'));
+
+			foreach ($files as $file)
+			{
+				$this->removeFolder(realpath($path) . '/' . $file);
+			}
+
+			return rmdir($path);
+		}
+
+		else if (is_file($path) === true)
+		{
+			return unlink($path);
+		}
+
 		return false;
 	}
 }

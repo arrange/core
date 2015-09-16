@@ -25,8 +25,42 @@
                 <div class="form-group">
                     <label class="col-md-4">Template</label>
                     <div class="col-md-8" style="padding-left: 0;">
+                        <div class="col-md-12">
+                            <input type="radio" name="type" value="zip" ng-model="Project.type" ng-click="setPreset(-1)" validator="required" required-error-message="Template selection required." > Upload Zip
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="  Project.type == 'zip' ">
+                    <label class="col-md-4"></label>
+                    <div class="col-md-8">
+                        <div class="col-md-3" >
+                            <button type="file" ngf-select="uploadFiles($file)" ngf-max-height="1000" ngf-max-size="64MB" required>
+                                Select File</button>
+                            {{zipFile.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4"></label>
+                    <div class="col-md-8" style="padding-left: 0;">
+                        <div class="col-md-12">
+                            <input type="radio" name="type" value="template" ng-model="Project.type" validator="required" required-error-message="Template selection required." > Select From Presets
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="  Project.type == 'template' ">
+                    <label class="col-md-4"></label>
+                    <div class="col-md-8">
                         <div class="col-md-3" ng-repeat="preset in presets" style="position:relative;"  ng-class = "{ 'selected' : Project.preset_id == preset.id }">
                             <img src="{{ preset_thumb_url + '?name=' + preset.thumb + '&token=' + token }}"  ng-click="setPreset(preset.id)" style="width:100%;cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4"></label>
+                    <div class="col-md-8" style="padding-left: 0;">
+                        <div class="col-md-12">
+                            <input type="radio" name="type" value="blank" ng-model="Project.type" validator="required" required-error-message="Template selection required." > Blank Folder
                         </div>
                     </div>
                 </div>

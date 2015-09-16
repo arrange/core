@@ -5,6 +5,7 @@ use App\Models\Preset;
 use App\Services\FileManager\SnapshotGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use App\Services\Extractor;
 
 class PresetsController extends Controller
 {
@@ -25,7 +26,7 @@ class PresetsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create( )
+	public function create()
 	{
 		//
 	}
@@ -40,39 +41,53 @@ class PresetsController extends Controller
 		if ( $request->has( 'name' ) ) {
 			$sDestinationPath = PRESETS_BASE_PATH;
 
-			if( !file_exists($sDestinationPath) )
+			if ( !file_exists( $sDestinationPath ) )
 				File::makeDirectory( $sDestinationPath , 0777 , true );
 
 			$aInputData = $request->only( array( 'name' ) );
 
-			if( !$request->hasFile( 'zip' ) )
+			if ( !$request->hasFile( 'zip' ) )
 				return response()->json( array( 'error' => "Add zip file" ) , 500 );
 
 			$oFile = $request->file( 'zip' );
 			$sZipFile = $request->file( 'zip' )->getClientOriginalName();
+			$sFileName = pathinfo( $oFile->getClientOriginalName() , PATHINFO_FILENAME );
+
 			$counter = 1;
-			while( File::exists($sDestinationPath.$sZipFile) )
-				$sZipFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
-
-			$request->file( 'zip' )->move( $sDestinationPath , $sZipFile );
-			$aInputData[ 'zip_location' ] = $sZipFile;
-
-			if( $request->hasFile( 'thumb' ) ) {
-
-				$oFile = $request->file( 'thumb' );
-				$sThumbFile = $request->file( 'thumb' )->getClientOriginalName();
-				$counter = 1;
-				while( File::exists($sDestinationPath.$sThumbFile) )
-					$sThumbFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);$sThumbFile = $request->file( 'thumb' )->getClientOriginalName();
-				$counter = 1;
-				while( File::exists($sDestinationPath.$sThumbFile) )
-					$sThumbFile = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
-
-				$request->file( 'thumb' )->move( $sDestinationPath , $sThumbFile );
-				$aInputData[ 'thumb' ] = $sThumbFile;
+			while ( File::exists( $sDestinationPath . $sFileName ) ) {
+				$sFileName = pathinfo( $oFile->getClientOriginalName() , PATHINFO_FILENAME ) . "_" . $counter ++;
+				$sZipFile = $sFileName . "." . pathinfo( $oFile->getClientOriginalName() , PATHINFO_EXTENSION );
 			}
 
+			$request->file( 'zip' )->move( $sDestinationPath , $sZipFile );
+			$aInputData[ 'zip_location' ] = $sFileName;
+
+			// Extract zip to zip named folder
+			$sSourceZip = PRESETS_BASE_PATH . $sZipFile;
+			$sDestinationFolder = PRESETS_BASE_PATH . $sFileName . DIRECTORY_SEPARATOR;
+			if ( !file_exists( $sDestinationFolder ) )
+				File::makeDirectory( $sDestinationFolder , 0777 , true );
+			$oExtractor = new Extractor( $sSourceZip , $sDestinationFolder );
+			$oExtractor->extract( $sSourceZip , $sDestinationFolder );
+
+			// Generate preview thumb from extracted folder
+			$oSnpShotGenerator = new SnapshotGenerator();
+			if ( $oExtractor ) {
+				$aFile = $oSnpShotGenerator->getHtmlFile( $sDestinationFolder );
+				if ( !empty( $aFile ) AND count( $aFile ) > 1 ) {
+					$sSrc = "Backend/presets/" . $sFileName . "/" . $aFile[ 1 ];
+					$sDest = PRESETS_BASE_PATH . $sFileName . ".png";
+					$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
+					if ( $sThumbPath ) {
+						$aInputData[ 'thumb' ] = $sFileName . ".png";
+					}
+				}
+			}
+
+			unlink( $sSourceZip );
+
 			$oPreset = Preset::create( $aInputData );
+
 			if ( !$oPreset )
 				return response()->json( array( 'error' => "Couldn't create presets" ) , 500 );
 

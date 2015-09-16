@@ -24,9 +24,16 @@ class PreviewController extends Controller
 		$oSnpShotGenerator = new SnapshotGenerator();
 		$iProjectId = $request->input( 'id' );
 		$oProject = Project::where( 'id' , '=' , $iProjectId )->first();
-		$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . str_replace("\\","",str_replace('/',"",$oProject->location)) . "/index1.html";
-		$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . str_replace("\\","",str_replace('/',"",$oProject->location)) . ".png";		//return response()->json([$sSrc,$sDest]);
-		$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
-		return response()->json(array($sThumbPath));
+		$sDestinationPath = CLIENTS_BASE_PATH. $oUser->Organization->id . "/" . $oUser->id . "/" . str_replace("\\","",str_replace('/',"",$oProject->location)) . "/";
+		$aFiles = $oSnpShotGenerator->getHtmlFile( $sDestinationPath );
+		if ( !empty( $aFiles ) AND count( $aFiles ) > 1 ) {
+			$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . str_replace( "\\" , "" , str_replace( '/' , "" , $oProject->location ) ) . "/" . $aFiles[ 1 ];
+
+			//$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . str_replace("\\","",str_replace('/',"",$oProject->location)) . "/index1.html";
+			$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . str_replace( "\\" , "" , str_replace( '/' , "" , $oProject->location ) ) . ".png";        //return response()->json([$sSrc,$sDest]);
+			$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
+			return response()->json( array( $sThumbPath ) );
+		}
+		return response()->json(array('error'=>"Thumb can't generated"),404);
 	}
 }
