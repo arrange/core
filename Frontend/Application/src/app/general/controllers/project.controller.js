@@ -103,8 +103,8 @@
 
             }]);
     angular.module('easywebapp')
-        .controller('editProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', '$config', 'Auth', 'Project', 'toastr', 'File',
-            function ($stateParams, $scope, $state, $rootScope, $config, Auth, Project, toastr, File) {
+        .controller('editProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', '$config', 'Auth', 'Project', 'toastr', 'File','$modal',
+            function ($stateParams, $scope, $state, $rootScope, $config, Auth, Project, toastr, File, $modal) {
                 var user_id = Auth.getValue('id');
                 var organization_id = Auth.getValue('organization_id');
                 $scope.editHtml = "";
@@ -113,6 +113,14 @@
                 $scope.ShowHtml = true;
                 $scope.ShowCss = true;
                 $scope.ShowJs = true;
+
+                $scope.socialIcons = function() {
+                    $modal.open({
+                        templateUrl: $config.module.general.view + "socialIcons.modal.html",
+                        controller: 'SocialIconCtrl',
+                        size: 'lg'
+                    });
+                };
 
                 $scope.editorOptions1 = {
                     lineWrapping : true,

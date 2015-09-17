@@ -1,3 +1,41 @@
+<style>
+    .a-monochrome{
+        color: #ffffff;
+    }
+    .a-monochrome-rounded-border{
+       background-color: #999;
+    }
+    .a-flat{
+        background-color: #ffffff;
+        color:#999;
+    }
+    .a-rounded-border0 {
+        border-radius : 0;
+    }
+    .a-rounded-border20 {
+        border-radius : 50%
+    }
+    .a-rounded-border5 {
+        border-radius : 10%;
+    }
+    .a-social{
+        padding:10px 15px;
+        float: left;
+        text-align: center;
+        margin-left:5px;
+    }
+    .a-plain{
+        background-color:#fff;
+    }
+    .facebook-official{
+        background-color: #000066;
+        color:#fff;
+    }
+    .twitter-official{
+        background-color: #000000;
+        color:#008855;
+    }
+</style>
 <div id="wrap">
     <div class="row">
         <div class="col-sm-6"><h3>{{ Project.name }}</h3></div>
@@ -6,6 +44,7 @@
             Sign Out</button></h3></div>
     </div>
     <div class="row">
+        <button class="btn btn-primary" ng-click="socialIcons()">Social Icons</button>
         <div class="col-sm-4" style="padding-right: 0;" ng-show="ShowHtml || ShowCss || ShowJs">
             <div class="col-sm-12" style="padding-right: 0;"  ng-show="ShowHtml">
                 <h4>HTML</h4>

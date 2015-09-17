@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <h3 class="modal-title">Social Icon generator</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <tabset justified="true">
+                    <tab heading="Set your links">
+                        <br>
+                        <div class="form-group"  ng-repeat="link in models.social_links">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" ng-model="link.href" placeholder="{{ link.placeholder }}"/>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Customize the look">
+                        <div class="form-group" style="margin-top:10px;">
+                            <label class="col-md-12">Style of icon</label>
+                            <div class="col-md-12">
+                                <select class="form-control" ng-model="models.styleicon" name="style">
+                                    <option value="plain" selected="selected">Silhouette</option>
+                                    <option value="circle">Circle</option>
+                                    <option value="rounded">Rounded corners</option>
+                                    <option value="square">Square</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="monochrome"> Monochrome
+                            </div>
+                            <div class="col-md-6">
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="brand"> Brand color for each icon
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Color if monochrome</label>
+                            <div class="col-md-12">
+                                <input type="text" ng-disabled="models.monochrome!='monochrome'" name="monochrome_bgcolor" ng-model="models.monochrome_bgcolor" value="" placeholder="#ccc" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Font-size</label>
+                            <div class="col-md-12">
+                                <select class="form-control" ng-model="models.font_size">
+                                    <option value="15px">small</option>
+                                    <option value="22px">medium</option>
+                                    <option value="50px">large</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="checkbox" name="open_in_new_tab" ng-model="models.open_in_new_tab"> Open in new tab
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" style="margin-top:10px;">
+                    <div class="col-md-12">
+                        <h1>Preview</h1>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:10px;">
+                    <div class="col-md-12">
+                        <h4>Your buttons will appear just like this, wherever you place your code.</h4>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <a href="{{ link.href }}" class="a-social" ng-repeat="link in models.social_links"
+                           ng-class="{
+                            'a-monochrome' : models.monochrome,
+                            'a-flat' : models.styleicon == 'plain',
+                            'a-rounded-border20' :  models.styleicon == 'circle',
+                            'a-rounded-border5' :  models.styleicon == 'rounded',
+                            'a-rounded-border0' :  models.styleicon == 'square',
+                            'a-monochrome-rounded-border' : models.monochrome && ( models.styleicon == 'square' || models.styleicon == 'circle' || models.styleicon == 'rounded' ),
+                           }"
+                           ng-target="{{ models.open_in_new_tab ? '_blank' : '_self' }}" ng-show="link.href" title="link.title" style="{{models.monochrome == 'monochrome' ?  'background:'+ models.monochrome_bgcolor : 'background:'+link.background_color}}">
+                            <i class="fa {{ link.class }}" style="{{models.monochrome == 'monochrome' ?  '' : 'color:'+link.color+';'}}font-size:{{models.font_size}}"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </form>
+    <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="close()">Close</button>
+</div>
