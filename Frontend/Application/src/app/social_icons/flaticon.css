@@ -1,0 +1,187 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+       /* font-size: 20px;*/
+font-style: normal;
+margin-left: 10px;
+}.flaticon-dark4:before {
+	content: "\e000";
+}
+.flaticon-dark5:before {
+    content: "\e000";
+}
+.flaticon-dark6:before {
+    content: "\e000";
+}
+.flaticon-email131:before {
+	content: "\e001";
+}
+.flaticon-facebok:before {
+	content: "\e002";
+}
+.flaticon-facebook29:before {
+	content: "\e003";
+}
+.flaticon-facebook31:before {
+	content: "\e004";
+}
+.flaticon-facebook53:before {
+	content: "\e005";
+}
+.flaticon-flickr19:before {
+	content: "\e006";
+}
+.flaticon-flickr5:before {
+	content: "\e007";
+}
+.flaticon-flickr7:before {
+	content: "\e008";
+}
+.flaticon-google110:before {
+	content: "\e009";
+}
+.flaticon-google111:before {
+	content: "\e00a";
+}
+.flaticon-google116:before {
+	content: "\e00b";
+}
+.flaticon-google2:before {
+	content: "\e00c";
+}
+.flaticon-instagram1:before {
+	content: "\e00d";
+}
+.flaticon-instagram13:before {
+	content: "\e00e";
+}
+.flaticon-linkedin18:before {
+	content: "\e00f";
+}
+.flaticon-linkedin21:before {
+	content: "\e010";
+}
+.flaticon-linkedin24:before {
+	content: "\e011";
+}
+.flaticon-logo22:before {
+	content: "\e012";
+}
+.flaticon-logotype1:before {
+	content: "\e013";
+}
+.flaticon-logotype48:before {
+	content: "\e014";
+}
+.flaticon-pinterest12:before {
+	content: "\e015";
+}
+.flaticon-pinterest19:before {
+	content: "\e016";
+}
+.flaticon-pinterest24:before {
+	content: "\e017";
+}
+.flaticon-rss23:before {
+	content: "\e018";
+}
+.flaticon-rss45:before {
+	content: "\e019";
+}
+.flaticon-rss51:before {
+	content: "\e01a";
+}
+.flaticon-socialmedia11:before {
+	content: "\e01b";
+}
+.flaticon-social140:before {
+	content: "\e01c";
+}
+.flaticon-socialnetwork159:before {
+	content: "\e01d";
+}
+.flaticon-socialnetwork168:before {
+	content: "\e01e";
+}
+.flaticon-socialnetwork287:before {
+	content: "\e01f";
+}
+.flaticon-socialnetwork288:before {
+	content: "\e020";
+}
+.flaticon-socialnetwork291:before {
+	content: "\e021";
+}
+.flaticon-socialnetwork301:before {
+	content: "\e022";
+}
+.flaticon-socialnetwork302:before {
+    content: "\e022";
+}
+.flaticon-socialnetwork323:before {
+	content: "\e023";
+}
+.flaticon-tumblr19:before {
+	content: "\e024";
+}
+.flaticon-tumblr22:before {
+	content: "\e025";
+}
+.flaticon-twitter1:before {
+	content: "\e026";
+}
+.flaticon-twitter25:before {
+	content: "\e027";
+}
+.flaticon-twitter47:before {
+	content: "\e028";
+}
+.flaticon-video193:before {
+	content: "\e029";
+}
+.flaticon-vimeo1:before {
+	content: "\e02a";
+}
+.flaticon-vimeo3:before {
+	content: "\e02b";
+}
+.flaticon-web-feed1:before {
+	content: "\e02c";
+}
+.flaticon-wordpress15:before {
+	content: "\e02d";
+}
+.flaticon-wordpress4:before {
+	content: "\e02e";
+}
+.flaticon-yelp:before {
+	content: "\e02f";
+}
+.flaticon-yelp5:before {
+	content: "\e030";
+}
+.flaticon-yelp6:before {
+	content: "\e031";
+}
+.flaticon-yelp7:before {
+    content: "\e031";
+}
+.flaticon-youtube28:before {
+	content: "\e032";
+}
+.flaticon-youtube31:before {
+	content: "\e033";
+}
+.flaticon-youtube32:before {
+	content: "\e034";
+}

@@ -77,7 +77,7 @@ class Extractor
 
 		if ( !glob( $destination . '*.html' ) ) {
 			$files = array_diff( scandir( $destination ) , array( '.' , '..' ) );
-			if ( count( $files ) == 1 ) {
+			//if ( count( $files ) == 1 ) {
 				foreach( $files as $file ) {
 					$folder = $file;
 					break;
@@ -85,7 +85,7 @@ class Extractor
 				$this->recurse_copy( $destination . $folder . DIRECTORY_SEPARATOR , $destination );
 				$oSnapshot = new SnapshotGenerator();
 				$oSnapshot->removeFolder( $destination . $folder );
-			}
+			//}
 		}
 	}
 

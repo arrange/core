@@ -10,7 +10,7 @@
                         <br>
                         <div class="form-group"  ng-repeat="link in models.social_links">
                             <div class="col-md-12">
-                                <input type="text" class="form-control" ng-model="link.href" placeholder="{{ link.placeholder }}"/>
+                                <input type="text" class="form-control" ng-model="link.href" placeholder="{{ link.placeholder }}" ng-blur="output.changeCode()"/>
                             </div>
                         </div>
                     </tab>
@@ -18,7 +18,7 @@
                         <div class="form-group" style="margin-top:10px;">
                             <label class="col-md-12">Style of icon</label>
                             <div class="col-md-12">
-                                <select class="form-control" ng-model="models.styleicon" name="style">
+                                <select class="form-control" ng-model="models.styleicon" name="style" ng-blur="output.changeCode()">
                                     <option value="plain" selected="selected">Silhouette</option>
                                     <option value="circle">Circle</option>
                                     <option value="rounded">Rounded corners</option>
@@ -28,22 +28,22 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="monochrome"> Monochrome
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="monochrome" ng-blur="output.changeCode()"> Monochrome
                             </div>
                             <div class="col-md-6">
-                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="brand"> Brand color for each icon
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="brand" ng-blur="output.changeCode()"> Brand color for each icon
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Color if monochrome</label>
                             <div class="col-md-12">
-                                <input type="text" ng-disabled="models.monochrome!='monochrome'" name="monochrome_bgcolor" ng-model="models.monochrome_bgcolor" value="" placeholder="#ccc" class="form-control">
+                                <input type="text" ng-disabled="models.monochrome!='monochrome'" name="monochrome_bgcolor" ng-model="models.monochrome_bgcolor" value="" placeholder="#ccc" class="form-control" ng-blur="output.changeCode()">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Font-size</label>
                             <div class="col-md-12">
-                                <select class="form-control" ng-model="models.font_size">
+                                <select class="form-control" ng-model="models.font_size" ng-blur="output.changeCode()">
                                     <option value="15px">small</option>
                                     <option value="22px">medium</option>
                                     <option value="50px">large</option>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="checkbox" name="open_in_new_tab" ng-model="models.open_in_new_tab"> Open in new tab
+                                <input type="checkbox" name="open_in_new_tab" ng-model="models.open_in_new_tab" ng-click="output.changeCode()"> Open in new tab
                             </div>
                         </div>
                     </tab>
@@ -70,22 +70,46 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-12">
-                        <a href="{{ link.href }}" class="a-social" ng-repeat="link in models.social_links"
-                           ng-class="{
-                            'a-monochrome' : models.monochrome,
-                            'a-flat' : models.styleicon == 'plain',
-                            'a-rounded-border20' :  models.styleicon == 'circle',
-                            'a-rounded-border5' :  models.styleicon == 'rounded',
-                            'a-rounded-border0' :  models.styleicon == 'square',
-                            'a-monochrome-rounded-border' : models.monochrome && ( models.styleicon == 'square' || models.styleicon == 'circle' || models.styleicon == 'rounded' ),
-                           }"
-                           ng-target="{{ models.open_in_new_tab ? '_blank' : '_self' }}" ng-show="link.href" title="link.title" style="{{models.monochrome == 'monochrome' ?  'background:'+ models.monochrome_bgcolor : 'background:'+link.background_color}}">
-                            <i class="fa {{ link.class }}" style="{{models.monochrome == 'monochrome' ?  '' : 'color:'+link.color+';'}}font-size:{{models.font_size}}"></i>
+                    <div class="col-md-12 social-links">
+                        <a href="{{ link.href }}" class="glyph a-social"
+                           ng-repeat="link in models.social_links"
+                           ng-attr-target="{{ models.open_in_new_tab ? '_blank' : '_self' }}"
+                           ng-show="link.href" title="{{ link.title }}"
+                          >
+                            <i class="glyph-icon "
+                               ng-class="{
+                                '{{link['plain']}}' : models.styleicon == 'plain',
+                                '{{link['circle']}}' : models.styleicon == 'circle',
+                                '{{link['rounded']}}' : models.styleicon == 'rounded',
+                                '{{link['square']}}' : models.styleicon == 'square',
+                               }"
+                               style="{{  models.monochrome == 'monochrome'  ? ( models.styleicon == 'plain' ? 'color:#999;' :  'color:' + models.monochrome_bgcolor + ';' ) : 'color:' + link.background_color + ';' }}font-size:{{models.font_size}}"></i>
                         </a>
                     </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button data-clipboard-target="to-copy" class="btn btn-success btn-md">Copy to Clipboard</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <div class="col-sm-12">
+                            <pre>
+<a href="#">flaticon/flaticon.css</a>
+.social-links a{
+        float: left;
+        text-align: center;
+        margin-left:5px;
+        color:#999;
+        text-decoration: none;
+}
+.social-links a:hover{
+        text-decoration: none;
+}
+     {{ output.preview }}</pre>
+                        </div>
+                    </div>
+                </div>
         </div>
      </form>
     <div class="clearfix"></div>
