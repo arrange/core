@@ -62,6 +62,7 @@
                                 Upload.upload({
                                     url: $config.api + 'projects',
                                     method: 'POST',
+                                    async : false,
                                     headers: {'token': Auth.getValue('token')},
                                     fields: ($scope.Project).toJSON(),
                                     file: $scope.zipFile,
@@ -177,17 +178,6 @@
                                     $(this).attr('src',$config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.location + src );
                             });
                             $scope.editHtml = div.html();
-                            //console.log($scope.editHtml);
-                            generatePreview();
-                        }, function () {
-                        });
-                        File.index({mode: 'editFile', 'path': project.location + 'style.css'}).then(function (resp) {
-                            $scope.editCss = resp;
-                            generatePreview();
-                        }, function () {
-                        });
-                        File.index({mode: 'editFile', 'path': project.location + 'main.js'}).then(function (resp) {
-                            $scope.editJs = resp;
                             generatePreview();
                         }, function () {
                         });
@@ -197,10 +187,6 @@
                     {
                         var content = '<style class="text/css">' + $scope.editCss + '</style>' + $scope.editHtml + '<script type="text/javascript">' + $scope.editJs + '</script>';
                         File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index.html' , 'text': $scope.editHtml }).then(function (resp) {}, function () {});
-                        File.index({mode: 'saveFile', 'path': $scope.Project.location + 'style.css' , 'text': $scope.editCss }).then(function (resp) {}, function () {});
-                        File.index({mode: 'saveFile', 'path': $scope.Project.location + 'main.js' , 'text': $scope.editJs }).then(function (resp) {}, function () {});
-                        //File.index({mode: 'saveFile', 'path': $scope.Project.location + 'index1.html' , 'text': content }).then(function (resp) {
-                        //}, function () {});
                         File.saveSnapShot({ 'id': $scope.Project.id }).then(function () {
                             toastr.success("Project saved successfully");
                         }, function () {
@@ -216,7 +202,7 @@
                         getFile($scope.Project);
                     }, function (data) {
                         $state.go('dashboard');
-                        toastr.error();
+                        toastr.error('unable to load project'+ $stateParams.projectId);
                     });
 
                     $scope.token = Auth.getValue('token');

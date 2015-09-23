@@ -13,7 +13,8 @@
           'validation',
           'validation.rule',
           'ui.codemirror',
-          'ngFileUpload'
+          'ngFileUpload',
+          'angular-clipboard'
       ]);
 
 })();

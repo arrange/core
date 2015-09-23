@@ -1,4 +1,5 @@
 <div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
     <h3 class="modal-title">Social Icon generator</h3>
 </div>
 <div class="modal-body">
@@ -76,37 +77,27 @@
                            ng-attr-target="{{ models.open_in_new_tab ? '_blank' : '_self' }}"
                            ng-show="link.href" title="{{ link.title }}"
                           >
-                            <i class="glyph-icon "
+   <i class="glyph-icon "
                                ng-class="{
                                 '{{link['plain']}}' : models.styleicon == 'plain',
                                 '{{link['circle']}}' : models.styleicon == 'circle',
                                 '{{link['rounded']}}' : models.styleicon == 'rounded',
                                 '{{link['square']}}' : models.styleicon == 'square',
                                }"
-                               style="{{  models.monochrome == 'monochrome'  ? ( models.styleicon == 'plain' ? 'color:#999;' :  'color:' + models.monochrome_bgcolor + ';' ) : 'color:' + link.background_color + ';' }}font-size:{{models.font_size}}"></i>
-                        </a>
+                               style="{{  models.monochrome == 'monochrome'  ? ( models.styleicon == 'plain' ? 'color:#999;' :  'color:' + ( models.monochrome_bgcolor ? models.monochrome_bgcolor : '#999' )  + ';' ) : 'color:' + link.background_color + ';' }}font-size:{{models.font_size}}"></i>
+</a>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <button data-clipboard-target="to-copy" class="btn btn-success btn-md">Copy to Clipboard</button>
+                        <button clipboard text="output.preview" on-copied="success()" on-error="fail(err)" class="btn btn-success btn-md">Copy to Clipboard</button>
                     </div>
                 </div>
                 <div class="form-group">
                         <div class="col-sm-12">
                             <pre>
 <a href="#">flaticon/flaticon.css</a>
-.social-links a{
-        float: left;
-        text-align: center;
-        margin-left:5px;
-        color:#999;
-        text-decoration: none;
-}
-.social-links a:hover{
-        text-decoration: none;
-}
-     {{ output.preview }}</pre>
+{{ output.preview }}</pre>
                         </div>
                     </div>
                 </div>

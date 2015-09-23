@@ -9,10 +9,10 @@
         .constant('moment', moment)
         .constant('$config',{
             url : "http://localhost:3000/",
-         //   api : "http://localhost/notrierepo/Backend/public/",
-         //   preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
-         //   project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
-         //   clients_path : "http://localhost/notrierepo/Backend/clients/",
+          //  api : "http://localhost/notrierepo/Backend/public/",
+          //  preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
+          //  project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
+          //  clients_path : "http://localhost/notrierepo/Backend/clients/",
             api : "http://api.notrie.com/",
             preset_thumb_url :  "http://api.notrie.com/preset-thumb",
             project_thumb_url :  "http://api.notrie.com/preview/file",

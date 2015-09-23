@@ -17,7 +17,10 @@
             $scope.models.font_size = '22px';
             $scope.models.open_in_new_tab = true;
             $scope.output = {};
-            $scope.output.preview = "";
+            var preview1 = ".social-links a{ float: left; text-align: center; margin-left:5px; color:#999; text-decoration: none; }" +  "\n" + ".social-links a:hover{ text-decoration: none; }";
+            $scope.output.preview = preview1;
+            $scope.success = function(){ console.log('success'); };
+            $scope.fail = function(err){ console.log(err); };
             $scope.output.changeCode = function(){
                 var htmlText = $('.social-links').clone();
                 var div = $('<div>');
@@ -29,9 +32,10 @@
                         $(this).removeAttr('ng-attr-target ng-repeat ng-show');
                         $(this).find('i').removeAttr('ng-class');
                         div1.append($(this));
+                        div1.append("\n");
                     }
                 });
-                $scope.output.preview = div1.html();
+                $scope.output.preview = preview1 +  "\n" +  div1.html();
             };
             $scope.models.social_links = [
                     {
