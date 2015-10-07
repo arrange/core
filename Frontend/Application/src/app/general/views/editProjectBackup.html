@@ -1,0 +1,58 @@
+<style>
+    .social-links a{
+        float: left;
+        text-align: center;
+        margin-left:5px;
+        color:#999;
+        text-decoration: none;
+    }
+    .social-links a:hover{
+        text-decoration: none;
+    }
+</style>
+<div id="wrap">
+    <div class="row">
+        <div class="col-sm-6"><h3>{{ Project.name }}</h3></div>
+        <div class="col-sm-5"><h3 class="pull-right">Welcome {{ User.firstname }}</h3></div>
+        <div class="col-sm-1"><h3><button class="btn btn-md btn-danger pull-right" ng-click="getlogout()">
+            Sign Out</button></h3></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4" style="padding-right: 0;" ng-show="ShowHtml || ShowCss || ShowJs">
+            <div class="col-sm-12" style="padding-right: 0;"  ng-show="ShowHtml">
+                <h4>HTML</h4>
+                <textarea ui-codemirror ui-codemirror-opts="editorOptions1" class="full-width" ng-model="editHtml"></textarea>
+                <!--<ui-codemirror  ng-model="editHtml"></ui-codemirror>-->
+            </div>
+            <div class="col-sm-12" style="padding-right: 0;"  ng-show="ShowCss">
+                <h4>CSS</h4>
+                <textarea ui-codemirror ui-codemirror-opts="editorOptions2" class="full-width" ng-model="editCss"></textarea>
+            </div>
+            <div class="col-sm-12" style="padding-right: 0;"  ng-show="ShowJs">
+                <h4>JS</h4>
+                <textarea ui-codemirror ui-codemirror-opts="editorOptions3" class="full-width" ng-model="editJs"></textarea>
+            </div>
+        </div>
+        <div ng-class="{ 'col-sm-8' : ShowHtml || ShowCss || ShowJs , 'col-sm-12' : !ShowHtml && !ShowCss && !ShowJs }">
+            <div class="col-sm-12" style="padding-left: 0;">
+                <h3>Preview</h3>
+                <iframe name="preview" id="preview" class="full-width"  style="height: 600px;border:0;border:1px solid #cccccc;border-radius:20px;"></iframe>
+            </div>
+            <div class="col-sm-12" style="padding-top: 5px;">
+                <div class="col-sm-12">
+                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowHtml , 'btn-gray' : !ShowHtml } " ng-click="toggleHtml()">Html</button>
+                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowCss , 'btn-gray' : !ShowCss } " ng-click="toggleCss()">Css</button>
+                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowJs , 'btn-gray' : !ShowJs } " ng-click="toggleJs()" >Js</button>
+                    <button class="btn btn-md btn-success pull-right" ng-click="saveFile({{ Project }})">
+                        Save</button>
+                    <button class="btn btn-md btn-primary pull-right" ng-click="goHome()" style="margin-right: 5px;">
+                        Home</button>
+                    <button class="btn btn-primary pull-right" ng-click="socialIcons()"  style="margin-right: 5px;">Social Icons</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>

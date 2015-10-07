@@ -151,4 +151,39 @@ class FilesController extends Controller
 		$oFile->move( $path , $sFile );
 	}
 
+	public function anyFiles(Request $request){
+		$filter = "html";
+		if( !$request->has('location') )
+			return response()->json( array( 'error' => 'Folder name is required' ) , 404 );
+		if( $request->has('filter') )
+			$filter = $request->input('filter');
+
+		$base = str_replace("\\\\",DIRECTORY_SEPARATOR,str_replace("//",DIRECTORY_SEPARATOR,$this->base)) . $this->path;
+		$dir = $base . $request->input('location');
+		$results = array();
+		if (is_dir($dir)) {
+			$iterator = new \RecursiveDirectoryIterator($dir);
+			foreach ( new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file ) {
+				if ($file->isFile()) {
+					$thispath = str_replace('\\', '/', $file);
+					$thispath1 = str_replace($base, "", $file->getPath().DIRECTORY_SEPARATOR);
+					$thisfile = utf8_encode($file->getFilename());
+					if( strstr($thispath,".".$filter) ) {
+						//$results = array_merge_recursive( $results , $this->pathToArray( $thispath1 , $thisfile ) );
+						if( preg_match('/'.$filter."$/",$thisfile) )
+							$results[] = $thispath1.$thisfile;
+					}
+				}
+			}
+		}
+		return response()->json($results);
+	}
+
+	private function pathToArray($path,$file)
+	{
+		//var_dump($path);
+		//var_dump($file);
+		return explode(DIRECTORY_SEPARATOR,$path);
+	}
+
 }

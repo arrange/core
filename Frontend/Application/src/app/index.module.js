@@ -14,7 +14,8 @@
           'validation.rule',
           'ui.codemirror',
           'ngFileUpload',
-          'angular-clipboard'
+          'angular-clipboard',
+          'ui.bootstrap-slider'
       ]);
 
 })();

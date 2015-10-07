@@ -22,5 +22,14 @@
                     });
                     return defer.promise;
                 };
+                this.getFiles = function(params){
+                    var defer = $q.defer();
+                    $http.post($config.api + 'files/files', params).success(function (data) {
+                        defer.resolve(data);
+                    }).error(function (data) {
+                        defer.reject(data);
+                    });
+                    return defer.promise;
+                };
             }]);
 })();

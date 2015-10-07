@@ -5,6 +5,10 @@
     angular
         .module('easywebapp')
         .constant('malarkey', malarkey)
+        .value('froalaConfig', {
+            inlineMode: true,
+            placeholder: 'Enter Text Here'
+        })
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('$config',{

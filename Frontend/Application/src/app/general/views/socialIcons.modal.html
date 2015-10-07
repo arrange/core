@@ -15,11 +15,11 @@
                             </div>
                         </div>
                     </tab>
-                    <tab heading="Customize the look">
+                    <tab heading="Customize the look" ng-click="availFuncForTab2()">
                         <div class="form-group" style="margin-top:10px;">
                             <label class="col-md-12">Style of icon</label>
                             <div class="col-md-12">
-                                <select class="form-control" ng-model="models.styleicon" name="style" ng-blur="output.changeCode()">
+                                <select class="form-control" ng-model="models.styleicon" name="style" ng-change="output.changeCode()">
                                     <option value="plain" selected="selected">Silhouette</option>
                                     <option value="circle">Circle</option>
                                     <option value="rounded">Rounded corners</option>
@@ -29,10 +29,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="monochrome" ng-blur="output.changeCode()"> Monochrome
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="monochrome" ng-click="output.changeCode()"> Monochrome
                             </div>
                             <div class="col-md-6">
-                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="brand" ng-blur="output.changeCode()"> Brand color for each icon
+                                <input type="radio" name="type_of_color" ng-model="models.monochrome" value="brand" ng-click="output.changeCode()"> Brand color for each icon
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,13 +42,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Font-size</label>
+                            <label class="col-md-12">Size</label>
                             <div class="col-md-12">
-                                <select class="form-control" ng-model="models.font_size" ng-blur="output.changeCode()">
-                                    <option value="15px">small</option>
-                                    <option value="22px">medium</option>
-                                    <option value="50px">large</option>
-                                </select>
+                                <slider slideStop="executeMe()" ng-model="sliders.sliderValue" min="{{testOptions.min}}" step="{{testOptions.step}}" max="{{testOptions.max}}"></slider>
+                            </div>
+                            <div class="col-sm-12">
+                                {{ sliders.sliderValue }}px
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,7 +83,7 @@
                                 '{{link['rounded']}}' : models.styleicon == 'rounded',
                                 '{{link['square']}}' : models.styleicon == 'square',
                                }"
-                               style="{{  models.monochrome == 'monochrome'  ? ( models.styleicon == 'plain' ? 'color:#999;' :  'color:' + ( models.monochrome_bgcolor ? models.monochrome_bgcolor : '#999' )  + ';' ) : 'color:' + link.background_color + ';' }}font-size:{{models.font_size}}"></i>
+                               style="{{  models.monochrome == 'monochrome'  ? ( models.styleicon == 'plain' ? 'color:#999;' :  'color:' + ( models.monochrome_bgcolor ? models.monochrome_bgcolor : '#999' )  + ';' ) : 'color:' + link.background_color + ';' }}font-size:{{ sliders.sliderValue }}px;"></i>
 </a>
                     </div>
                 </div>
@@ -99,8 +98,8 @@
 <a href="#">flaticon/flaticon.css</a>
 {{ output.preview }}</pre>
                         </div>
-                    </div>
                 </div>
+            </div>
         </div>
      </form>
     <div class="clearfix"></div>
@@ -108,3 +107,4 @@
 <div class="modal-footer">
     <button class="btn btn-warning" type="button" ng-click="close()">Close</button>
 </div>
+

@@ -7,6 +7,16 @@
             $scope.close = function(){
                 $modalInstance.close();
             };
+
+            $scope.sliders = {};
+            $scope.sliders.sliderValue = 50;
+
+            $scope.testOptions = {
+                min: 0,
+                max: 100,
+                step: 1
+            };
+
             $scope.models = {};
             $scope.models.facebook_link = "http://facebbook.com/";
             $scope.models.twitter_link = "http://twitter.com/";
@@ -14,14 +24,14 @@
             $scope.models.monochrome = 'monochrome';
             $scope.models.color = "#fff";
             $scope.models.bgcolor = "#999";
-            $scope.models.font_size = '22px';
             $scope.models.open_in_new_tab = true;
             $scope.output = {};
             var preview1 = ".social-links a{ float: left; text-align: center; margin-left:5px; color:#999; text-decoration: none; }" +  "\n" + ".social-links a:hover{ text-decoration: none; }";
-            $scope.output.preview = preview1;
+            $scope.output.preview = preview1 + '\n' + '<a href="http://facebook.com/notrie" class="glyph a-social" title="Follow us on Facebook" target="_blank" style="">'+'\n   '+'<i class="glyph-icon  flaticon-facebook31" style="color:#999;font-size:50px;"></i>'+'\n'+'</a>'+'\n'+'<a href="http://twitter.com/notrie" class="glyph a-social" title="Follow us on Twitter" target="_blank" style="">'+'\n   '+'<i class="glyph-icon  flaticon-twitter1" style="color:#999;font-size:50px;"></i>'+'\n'+'</a>';
             $scope.success = function(){ console.log('success'); };
             $scope.fail = function(err){ console.log(err); };
-            $scope.output.changeCode = function(){
+
+            var changeCode1 =  function(){
                 var htmlText = $('.social-links').clone();
                 var div = $('<div>');
                 var div1 = $('<div>');
@@ -36,6 +46,17 @@
                     }
                 });
                 $scope.output.preview = preview1 +  "\n" +  div1.html();
+            };
+            $scope.output.changeCode = changeCode1;
+
+            $scope.output.avail = false;
+            $scope.availFuncForTab2 = function() {
+                if( !$scope.output.avail ) {
+                    $scope.$watch(function ($newVal, $oldVal) {
+                        $scope.output.changeCode();
+                    });
+                    $scope.output.avail = true;
+                }
             };
             $scope.models.social_links = [
                     {
