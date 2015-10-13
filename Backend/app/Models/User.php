@@ -12,10 +12,12 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Cashier\Billable;
+use Laravel\Cashier\Contracts\Billable as BillableContract;
 
-class User extends Model implements AuthenticatableContract , CanResetPasswordContract
+class User extends Model implements AuthenticatableContract , CanResetPasswordContract , BillableContract
 {
-
+	use Billable;
 	use Authenticatable , CanResetPassword;
 	use SoftDeletes;
 
@@ -40,6 +42,8 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 	 */
 	protected $hidden = [ 'password' , 'remember_token' ];
 
+	protected $dates = ['trial_ends_at', 'subscription_ends_at'];
+
 	public function Organization()
 	{
 		return $this->belongsTo( 'App\Models\Organization' , 'organization_id' );
@@ -54,4 +58,21 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 	{
 		return $this->hasMany( 'App\Models\Project' , 'user_id' );
 	}
+
+	public function getTrialEndsAtAttribute($value)
+	{
+		if( $value )
+			return strtotime($value) * 1000;
+		else
+			return $value;
+	}
+
+	public function getSubscriptionEndsAtAttribute($value)
+	{
+		if( $value )
+			return strtotime($value) * 1000;
+		else
+			return $value;
+	}
+
 }

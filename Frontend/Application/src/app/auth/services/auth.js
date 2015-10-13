@@ -19,8 +19,16 @@ angular.module('easywebapp')
             return false;
         };
 
+        var getUser = function (){
+            if($cookieStore.get('user')) {
+                return JSON.parse($cookieStore.get('user'));
+            }
+            return false;
+        };
+
         this.getValue = getValue;
         this.setUser = setUser;
+        this.getUser = getUser;
 
 		this.login = function (credentials) {
 			var defer = $q.defer();

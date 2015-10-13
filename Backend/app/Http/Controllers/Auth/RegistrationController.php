@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\SignUpRequest;
@@ -42,6 +43,7 @@ class RegistrationController extends Controller
 		// Get Owner role's row
 		$oRole = Role::where( 'role_name' , 'Owner' )->first();
 
+		$aInputUserData[ 'trial_ends_at' ] = Carbon::now()->addDays( 14 );
 		// Insert User
 		$oUser = User::create( $aInputUserData );
 

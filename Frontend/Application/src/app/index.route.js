@@ -31,6 +31,18 @@
                 templateUrl : $config.module.general.view + 'editProject.html',
                 controller : 'editProjectCtrl',
                 controllerAs : 'editProject'
+            })
+            .state('profile',{
+                url : '/edit-profile' ,
+                templateUrl : $config.module.general.view + 'editProfile.html',
+                controller : 'editProfileCtrl',
+                controllerAs : 'editProfile'
+            })
+            .state('upgradePlan',{
+                url : '/upgrade-plan',
+                templateUrl : $config.module.general.view + 'upgradePlan.html',
+                controller : 'upgradePlanCtrl',
+                controllerAs : 'upgradePlan'
             });
         $urlRouterProvider.otherwise('/');
     }

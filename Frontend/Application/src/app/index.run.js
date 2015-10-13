@@ -3,9 +3,9 @@
 
   angular
     .module('easywebapp')
-    .run( [ '$rootScope' , '$config' , 'Auth' , 'toastr' , '$state' , '$cookies' , '$http' , '$location' ,
+    .run( [ '$rootScope' , '$config' , 'Auth' , 'toastr' , '$state' , '$cookies' , '$http' , '$location' , 'Stripe' ,
 
-		function ( $rootScope , $config , Auth , toastr , $state , $cookies , $http , $location ) {
+		function ( $rootScope , $config , Auth , toastr , $state , $cookies , $http , $location , Stripe) {
 
 			$rootScope.$state = $state;
 			$rootScope.Auth = Auth;
@@ -20,12 +20,34 @@
                window.location = "http://notrie.com";
             });
 
+            $rootScope.getlogout = function()
+            {
+                Auth.removeUser();
+                $state.go('login');
+            };
+
             if( Auth.isLoggedIn() ) {
                 $state.go('dashboard');
                 $http.defaults.headers.common.Token = Auth.getValue('token');
                 $http.get($config.api + 'user/'+ Auth.getValue('token') ).then(function(response){
                     Auth.setUser(response.data);
+                    if( Stripe.expiredPackage(response.data) ) {
+                        $state.go('upgradePlan');
+                    }
                     $rootScope.$broadcast('userInitialized', { message: "hello" });
+
+                    $rootScope.goHome = function(){
+                        $state.go('dashboard');
+                    };
+                    $rootScope.isExpired = function(){
+                        return Stripe.expiredPackage(response.data);
+                    };
+                    $rootScope.isExpiredTrial = function(){
+                        return Stripe.expiredPackageTrial(response.data);
+                    };
+                    $rootScope.isExpiredPlan = function(){
+                        return Stripe.expiredPackagePlan(response.data);
+                    };
                 });
             }
 
@@ -64,12 +86,21 @@
                         event.preventDefault();
                         $state.transitionTo('dashboard');
                     }
+
+                    if ( Auth.isLoggedIn() && Stripe.expiredPackage(Auth.getUser()) && toState.name ) {
+                        if( toState.name != "upgradePlan" ) {
+                            event.preventDefault();
+                            $state.transitionTo('upgradePlan');
+                        }
+                    }
                 } );
 
-            $rootScope.getlogout = function()
-            {
-                Auth.removeUser();
-                $state.go('login');
+            $rootScope.editProfile = function(){
+                $state.go('profile');
+            };
+
+            $rootScope.upgradePlan = function(){
+                $state.go('upgradePlan');
             };
 		} ] );
 

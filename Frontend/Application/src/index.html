@@ -24,9 +24,17 @@
 <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div ui-view></div>
-
+<div id="wrap">
+    <div class="row" ng-if="User">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"><span class="pull-right" style="font-weight:bold;">Welcome {{ User.firstname }}</span></div>
+    </div>
+    <div class="row" ng-if="User">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"><span class="pull-right" style="font-weight:bold;"><a href="javascript:;"  ng-click="editProfile()">Edit Profile |</a><a href="javascript:;" ng-click="upgradePlan()"> Upgrade Plan |</a><a href="javascript:;"  ng-click="getlogout()"> Sign Out</a></span></div>
+    </div>
+    <div ui-view></div>
+</div>
 <!-- build:js(src) scripts/vendor.js -->
 <!-- bower:js -->
 <!-- run `gulp inject` to automatically populate bower script dependencies -->

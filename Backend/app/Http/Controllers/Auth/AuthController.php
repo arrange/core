@@ -78,7 +78,7 @@ class AuthController extends Controller
 
 	public function getTokenInfo($token)
 	{
-		$oUser = User::where('token',$token)->first();
+		$oUser = User::with(['Organization','Roles'])->where('token',$token)->first();
 		if( ! $oUser )
 			return $this->error('Invalid Token',403);
 

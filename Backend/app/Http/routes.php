@@ -22,15 +22,16 @@ Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router 
 	Route::post( 'forgot-password' , 'Auth\PasswordController@postEmail' );
 	Route::get( 'user/{token}' , 'Auth\AuthController@getTokenInfo' );
 	Route::post( 'reset' , 'Auth\PasswordController@postReset' );
-	Route::controller( 'users' , 'UsersController' );
-
+	Route::post( 'is-exist' , 'UsersController@postIsExist' );
 	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
 
 	Route::group( [ 'middleware' => 'token' ] , function () {
+		Route::controller( 'users' , 'UsersController' );
 		Route::resource( 'projects' , 'ProjectsController' );
 		Route::controller( 'files' , 'FilesController' );
 		Route::resource( 'admin-presets' , 'PresetsController' );
 		Route::controller( 'preview' , 'PreviewController' );
+		Route::controller( 'stripe' , 'StripeController' );
 		Route::get( 'preset-thumb' , function ( Illuminate\Http\Request $request ) {
 			$name = $request->input( 'name' );
 			return file_get_contents( base_path() . DIRECTORY_SEPARATOR . 'presets' . DIRECTORY_SEPARATOR . $name );
