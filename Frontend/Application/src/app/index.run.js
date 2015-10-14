@@ -42,12 +42,6 @@
                     $rootScope.isExpired = function(){
                         return Stripe.expiredPackage(response.data);
                     };
-                    $rootScope.isExpiredTrial = function(){
-                        return Stripe.expiredPackageTrial(response.data);
-                    };
-                    $rootScope.isExpiredPlan = function(){
-                        return Stripe.expiredPackagePlan(response.data);
-                    };
                 });
             }
 

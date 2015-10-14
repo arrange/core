@@ -19,20 +19,21 @@
 <div class="row" ng-hide="paymentPart">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3">
         <div class="list-group list-group-horizontal">
-            <div ng-if="!User.stripe_plan && User.trial_ends_at" class="list-group-item col-md-6">
+            <div ng-if="!User.ever_subscribed" class="list-group-item col-md-6">
                 <label class="col-md-12"><h1>14 days</h1></label>
                 <label class="col-md-12"><h1>Free Trial</h1></label>
-                <h3><label class="label" ng-class="{ 'label-success' : !isExpiredTrial() ,'label-danger' : isExpiredTrial() }">{{ isExpiredTrial() ? 'Expired' : 'Selected' }}</label></h3>
+                <h3><button class="btn" disabled ng-class="{ 'btn-success' : User.on_trial ,'btn-danger' : !User.on_trial }">{{ !User.on_trial ? 'Expired' : 'Selected' }}</button></h3>
             </div>
             <div class="list-group-item col-md-6" ng-repeat="plan in plans">
                 <label class="col-md-12"><h1>Pay</h1></label>
                 <label class="col-md-12"><h1>{{ plan.name }}</h1></label>
-                <h3 ng-if="!isExpiredPlan()">
+                <h3 ng-if="(!User.expired && plan.id == User.stripe_plan && User.stripe_active)">
                     <button class="btn btn-danger" ng-if="plan.id == User.stripe_plan" ng-click="cancelPlan()">Cancel Plan</button>
                     <a href="javascript:;" ng-if="plan.id == User.stripe_plan" ng-click="transactions()">Transaction history</a>
                 </h3>
-                <button class="btn btn-success" ng-if="!isExpiredPlan() && plan.id != User.stripe_plan" ng-click="showPaymentPart(plan.id,plan.name)">Choose this plan</button>
-                <h3 ng-if="isExpiredPlan()"><label class="label label-danger">{{ isExpiredPlan() ? 'Expired' : 'Selected' }}</label></h3>
+                <button class="btn btn-success" ng-if="(!User.expired && plan.id != User.stripe_plan) || !User.ever_subscribed" ng-click="showPaymentPart(plan.id,plan.name)">Choose this plan</button>
+                <button class="btn btn-success" ng-if="(!User.expired && plan.id == User.stripe_plan && !User.stripe_active)" ng-click="showPaymentPart(plan.id,plan.name)">Resume</button>
+                <h3 ng-if="User.expired && User.stripe_plan == plan.id && User.stripe_active"><button class="btn btn-danger" disabled>Expired</button></h3>
             </div>
         </div>
     </div>
@@ -46,7 +47,7 @@
                    <h3> New Plan : {{ Payment.planName }} </h3>
                 </div>
                 <div class="col-xs-12 col-md-12">
-                    <input type="text" name="card_number" value="" class="form-control input-lg" placeholder="Card number" ng-model="Payment.number"   validator="required" required-error-message="Card number required." />
+                    <input type="text" name="card_number" value="" class="form-control input-lg" placeholder="Card number" ng-model="Payment.number"   validator="required,number" required-error-message="Card number required." number-error-message="Only digits allowed"/>
                     <select name="exp_month" ng-model="Payment.exp_month" class="form-control input-lg" validator="required" required-error-message="Expiry Month required.">
                         <option value="">Select Expiry Month</option>
                         <option value="{{ month }}" data-ng-repeat="month in months">{{ month }}</option>
@@ -55,14 +56,14 @@
                         <option value="">Select Expiry Year</option>
                         <option value="{{ year }}" data-ng-repeat="year in years">{{ year }}</option>
                     </select>
-                    <input type="password" name="cvc" value="" class="form-control input-lg" placeholder="CVC" ng-model="Payment.cvc"   validator="required" required-error-message="CVC required." />
+                    <input type="password" name="cvc" value="" class="form-control input-lg" placeholder="CVC" ng-model="Payment.cvc"   validator="required,number" required-error-message="CVC required." number-error-message="Only digits allowed"/>
                 </div>
                 <div class="col-xs-12 col-md-12">
                     <div class="col-sm-2 pull-right">
                         <button class="btn btn-block btn-success" type="submit" validation-submit="form1" ng-click="upgrade()">Upgrade</button>
                     </div>
                     <div class="col-sm-2 pull-right" style="padding-right:0;">
-                        <button class="btn btn-block btn-primary" ng-click="hidePaymentPart()">cancel</button>
+                        <button class="btn btn-block btn-primary" ng-click="hidePaymentPart()">Cancel</button>
                     </div>
                 </div>
             </div>

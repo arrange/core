@@ -59,20 +59,55 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 		return $this->hasMany( 'App\Models\Project' , 'user_id' );
 	}
 
-	public function getTrialEndsAtAttribute($value)
+	public function getTrialEndsAtTimestampAttribute()
 	{
-		if( $value )
-			return strtotime($value) * 1000;
-		else
-			return $value;
+		if( $this->trial_ends_at )
+			return strtotime($this->trial_ends_at) * 1000;
+
+		return null;
 	}
 
-	public function getSubscriptionEndsAtAttribute($value)
+	public function getSubscriptionEndsAtTimestampAttribute($value)
 	{
-		if( $value )
-			return strtotime($value) * 1000;
-		else
-			return $value;
+		if( $this->subscription_ends_at )
+			return strtotime($this->subscription_ends_at) * 1000;
+
+		return null;
+
 	}
 
+	public function getOnTrialAttribute(){
+		return $this->onTrial();
+	}
+
+	public function getCancelledAttribute(){
+		return $this->cancelled();
+	}
+
+	public function getOnGracePeriodAttribute(){
+		return $this->onGracePeriod();
+	}
+
+	public function getEverSubscribedAttribute(){
+		return $this->everSubscribed();
+	}
+
+	public function getSubscribedAttribute(){
+		return $this->subscribed();
+	}
+
+	public function getExpiredAttribute(){
+		return $this->expired();
+	}
+
+	public function toArray() {
+		$arr = parent::toArray();
+		$arr['trial_ends_at_timestamp'] = $this->trial_ends_at_timestamp;
+		$arr['on_trial'] = $this->on_trial;
+		$arr['cancelled'] = $this->cancelled();
+		$arr['subscribed'] = $this->subscribed;
+		$arr['ever_subscribed'] = $this->ever_subscribed;
+		$arr['expired'] = $this->expired;
+		return $arr;
+	}
 }

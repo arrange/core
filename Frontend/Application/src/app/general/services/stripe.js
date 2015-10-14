@@ -13,39 +13,8 @@
                return defer.promise;
            };
            this.expiredPackage = function(data){
-               var currentDate = new Date().getTime();
-                if( data.trial_ends_at )
-                {
-                    if( data.trial_ends_at > currentDate )
-                        return false;
-                }
-               if( data.subscription_ends_at )
-               {
-                   if( data.subscription_ends_at > currentDate )
-                       return false;
-               }
-               return true;
+               return data.expired || !data.stripe_active;
            };
-            this.expiredPackageTrial = function(data){
-                var currentDate = new Date().getTime();
-                if( data.trial_ends_at )
-                {
-                    if( data.trial_ends_at > currentDate )
-                        return false;
-                    return true;
-                }
-                return false;
-            };
-            this.expiredPackagePlan = function(data){
-                var currentDate = new Date().getTime();
-                if( data.subscription_ends_at )
-                {
-                    if( data.subscription_ends_at > currentDate )
-                        return false;
-                    return true;
-                }
-                return false;
-            };
             this.cancelSubscription = function(){
                 var defer = $q.defer();
                 $http.post($config.api+"stripe/cancel-subscription").success(function(data){
@@ -66,9 +35,9 @@
             };
             this.upgradePlan = function(data){
                 var defer = $q.defer();
-                $http.post($config.api+"stripe/change-plan",data).success(function(data){
+                $http.post($config.api+"stripe/change-plan",data).then(function(data){
                     defer.resolve(data);
-                }).error(function(data){
+                },function(data){
                     defer.reject(data);
                 });
                 return defer.promise;

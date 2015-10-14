@@ -12,7 +12,8 @@
 */
 
 Route::get( '/' , 'WelcomeController@index' );
-
+Route::post('stripe/payment-failed', 'Laravel\Cashier\WebhookController@handleWebhook');
+Route::post('stripe/payment-success', 'WebhookController@handleInvoicePaymentSucceeded');
 Route::get( 'home' , 'HomeController@index' );
 
 Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router $router ) {

@@ -16,16 +16,13 @@ class StripeController extends Controller
 	public function postChangePlan( Request $request , Guard $auth ){
 		if ( $request->input( 'plan' ) ) {
 			$oUser = $auth->user();
-			if( !empty($oUser->subscription_ends_at) ){
-				\Stripe\Stripe::setApiKey( env( 'STRIPE_API_SECRET' ) );
-				$cu = \Stripe\Customer::retrieve($oUser->stripe_id);
-				$subscription = $cu->subscriptions->retrieve($oUser->stripe_subscription);
-				$subscription->plan = $request->input( 'plan' );
-				$subscription->save();
-				$oUser->stripe_plan = $request->input( 'plan' );
-				$oUser->save();
-			}
-			else {
+			if( !$oUser->ever_subscribed ){
+				$this->validate($request, [
+					'exp_month' => 'required|digits_between:1,12',
+					'exp_year' => 'required|digits:4',
+					'cvc' => 'required|digits:3',
+					'number' => 'required|digits:16'
+				]);
 				$aInputData = $request->only( array( 'exp_month' , 'exp_year' , 'cvc' , 'number' , 'plan' ) );
 				$aInputData[ 'default_for_currency' ] = true;
 				$aInputData[ 'object' ] = "card";
@@ -34,32 +31,44 @@ class StripeController extends Controller
 				$oUser->trial_ends_at = null;
 				$oUser->subscription_ends_at = date('Y-m-d H:i:s',strtotime('+30 days'));
 				$oUser->save();
+				return response()->json($oUser->toArray());
 			}
-			return response()->json($oUser->toArray());
+			else if( $oUser->cancelled ){
+				if( $request->input( 'plan' ) == $oUser->stripe_plan && $oUser->subscription_ends_at >= date('d-m-Y H:i:s')){
+					$oUser->subscription( $request->input( 'plan' ) )->resume();
+				}
+				else {
+					$oUser->subscription( $request->input( 'plan' ) )->swap();
+				}
+				return response()->json($oUser->toArray());
+			}
+			else if( $oUser->subscribed ){
+				$oUser->subscription( $request->input( 'plan' ) )->swap();
+				return response()->json($oUser->toArray());
+			}
 		}
 		return response()->json(array('error'=>'Something went wrong,Please try again'),500);
 	}
 
 	public function getTransactions(Guard $auth){
 		$oUser = $auth->user();
-		dd($oUser);
 		$aInvoices = $oUser->invoices();
-
-		/*\Stripe\Stripe::setApiKey( env( 'STRIPE_API_SECRET' ) );
-
-		$aInvoices = \Stripe\Invoice::all();*/
-		return response()->json($aInvoices);
+		$response = array();
+		foreach($aInvoices as $oInvoice )
+		{
+			$invoice = $oInvoice->getStripeInvoice()->jsonSerialize();
+			foreach( $invoice['lines']['data'] as $item ) {
+				$item['period']['start'] = date('Y-m-d H:i:s',$item['period']['start']);
+				$item['period']['end'] = date('Y-m-d H:i:s',$item['period']['end']);
+				$response[ 'history' ][ ] = $item;
+			}
+		}
+		return response()->json($response);
 	}
 
 	public function postCancelSubscription(Guard $auth){
 		$oUser = $auth->user();
 		$oUser->subscription()->cancel();
-		$oUser->stripe_subscription = null;
-		$oUser->stripe_id = null;
-		$oUser->last_four = null;
-		$oUser->subscription_ends_at = null;
-		$oUser->stripe_plan = null;
-		$oUser->save();
 		return response()->json($oUser->toArray());
 	}
 }

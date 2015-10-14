@@ -83,7 +83,6 @@ class AuthController extends Controller
 			return $this->error('Invalid Token',403);
 
 		$oUser->token = $token;
-
 		return response()->json($oUser->toArray());
 	}
 }
