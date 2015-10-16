@@ -18,7 +18,7 @@
                 },function(){
                     $scope.plans = null;
                 });
-                $scope.showPaymentPart = function(plan_id,plan_name){
+                $scope.showPaymentPart = function(plan_id,plan_name,$event){
                     if( !$rootScope.User.ever_subscribed ) {
                         $scope.paymentPart = true;
                         $scope.Payment.plan = plan_id;
@@ -28,15 +28,23 @@
                     {
                         $scope.Payment.plan = plan_id;
                         $scope.Payment.planName = plan_name;
-                        Stripe.upgradePlan($scope.Payment).then(function(data){
+                        $($event.target).attr('disabled','disabled');
+                        Stripe.upgradePlan($scope.Payment).then(function(resp){
                             if( $rootScope.User.stripe_active )
                                 toastr.success("Plan upgraded successfully");
                             else
                                 toastr.success("Plan resumed successfully");
-                           // Auth.setUser(data);
-                            window.location.reload();
-                        },function(){
-                            toastr.error("Something went wrong, Please try again");
+                            Auth.setUser(resp.data);
+                            $($event.target).removeAttr('disabled');
+                        },function(error){
+                            if(error.status == 422 && error.data ){
+                                angular.forEach(error.data,function(value,index){
+                                    toastr.error(value[0]);
+                                });
+                            }
+                            else
+                                toastr.error("Something went wrong, Please try again");
+                            $($event.target).removeAttr('disabled');
                         });
                     }
                 };
@@ -48,36 +56,42 @@
                 $scope.upgrade = function(){
                     if($scope.Payment.plan)
                     {
-                        Stripe.upgradePlan($scope.Payment).then(function(data){
+                        $('.btn-payment').attr('disabled','disabled');
+                        Stripe.upgradePlan($scope.Payment).then(function(resp){
+                            Auth.setUser(resp.data);
+                            $scope.hidePaymentPart();
                             toastr.success("Plan upgraded successfully");
-                            //Auth.setUser(data);
-                            window.location.reload();
+                            $('.btn-payment').removeAttr('disabled');
                         },function(error){
                             if(error.status == 422 && error.data ){
                                 angular.forEach(error.data,function(value,index){
-                                        toastr.error(value[0]);
+                                    toastr.error(value[0]);
                                 });
                             }
                             else
                                 toastr.error("Something went wrong, Please try again");
+                            $('.btn-payment').removeAttr('disabled');
                         });
                     }
                 };
                 $scope.transactions = function(){
-                    Stripe.getTransactions().then(function(data){
-                        console.log(data);
-                    },function(){
-                        toastr.error("Something went wrong, Please try again");
-                    });
+                    $state.go('transactions');
                 };
-                $scope.cancelPlan = function(){
+                $scope.cancelPlan = function($event){
+                    $($event.target).attr('disabled','disabled');
                     Stripe.cancelSubscription().then(function(data){
-                       // Auth.setUser(data);
+                        Auth.setUser(data);
                         toastr.success("Plan cancelled successfully");
-                        window.location.reload();
-                        //$state.go('dashboard');
-                    },function(){
-                        toastr.error("Something went wrong, Please try again");
+                        $($event.target).removeAttr('disabled');
+                    },function(error){
+                        if(error.status == 422 && error.data ){
+                            angular.forEach(error.data,function(value,index){
+                                toastr.error(value[0]);
+                            });
+                        }
+                        else
+                            toastr.error("Something went wrong, Please try again");
+                        $($event.target).removeAttr('disabled');
                     });
                 }
             };

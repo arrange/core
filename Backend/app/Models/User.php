@@ -100,6 +100,10 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 		return $this->expired();
 	}
 
+	public function getStripeActiveIntAttribute(){
+		return ( $this->stripe_active ) ? true : false;
+	}
+
 	public function toArray() {
 		$arr = parent::toArray();
 		$arr['trial_ends_at_timestamp'] = $this->trial_ends_at_timestamp;
@@ -108,6 +112,8 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 		$arr['subscribed'] = $this->subscribed;
 		$arr['ever_subscribed'] = $this->ever_subscribed;
 		$arr['expired'] = $this->expired;
+		$arr['stripe_active_int'] = $this->stripe_active_int;
 		return $arr;
 	}
+
 }

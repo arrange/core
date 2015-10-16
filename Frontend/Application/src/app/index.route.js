@@ -43,6 +43,12 @@
                 templateUrl : $config.module.general.view + 'upgradePlan.html',
                 controller : 'upgradePlanCtrl',
                 controllerAs : 'upgradePlan'
+            })
+            .state('transactions',{
+                url : '/transactions',
+                templateUrl : $config.module.general.view + 'transactions.html',
+                controller : 'transactionCtrl',
+                controllerAs : 'transactions'
             });
         $urlRouterProvider.otherwise('/');
     }

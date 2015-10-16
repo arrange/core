@@ -31,7 +31,8 @@ class StripeController extends Controller
 				$oUser->trial_ends_at = null;
 				$oUser->subscription_ends_at = date('Y-m-d H:i:s',strtotime('+30 days'));
 				$oUser->save();
-				return response()->json($oUser->toArray());
+				$oResponseUser = User::with('Organization','Roles')->where('id',$oUser->id)->first();
+				return response()->json($oResponseUser->toArray());
 			}
 			else if( $oUser->cancelled ){
 				if( $request->input( 'plan' ) == $oUser->stripe_plan && $oUser->subscription_ends_at >= date('d-m-Y H:i:s')){
@@ -40,11 +41,13 @@ class StripeController extends Controller
 				else {
 					$oUser->subscription( $request->input( 'plan' ) )->swap();
 				}
-				return response()->json($oUser->toArray());
+				$oResponseUser = User::with('Organization','Roles')->where('id',$oUser->id)->first();
+				return response()->json($oResponseUser->toArray());
 			}
 			else if( $oUser->subscribed ){
 				$oUser->subscription( $request->input( 'plan' ) )->swap();
-				return response()->json($oUser->toArray());
+				$oResponseUser = User::with('Organization','Roles')->where('id',$oUser->id)->first();
+				return response()->json($oResponseUser->toArray());
 			}
 		}
 		return response()->json(array('error'=>'Something went wrong,Please try again'),500);
@@ -58,8 +61,8 @@ class StripeController extends Controller
 		{
 			$invoice = $oInvoice->getStripeInvoice()->jsonSerialize();
 			foreach( $invoice['lines']['data'] as $item ) {
-				$item['period']['start'] = date('Y-m-d H:i:s',$item['period']['start']);
-				$item['period']['end'] = date('Y-m-d H:i:s',$item['period']['end']);
+				$item['period']['start'] = date('d-m-Y H:i:s',$item['period']['start']);
+				$item['period']['end'] = date('d-m-Y H:i:s',$item['period']['end']);
 				$response[ 'history' ][ ] = $item;
 			}
 		}
@@ -69,6 +72,7 @@ class StripeController extends Controller
 	public function postCancelSubscription(Guard $auth){
 		$oUser = $auth->user();
 		$oUser->subscription()->cancel();
-		return response()->json($oUser->toArray());
+		$oResponseUser = User::with('Organization','Roles')->where('id',$oUser->id)->first();
+		return response()->json($oResponseUser->toArray());
 	}
 }

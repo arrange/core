@@ -13,7 +13,7 @@
                return defer.promise;
            };
            this.expiredPackage = function(data){
-               return data.expired || !data.stripe_active;
+               return ( !data.ever_subscribed && !data.on_trial ) || ( data.ever_subscribed && data.expired ) || ( data.ever_subscribed && !data.stripe_active_int );
            };
             this.cancelSubscription = function(){
                 var defer = $q.defer();

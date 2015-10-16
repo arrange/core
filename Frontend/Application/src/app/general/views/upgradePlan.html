@@ -27,13 +27,13 @@
             <div class="list-group-item col-md-6" ng-repeat="plan in plans">
                 <label class="col-md-12"><h1>Pay</h1></label>
                 <label class="col-md-12"><h1>{{ plan.name }}</h1></label>
-                <h3 ng-if="(!User.expired && plan.id == User.stripe_plan && User.stripe_active)">
-                    <button class="btn btn-danger" ng-if="plan.id == User.stripe_plan" ng-click="cancelPlan()">Cancel Plan</button>
+                <h3 ng-if="(!User.expired && plan.id == User.stripe_plan && User.stripe_active_int)">
+                    <button class="btn btn-danger" ng-if="plan.id == User.stripe_plan" ng-click="cancelPlan($event)">Cancel Plan</button>
                     <a href="javascript:;" ng-if="plan.id == User.stripe_plan" ng-click="transactions()">Transaction history</a>
                 </h3>
-                <button class="btn btn-success" ng-if="(!User.expired && plan.id != User.stripe_plan) || !User.ever_subscribed" ng-click="showPaymentPart(plan.id,plan.name)">Choose this plan</button>
-                <button class="btn btn-success" ng-if="(!User.expired && plan.id == User.stripe_plan && !User.stripe_active)" ng-click="showPaymentPart(plan.id,plan.name)">Resume</button>
-                <h3 ng-if="User.expired && User.stripe_plan == plan.id && User.stripe_active"><button class="btn btn-danger" disabled>Expired</button></h3>
+                <button class="btn btn-success" ng-if="(!User.expired && plan.id != User.stripe_plan) || !User.ever_subscribed" ng-click="showPaymentPart(plan.id,plan.name,$event)">Choose this plan</button>
+                <button class="btn btn-success" ng-if="(!User.expired && plan.id == User.stripe_plan && !User.stripe_active_int)" ng-click="showPaymentPart(plan.id,plan.name,$event)">Resume</button>
+                <h3 ng-if="User.expired && User.stripe_plan == plan.id && User.stripe_active_int"><button class="btn btn-danger" disabled>Expired</button></h3>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-xs-12 col-md-12">
                     <div class="col-sm-2 pull-right">
-                        <button class="btn btn-block btn-success" type="submit" validation-submit="form1" ng-click="upgrade()">Upgrade</button>
+                        <button class="btn btn-block btn-success" type="submit" validation-submit="form1" ng-click="upgrade($event)">Upgrade</button>
                     </div>
                     <div class="col-sm-2 pull-right" style="padding-right:0;">
                         <button class="btn btn-block btn-primary" ng-click="hidePaymentPart()">Cancel</button>
