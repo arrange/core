@@ -6,16 +6,16 @@
     <form class="form-horizontal">
         <div class="col-md-12">
             <div class="col-md-6">
-                <tabset justified="true">
-                    <tab heading="Set your links">
+                <uib-tabset justified="true">
+                    <uib-tab heading="Set your links">
                         <br>
                         <div class="form-group"  ng-repeat="link in models.social_links">
                             <div class="col-md-12">
                                 <input type="text" class="form-control" ng-model="link.href" placeholder="{{ link.placeholder }}" ng-blur="output.changeCode()"/>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Customize the look" ng-click="availFuncForTab2()">
+                    </uib-tab>
+                    <uib-tab heading="Customize the look" ng-click="availFuncForTab2()">
                         <div class="form-group" style="margin-top:10px;">
                             <label class="col-md-12">Style of icon</label>
                             <div class="col-md-12">
@@ -55,8 +55,8 @@
                                 <input type="checkbox" name="open_in_new_tab" ng-model="models.open_in_new_tab" ng-click="output.changeCode()"> Open in new tab
                             </div>
                         </div>
-                    </tab>
-                </tabset>
+                    </uib-tab>
+                </uib-tabset>
             </div>
             <div class="col-md-6">
                 <div class="form-group" style="margin-top:10px;">

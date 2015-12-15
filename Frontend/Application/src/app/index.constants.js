@@ -1,26 +1,22 @@
 /* global malarkey:false, toastr:false, moment:false */
 (function() {
     'use strict';
-
+    var api = "http://localhost/notrierepo/Backend/public/";
     angular
         .module('easywebapp')
-        .constant('malarkey', malarkey)
-        .value('froalaConfig', {
-            inlineMode: true,
-            placeholder: 'Enter Text Here'
-        })
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('$config',{
             url : "http://localhost:3000/",
-           // api : "http://localhost/notrierepo/Backend/public/",
-           // preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
-           // project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
-           // clients_path : "http://localhost/notrierepo/Backend/clients/",
-            api : "http://api.notrie.com/",
-            preset_thumb_url :  "http://api.notrie.com/preset-thumb",
-            project_thumb_url :  "http://api.notrie.com/preview/file",
-            clients_path : "http://api1.notrie.com/clients",
+            api :  api,
+            preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
+            project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
+            clients_path : "http://localhost/notrierepo/Backend/clients",
+          //  url : "http://notrie.com/",
+          //  api : "http://api.notrie.com/",
+          //  preset_thumb_url :  "http://api.notrie.com/preset-thumb",
+          //  project_thumb_url :  "http://api.notrie.com/preview/file",
+          //  clients_path : "http://api1.notrie.com/clients",
             module : {
                 auth : {
                     controller : 'app/auth/controllers/',
@@ -30,6 +26,47 @@
                     controller : 'app/general/controller/',
                     view : 'app/general/views/'
                 }
+            },
+            filemanager_settings:{
+                 appName: 'Easy Web App',
+                 defaultLang: 'en',
+
+                 listUrl: api + 'handler',
+                 uploadUrl: api + 'handler',
+                 renameUrl: api + 'handler',
+                 copyUrl: api + 'handler',
+                 removeUrl: api + 'handler',
+                 editUrl: api + 'handler',
+                 getContentUrl: api + 'handler',
+                 createFolderUrl: api + 'handler',
+                 downloadFileUrl: api + 'handler',
+                 compressUrl: api + 'handler',
+                 extractUrl: api + 'handler',
+                 permissionsUrl: api + 'handler',
+
+                 sidebar: false,
+                 breadcrumb: true,
+                 allowedActions: {
+                     rename: true,
+                     copy: false,
+                     edit: false,
+                     changePermissions: true,
+                     compress: false,
+                     compressChooseName: false,
+                     extract: true,
+                     download: true,
+                     preview: true,
+                     remove:false
+                 },
+
+                 enablePermissionsRecursive: true,
+                 compressAsync: true,
+                 extractAsync: true,
+
+                 isEditableFilePattern: /\.(txt|html?|aspx?|ini|pl|py|md|css|js|log|htaccess|htpasswd|json|sql|xml|xslt?|sh|rb|as|bat|cmd|coffee|php[3-6]?|java|c|cbl|go|h|scala|vb)$/i,
+                 isImageFilePattern: /\.(jpe?g|gif|bmp|png|svg|tiff?)$/i,
+                 isExtractableFilePattern: /\.(gz|tar|rar|g?zip)$/i,
+                 tplPath: 'app/filemanager/templates'
             }
         });
 })();

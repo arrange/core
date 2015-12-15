@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <div class="pull-right">
-                        <button class="btn btn-success btn-md" type="submit" validation-submit="formAddProject" ng-click="saveProject()">Save</button>
+                        <button class="btn btn-success btn-md" type="submit" validation-submit="formAddProject" ng-click="saveProject()" ng-disabled="!enableSubmit">{{ btnText }}</button>
                         <button class="btn btn-default btn-md" type="button" ng-click="goHome();">Cancel</button>
                     </div>
                 </div>

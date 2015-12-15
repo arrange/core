@@ -3,11 +3,19 @@
 
   angular
     .module('easywebapp')
-    .controller('AuthController',[ '$state' , '$scope' , '$config' ,  'GooglePlus', 'Authservice' , '$stateParams' , function( $state , $scope , $config , GooglePlus , Authservice , $stateParams){
-          $scope.getLoginGoogle = function(){
+    .controller('AuthController',[ '$state' , '$scope' , '$config' ,  'GooglePlus', 'Authservice' , '$stateParams' ,'$window' , function( $state , $scope , $config , GooglePlus , Authservice , $stateParams , $window){
+          $scope.getLoginGoogle = function(child_window){
               GooglePlus.login().then(function (authResult) {
                   console.log(authResult);
                   GooglePlus.getUser().then(function (user) {
+                      console.log(user);
+                      if( child_window ){
+                          var queryString = window.location.href.split('?')[1];
+                          var url = queryString.split('=')[1];
+                          var url = decodeURIComponent(url);
+                          window.opener.postMessage(JSON.stringify(user),url);
+                          window.close();
+                      }
                       if( !user.email ) {
                           var datam = {
                               'user_name' : user.name,
@@ -20,7 +28,7 @@
                           google_sign_up : true
                       };
                       Authservice.isUserExist(inputs).then(function(data) {
-                          console.log(user);
+                          //console.log(user);
                            if( data.user )
                            {
                                var subdomain = data.user.organization.subdomain;
@@ -45,9 +53,15 @@
                       });
                   });
               }, function (err) {
-                  console.log(err);
+                  //console.log(err);
               });
           };
+          if( window.location.href.indexOf('google_sign_up') != -1 ){
+              //console.log("a");
+              window.setTimeout(function(){
+                  $scope.getLoginGoogle(true);
+              },1000);
+          }
     }])
     // Signin (Login Controller)
     .controller('SigninController',['$scope', 'Authservice', 'toastr', '$config' , function( $scope, Authservice, toastr, $config ){
@@ -70,7 +84,7 @@
     .controller('SignupController',['$scope', 'Organization', 'toastr', '$state' , function( $scope, Organization, toastr , $state ){
         $scope.organization = new Organization();
           $scope.showPwd = true;
-          console.log($state.params);
+         // console.log($state.params);
           if( $state.params.user_name )
               $scope.organization.name = $state.params.user_name;
           if( $state.params.email ) {
@@ -85,14 +99,16 @@
 
         $scope.signupForm = function()
         {
-              $scope.organization.$save(function(data){
+              var organization1 = angular.copy($scope.organization);
+              organization1.$save(function(data){
                   toastr.success('Organization created successfully!','Success');
                   window.location = "http://" + data.subdomain + ".notrie.com?token="+data.users[0].token;
-              },function(data){
-                /*angular.forEach(data.data, function(value){
-                  toastr.error(value);
-                });*/
-                  console.log(data);
+              },function(resp){
+                  if( resp.status == 422 ) {
+                      angular.forEach(resp.data, function(value){
+                       toastr.error(value);
+                      });
+                  }
               });
         };
 

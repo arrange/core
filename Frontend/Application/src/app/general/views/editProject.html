@@ -10,49 +10,89 @@
         text-decoration: none;
     }
 </style>
-    <div class="row">
-        <div class="col-sm-4" style="padding-right: 0;" ng-show="ShowHtml || ShowCss || ShowJs">
-            <div class="col-sm-12" style="padding-right: 0;"  ng-show="ShowHtml">
-                <h4>HTML</h4>
-                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions1" class="full-width" ng-model="editHtml" ng-change="renderPreview()"></textarea>
-            </div>
-            <div class="col-sm-12" style="padding-top:5px;padding-right: 0;"  ng-show="ShowCss">
-                <label class="col-sm-4 pull-left">CSS</label>
-                <div class="col-sm-6" style="padding-bottom:5px;">
-                    <select class="form-control" ng-model="css_file" ng-change="cssChange()">
-                        <option value="">Select Css</option>
-                        <option ng-repeat="item in css_list" ng-selected="css_file==item" value="{{item}}">{{item}}</option>
-                    </select>
-                </div>
-                <button class="btn btn-sm col-sm-2"  ng-click="saveCss()">Update</button>
-                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions2" class="full-width" ng-model="editCss" ng-change="renderPreview()"></textarea>
-            </div>
-            <div class="col-sm-12" style="padding-top:5px;padding-right: 0;"  ng-show="ShowJs">
-                <label class="col-sm-4 pull-left">Js</label>
-                <div class="col-sm-6" style="padding-bottom:5px;">
-                    <select class="form-control" ng-model="js_file" ng-change="jsChange()">
-                        <option value="">Select Js</option>
-                        <option ng-repeat="item in js_list" ng-selected="js_file==item" value="{{item}}">{{item}}</option>
-                    </select>
-                </div>
-                <button class="btn btn-sm col-sm-2"  ng-click="saveJs()">Update</button>
-                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions3" class="full-width" ng-model="editJs" ng-change="renderPreview()"></textarea>
+    <div class="row controls_wrap">
+        <div class="back_btn">
+            <a href="" title=""><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <span class="project_title">{{ project_name }}</span>
+        </div>
+        <div class="toggle_btn_wrap" ng-show="ShowView">
+            <div class="changer switcheroo-wrapper">
+                <input class="btn-toggle" type="checkbox" name="switcheroo" value="html" ng-checked="ShowHtml" ng-click="togglePart('html')"/>
+                <label class="bs-bet-type-label">HTML</label>
+                <input class="btn-toggle" type="checkbox" name="switcheroo" value="css" ng-checked="ShowCss" ng-click="togglePart('css')"/>
+                <label class="bs-bet-type-label">CSS</label>
+                <input class="btn-toggle btn-subdued" type="checkbox" name="switcheroo" value="js" ng-checked="ShowJs" ng-click="togglePart('js')"/>
+                <label class="btn-toggle">JS</label>
             </div>
         </div>
-        <div ng-class="{ 'col-sm-8' : ShowHtml || ShowCss || ShowJs , 'col-sm-12' : !ShowHtml && !ShowCss && !ShowJs }">
-            <div class="col-sm-12" style="padding-top: 5px;padding-left:0;">
-                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowHtml , 'btn-gray' : !ShowHtml } " ng-click="toggleHtml()">Html</button>
-                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowCss , 'btn-gray' : !ShowCss } " ng-click="toggleCss()">Css</button>
-                    <button class="btn btn-sm " ng-class="{ 'btn-primary' : ShowJs , 'btn-gray' : !ShowJs } " ng-click="toggleJs()" >Js</button>
-                    <button class="btn btn-md btn-success pull-right" ng-click="saveFile({{ Project }})">
-                        Save</button>
-                    <button class="btn btn-md btn-primary pull-right" ng-click="goHome()" style="margin-right: 5px;">
-                        Home</button>
-                    <button class="btn btn-primary pull-right" ng-click="socialIcons()"  style="margin-right: 5px;">Social Icons</button>
+        <div class="toggle_btn_wrap mode_toggle_btn_wrap">
+            <div class="changer switcheroo-wrapper switcheroo-wrapper-2">
+                <input class="btn-toggle" type="radio" name="switcheroo1" value="developer" checked ng-click="togglePart('view')"/>
+                <label class="bs-bet-type-label">DEVELOPER</label>
+                <input class="btn-toggle btn-subdued" type="radio" name="switcheroo1" value="designer" ng-click="togglePart('view')"/>
+                <label class="btn-toggle" >DESIGNER</label>
             </div>
-            <div class="col-sm-12" style="padding-left: 0;">
-                <h3>Preview</h3>
+        </div>
+        <div class="right_btns_wrap">
+            <input type="button" class="btn btn-lg save_btn" value="Save"  ng-click="save()">
+            <input type="button" class="btn btn-lg social_icons_btn" value="Social Icons" ng-click="socialIcons()" ng-show="ShowView">
+            <input type="button" class="btn btn-default btn-lg update_preview_btn" value="update preview" ng-click="renderPreview()" ng-show="ShowView">
+        </div>
+    </div>
+    <div class="row content_wrap" ng-show="ShowView">
+        <div class="col-sm-4 editor_wrap"  ng-show="ShowHtml || ShowCss || ShowJs">
+            <div class="col-sm-12  editor" ng-show="ShowHtml">
+                <div class="editor_title_row">
+                        <span class="editor_title">
+	    					HTML
+	    				</span>
+                        <span class="editor_file_name">
+	    					{{ html_file }}
+	    				</span>
+                        <span class="file_controls_wrap">
+	    					<span class="glyphicon glyphicon-plus-sign create_new_file" ng-hide="true"></span>
+                            <span class="glyphicon glyphicon-folder-open"  ng-click="browseFile('html')"></span>
+                        </span>
+                </div>
+                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions1" class="full-width editor_content" ng-model="editHtml"></textarea>
+            </div>
+            <div class="col-sm-12 editor" ng-show="ShowCss">
+                <div class="editor_title_row">
+                        <span class="editor_title">
+	    					CSS
+	    				</span>
+                        <span class="editor_file_name">
+	    					 {{ css_file }}
+	    				</span>
+                        <span class="file_controls_wrap">
+	    					<span class="glyphicon glyphicon-plus-sign create_new_file" ng-hide="true"></span>
+                            <span class="glyphicon glyphicon-folder-open" ng-click="browseFile('css')"></span>
+                        </span>
+                </div>
+                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions2" class="full-width editor_content" ng-model="editCss"></textarea>
+            </div>
+            <div class="col-sm-12 editor"  ng-show="ShowJs">
+                <div class="editor_title_row">
+                        <span class="editor_title">
+	    					JS
+	    				</span>
+                        <span class="editor_file_name">
+	    					{{ js_file }}
+	    				</span>
+                        <span class="file_controls_wrap">
+	    					<span class="glyphicon glyphicon-plus-sign create_new_file" ng-hide="true"></span>
+                            <span class="glyphicon glyphicon-folder-open"  ng-click="browseFile('js')"></span>
+                        </span>
+                </div>
+                <textarea ui-codemirror="{onLoad: codemirrorLoaded}" ui-codemirror-opts="editorOptions3" class="full-width editor_content" ng-model="editJs"></textarea>
+            </div>
+        </div>
+        <div class="editor_result_wrap" ng-class="{ 'col-sm-8' : ShowHtml || ShowCss || ShowJs , 'col-sm-12' : !ShowHtml && !ShowCss && !ShowJs }">
                 <iframe name="preview" id="preview" class="full-width"  style="height: 600px;border:0;border:1px solid #cccccc;border-radius:20px;"></iframe>
-            </div>
+        </div>
+    </div>
+    <div class="row controls_wrap" ng-show="!ShowView">
+        <div class="col-sm-12" style="height:600px;">
+            <div ng-model="editHtml" dante ng-show="!ShowView"></div>
         </div>
     </div>

@@ -3,10 +3,10 @@
 
     angular
         .module('easywebapp')
-        .config(config);
+        .config(config)
 
     /** @ngInject */
-    function config($logProvider, toastr) {
+    function config($logProvider, toastr,$config,fileManagerConfigProvider,$httpProvider) {
         // Enable log
         $logProvider.debugEnabled(true);
 
@@ -15,6 +15,12 @@
         toastr.options.positionClass = 'toast-top-right';
         toastr.options.preventDuplicates = true;
         toastr.options.progressBar = true;
+
+        fileManagerConfigProvider.set(
+            $config.filemanager_settings
+        );
+
+        $httpProvider.interceptors.push('myHttpInterceptor');
     }
 
 })();

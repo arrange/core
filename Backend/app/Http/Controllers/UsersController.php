@@ -31,12 +31,23 @@ class UsersController extends Controller
 	public function postIsExist( Request $request )
 	{
 		if ( $request->has( 'email' ) ) {
-			$oUser = User::with( 'Organization' )
-				->where( 'email' , $request->input( 'email' ) )
-				->whereHas( 'Roles' , function ( $q ) {
-					$q->where( 'role_name' , '=' , 'Owner' );
-				} )->first();
-
+			if( $request->has('subdomain') ){
+				$oUser = User::with( 'Organization' )
+					->where( 'email' , $request->input( 'email' ) )
+					->whereHas('Organization',function($q)use($request){
+						$q->where('subdomain','=',$request->input('subdomain'));
+					})
+					->whereHas( 'Roles' , function ( $q ) {
+						$q->where( 'role_name' , '=' , 'Owner' );
+					} )->first();
+			}
+			else {
+				$oUser = User::with( 'Organization' )
+					->where( 'email' , $request->input( 'email' ) )
+					->whereHas( 'Roles' , function ( $q ) {
+						$q->where( 'role_name' , '=' , 'Owner' );
+					} )->first();
+			}
 			if ( $oUser ) {
 				return response()->json( [ 'user' => $oUser ] );
 			}

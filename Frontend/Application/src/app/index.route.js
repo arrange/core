@@ -50,6 +50,12 @@
                 controller : 'transactionCtrl',
                 controllerAs : 'transactions'
             });
+            /*.state('edit-project-design',{
+                url : '/project/edit/design-mode/:projectId',
+                templateUrl : $config.module.general.view + 'editProjectDesign.html',
+                controller : 'editProjectDesignCtrl',
+                controllerAs : 'editProjectDesign'
+            });*/
         $urlRouterProvider.otherwise('/');
     }
 

@@ -10,20 +10,19 @@
                 <div class="row">
                   <div class="col-xs-12 col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control input-lg" id="domain_url" name="domain_url" placeholder="Pick a url for your account" ng-model="organization.subdomain" validator="required">
+                      <input type="text" class="form-control input-lg" id="domain_url" name="domain_url" placeholder="Pick a url for your account" ng-model="organization.subdomain" validator="required" required-error-message="Subdomain is required.">
                       <div class="input-group-addon input-lg">.notrie.com</div>
                     </div>
                   </div>
                 </div>
+                <input type="email" name="email" value="" class="form-control input-lg" ng-model="organization.email" ng-if="!showPwd" disabled/>
+                <input type="email" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="organization.email" validator="email"  email-error-message="email address required." ng-if="showPwd"/>
               
-                <input type="email" name="email" value="" class="form-control input-lg" placeholder="Email Address" ng-model="organization.email" validator="email"  email-error-message="email address required."/>
-              
-                <input type="password" name="password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Password (min 6 charector)" ng-model="organization.password"  validator="required" password-error-message="email address required." />
-                               
-              
-                <input type="password" name="confirm_password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Confirm Password" ng-model="organization.password_confirmation" validator="required" />
+                <input type="password" name="password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Password (min 6 charector)" ng-model="organization.password"  validator="required, minlength=6" required-error-message="Password is required." minlength-error-message="Minimum 6 charaters required"/>
+
+                <input type="password" name="confirm_password" ng-if="showPwd" value="" class="form-control input-lg" placeholder="Confirm Password" ng-model="organization.password_confirmation" validator="required,  minlength=6"  required-error-message="Confirm Password is required." minlength-error-message="Minimum 6 charaters required"/>
                 
-                <input type="text" name="company_name" value="" class="form-control input-lg" placeholder="Your / Company name" ng-model="organization.name" validator="required" />         
+                <input type="text" name="company_name" value="" class="form-control input-lg" placeholder="Your / Company name" ng-model="organization.name" validator="required" required-error-message="Your/Company name is required."/>
                 <input name="google_sign_up" type="hidden" model="Organization.google_sign_up">
                 <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit" validation-submit="form1" ng-click="signupForm()">
                         Create account</button>

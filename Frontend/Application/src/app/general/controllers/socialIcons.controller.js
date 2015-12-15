@@ -3,9 +3,9 @@
 
     angular
         .module('easywebapp')
-        .controller('SocialIconCtrl', function ($config, $state, Auth, $scope, $rootScope, toastr, $stateParams,$modalInstance) {
+        .controller('SocialIconCtrl', function ($config, $state, Auth, $scope, $rootScope, toastr, $stateParams,$uibModalInstance) {
             $scope.close = function(){
-                $modalInstance.close();
+                $uibModalInstance.close();
             };
 
             $scope.sliders = {};

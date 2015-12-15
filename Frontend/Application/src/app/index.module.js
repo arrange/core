@@ -15,7 +15,10 @@
           'ui.codemirror',
           'ngFileUpload',
           'angular-clipboard',
-          'ui.bootstrap-slider'
+          'ui.bootstrap-slider',
+          'FileManagerApp',
+          'ngFileUpload'
       ]);
+
 
 })();

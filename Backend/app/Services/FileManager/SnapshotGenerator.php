@@ -23,9 +23,20 @@ class SnapshotGenerator
 
 	public function getAndSavePreview( $source , $destination )
 	{
-		$aResponse = json_decode( file_get_contents( env( 'SS_SERVER_URL' ) . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination ) , true );
-		if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
-			return $aResponse[ 'success' ];
+		/*echo env( 'SS_SERVER_URL' ) . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination;
+		exit;*/
+		if(  $aRes = @file_get_contents( env( 'SS_SERVER_URL' ) . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination ) ) {
+			$aResponse = json_decode( $aRes , true );
+			if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
+				return $aResponse[ 'success' ];
+		}
+		else {
+			$client = new \GuzzleHttp\Client();
+			$res = $client->request('GET', env( 'SS_SERVER_URL' ) . '?mode=screenshot&input=' . env( 'SS_BASE_URL' ) . $source . "&output=" . $destination );
+			$aResponse = json_decode($res->getBody(),true);
+			if ( isset( $aResponse[ 'success' ] ) AND $aResponse[ 'success' ] )
+				return $aResponse[ 'success' ];
+		}
 		return false;
 	}
 
@@ -38,7 +49,8 @@ class SnapshotGenerator
 		else {
 			$files = glob( $path . '*.html' );
 			foreach( $files as $file ) {
-				return array( $path , $file );
+				$path_parts = pathinfo($file);
+				return array( $path , $path_parts['filename'].".html" );
 			}
 		}
 		return array();

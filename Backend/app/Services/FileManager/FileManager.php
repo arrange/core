@@ -1,7 +1,7 @@
 <?php namespace App\Services\FileManager;
 
 
-class FileManager extends Ftp {
+class FileManager extends FtpService {
 
 	public function downloadTemp($path)
 	{
@@ -18,5 +18,4 @@ class FileManager extends Ftp {
 			return @file_get_contents($localPath);
 		}
 	}
-
 }

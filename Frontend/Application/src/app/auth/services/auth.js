@@ -86,5 +86,15 @@ angular.module('easywebapp')
             });
             return defer.promise;
         };
+
+        this.isUserExist = function(data){
+            var defer = $q.defer();
+            $http.post($config.api + 'users/is-exist' , data  ).success(function(response){
+                defer.resolve(response);
+            },function(data1){
+                defer.reject(data1);
+            });
+            return defer.promise;
+        };
 	}]);
 })();

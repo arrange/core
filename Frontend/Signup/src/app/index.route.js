@@ -14,7 +14,7 @@
                 controller: 'MainController',
                 controllerAs: 'main'
             },*/{
-                url: '/',
+                url: '/:param1',
                 templateUrl: 'app/auth/views/option.html',
                 controller: 'AuthController',
                 controllerAs: 'auth'

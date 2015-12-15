@@ -79,6 +79,8 @@ class ProjectsController extends Controller
 		if ( !file_exists( $sDestinationPath ) )
 			File::makeDirectory( $sDestinationPath , $permissions = intval( "0777" , 8 ) , true );
 		$oProject->location = $sProjectFolder . DIRECTORY_SEPARATOR;
+		$oProject->thumb = $sProjectFolder . ".png";
+		$oProject->save();
 
 		if ( $request->input( 'type' ) == "template" ) {
 			// Copy Preset folder in project_id folder
@@ -112,12 +114,8 @@ class ProjectsController extends Controller
 			$sSrc = "Backend/clients/" . $oUser->Organization->id . "/" . $oUser->id . "/" . $sProjectFolder . "/" . $aFiles[ 1 ];
 			$sDest = CLIENTS_BASE_PATH . $oUser->Organization->id . DIRECTORY_SEPARATOR . $oUser->id . DIRECTORY_SEPARATOR . $sProjectFolder . ".png";
 			$sThumbPath = $oSnpShotGenerator->getAndSavePreview( $sSrc , $sDest );
-			if ( $sThumbPath ) {
-				$oProject->thumb = $sProjectFolder . ".png";
-			}
 		}
 
-		$oProject->save();
 
 		return response()->json( $oProject->toArray() );
 	}

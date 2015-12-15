@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="55a4e810-e938-448f-9c4e-44e9b60c3c84" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/FtpWrapper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/addproject.controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/editproject.controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/filemanager.modal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/filemanger.controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/factories/interceptor.js" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Backend\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Backend\public\Backend\clients\2\2\2%5Chello%5C\thumb-2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Backend\public\Backend\clients\2\2\2%5Chello%5C\thumb-2_1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-054fb1ae4c.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-0965d289c6.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-110f590a26.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-190147cf48.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-3a15ae41c2.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-3b4f71bbd9.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-522fc910ab.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-5b58c2a065.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-8ec447133c.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-97d20ed201.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-c13f1b630b.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-cddf2c0524.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-d4f05c2836.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\app-dcdeceacad.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-16d7c3ec64.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-2831159925.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-2a6eb62dec.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-41df48d98a.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-907124387b.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\scripts\vendor-e9604ecb97.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\app-4f80a24298.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\app-68f0da15a6.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\app-dcbe6987c2.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\app-e90cbe0f22.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\app-f88ec919b3.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\vendor-300e3c80b9.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\vendor-56b604ee8a.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\dist\styles\vendor-5ed2807b23.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Application\src\app\general\controllers\project.controller.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\app-6b73e14f2d.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\app-a10c5995a7.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\app-b4c384f95a.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\app-ec833fabf7.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\app-f811cf0a15.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\scripts\vendor-e9604ecb97.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\notrierepo\Frontend\Signup\dist\styles\vendor-5ed2807b23.css" afterPath="" />
+      <change type="MOVED" beforePath="C:\wamp\www\notrierepo\Backend\app\Http\Requests\SignupRequest.php" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/SignUpRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/app/Services/FileManager/FileManager.php" afterPath="$PROJECT_DIR$/Backend/app/Services/FileManager/FileManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/ProjectsController.php" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/ProjectsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/app/Services/FileManager/SnapshotGenerator.php" afterPath="$PROJECT_DIR$/Backend/app/Services/FileManager/SnapshotGenerator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/addProject.html" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/addProject.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Signup/src/app/auth/controllers/auth.controller.js" afterPath="$PROJECT_DIR$/Frontend/Signup/src/app/auth/controllers/auth.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/auth/services/auth.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/auth/services/auth.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/bower.json" afterPath="$PROJECT_DIR$/Frontend/Application/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/composer.json" afterPath="$PROJECT_DIR$/Backend/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/composer.lock" afterPath="$PROJECT_DIR$/Backend/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/gulp/conf.js" afterPath="$PROJECT_DIR$/Frontend/Application/gulp/conf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/config/cors.php" afterPath="$PROJECT_DIR$/Backend/config/cors.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProject.html" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProject.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/general/factories/file.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/factories/file.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.config.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.constants.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Signup/src/app/index.constants.js" afterPath="$PROJECT_DIR$/Frontend/Signup/src/app/index.constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.css" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/dist/index.html" afterPath="$PROJECT_DIR$/Frontend/Application/dist/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/index.html" afterPath="$PROJECT_DIR$/Frontend/Application/src/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Signup/dist/index.html" afterPath="$PROJECT_DIR$/Frontend/Signup/dist/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.module.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.route.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.route.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Signup/src/app/index.route.js" afterPath="$PROJECT_DIR$/Frontend/Signup/src/app/index.route.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/index.run.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/index.run.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/app/Http/routes.php" afterPath="$PROJECT_DIR$/Backend/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/auth/views/sign_in.html" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/auth/views/sign_in.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Signup/src/app/auth/views/sign_up.html" afterPath="$PROJECT_DIR$/Frontend/Signup/src/app/auth/views/sign_up.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/auth/controllers/signin.controller.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/auth/controllers/signin.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/socialIcons.controller.js" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/socialIcons.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/socialIcons.modal.html" afterPath="$PROJECT_DIR$/Frontend/Application/src/app/general/views/socialIcons.modal.html" />
+    </list>
+    <ignored path="notrierepo.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="notrierepo" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FtpWrapper.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Backend/app/Http/Controllers/FtpWrapper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.72440946" vertical-offset="3495" max-vertical-offset="4865">
+              <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+              <folding>
+                <element signature="e#121#149#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editproject.controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/editproject.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4865" max-vertical-offset="11515">
+              <caret line="145" column="31" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interceptor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/factories/interceptor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2170">
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/controllers/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4970" max-vertical-offset="6370">
+              <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filenavigator.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/filenavigator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5320">
+              <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modals.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/modals.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.833333" vertical-offset="7140" max-vertical-offset="12005">
+              <caret line="215" column="30" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fileuploader.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/fileuploader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1120" max-vertical-offset="2485">
+              <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.module.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.module.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1050">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editProject.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProject.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="8.166667" vertical-offset="525" max-vertical-offset="3640">
+              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/slimScroll/bower.json" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/dropdown.controller,js.php" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/dropdown.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/index.html" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/auth/controllers/signin.controller.js" />
+        <option value="$PROJECT_DIR$/Backend/app/Http/Controllers/FilesController.php" />
+        <option value="$PROJECT_DIR$/Backend/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/angular-filemanager/src/js/app.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/angular-filemanager/bower.json" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/views/filemanager.modal.html" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/socialIcons.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/views/socialIcons.modal.html" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/index.config.js" />
+        <option value="$PROJECT_DIR$/Backend/config/cors.php" />
+        <option value="$PROJECT_DIR$/Backend/vendor/nicolab/php-ftp-client/composer.json" />
+        <option value="$PROJECT_DIR$/Backend/vendor/nicolab/php-ftp-client/src/FtpClient/FtpClient.php" />
+        <option value="$PROJECT_DIR$/Backend/app/Services/FileManager/FileManager.php" />
+        <option value="$PROJECT_DIR$/Backend/vendor/laravel/framework/src/Illuminate/Support/helpers.php" />
+        <option value="$PROJECT_DIR$/Backend/.env" />
+        <option value="$PROJECT_DIR$/Backend/app/Services/FileManager/FtpService.php" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/angular-filemanager/dist/angular-filemanager.min.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower.json" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/bootstrap/bower.json" />
+        <option value="$PROJECT_DIR$/Frontend/Application/gulp/conf.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/filemanager/css/angular-filemanager.css" />
+        <option value="$PROJECT_DIR$/Frontend/Application/bower_components/codemirror/bower.json" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/index.css" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/project.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/addproject.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/factories/file.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/filemanger.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProjectDesign.html" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/index.route.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/index.constants.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/editproject.controller.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProject.html" />
+        <option value="$PROJECT_DIR$/Backend/app/Http/Controllers/FtpWrapper.php" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/controllers/main.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/general/factories/interceptor.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/index.module.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/filenavigator.js" />
+        <option value="$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/fileuploader.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notrierepo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.lastSelected" value="org.jetbrains.plugins.terminal.TerminalOptionsConfigurable" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ays_full" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\notrierepo\Frontend\Application\src\app\general\views" />
+      <recent name="C:\wamp\www\notrierepo\Frontend\Application" />
+      <recent name="C:\wamp\www\notrierepo\Frontend\Application\src\app" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55a4e810-e938-448f-9c4e-44e9b60c3c84" name="Default" comment="" />
+      <created>1448968406242</created>
+      <option name="number" value="Default" />
+      <updated>1448968406242</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35915494" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18082368" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3084507" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35915494" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3084507" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23616473" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Backend/vendor/nicolab/php-ftp-client/src/FtpClient/FtpClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56478405" vertical-offset="26085" max-vertical-offset="29400">
+          <caret line="764" column="62" selection-start-line="764" selection-start-column="62" selection-end-line="764" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Services/FileManager/Ftp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5007874" vertical-offset="20227" max-vertical-offset="25200">
+          <caret line="587" column="24" selection-start-line="587" selection-start-column="24" selection-end-line="587" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="17484" max-vertical-offset="28105">
+          <caret line="509" column="12" selection-start-line="509" selection-start-column="12" selection-end-line="509" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4830247" vertical-offset="16749" max-vertical-offset="28105">
+          <caret line="509" column="13" selection-start-line="509" selection-start-column="13" selection-end-line="509" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/storage/logs/laravel-2015-12-11.log">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3324937" vertical-offset="6483" max-vertical-offset="27405">
+          <caret line="189" column="173" selection-start-line="189" selection-start-column="173" selection-end-line="189" selection-end-column="173" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="657" max-vertical-offset="1400">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/bower_components/bootstrap/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35714287" vertical-offset="420" max-vertical-offset="1400">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/gulp/inject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2983115" vertical-offset="692" max-vertical-offset="1435">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/gulp/conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72232646" vertical-offset="525" max-vertical-offset="1645">
+          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/gulp/build.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20192307" vertical-offset="2800" max-vertical-offset="3465">
+          <caret line="83" column="4" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/gulp/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.3653846" vertical-offset="1750" max-vertical-offset="2415">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/gulp/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="805">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09542744" vertical-offset="1072" max-vertical-offset="1820">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Services/FileManager/FileManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51080245" vertical-offset="124" max-vertical-offset="910">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5737463" vertical-offset="311" max-vertical-offset="1085">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7894737" vertical-offset="0" max-vertical-offset="1190">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/views/filemanager.modal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27006173" vertical-offset="0" max-vertical-offset="770">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/entities/item.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7007519" vertical-offset="1599" max-vertical-offset="10605">
+          <caret line="59" column="26" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/main-table-modal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062992126" vertical-offset="940" max-vertical-offset="1785">
+          <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/main-icons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/main-table.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22047244" vertical-offset="0" max-vertical-offset="2590">
+          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/bower_components/angular-ui-codemirror/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4861111" vertical-offset="0" max-vertical-offset="648">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/bower_components/codemirror/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16535433" vertical-offset="0" max-vertical-offset="805">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/css/angular-filemanager.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52064896" vertical-offset="13227" max-vertical-offset="19355">
+          <caret line="388" column="19" selection-start-line="388" selection-start-column="19" selection-end-line="388" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Services/FileManager/FtpService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45826772" vertical-offset="20219" max-vertical-offset="25165">
+          <caret line="586" column="38" selection-start-line="586" selection-start-column="38" selection-end-line="586" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7753165" vertical-offset="22645" max-vertical-offset="32375">
+          <caret line="661" column="13" selection-start-line="661" selection-start-column="13" selection-end-line="661" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProfile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1645">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/services/preview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="805">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44094488" vertical-offset="0" max-vertical-offset="770">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6062992" vertical-offset="315" max-vertical-offset="1400">
+          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86419755" vertical-offset="315" max-vertical-offset="1645">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/addproject.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0" vertical-offset="0" max-vertical-offset="4340">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/providers/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31578946" vertical-offset="1365" max-vertical-offset="2205">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/directives/directives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5263158" vertical-offset="0" max-vertical-offset="1610">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/filters/filters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/factories/file.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8259587" vertical-offset="105" max-vertical-offset="1470">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Http/Controllers/FilesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16535433" vertical-offset="5600" max-vertical-offset="6685">
+          <caret line="167" column="33" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProjectDesign.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27559054" vertical-offset="0" max-vertical-offset="635">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61946905" vertical-offset="1470" max-vertical-offset="2345">
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68421054" vertical-offset="1365" max-vertical-offset="2695">
+          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/filemanger.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="665">
+          <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/bower_components/dante/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32407406" vertical-offset="315" max-vertical-offset="1750">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/views/editProject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.166667" vertical-offset="525" max-vertical-offset="3640">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/templates/modals.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.833333" vertical-offset="7140" max-vertical-offset="12005">
+          <caret line="215" column="30" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/controllers/editproject.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4865" max-vertical-offset="11515">
+          <caret line="145" column="31" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/index.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1050">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/filenavigator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5320">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/services/fileuploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1120" max-vertical-offset="2485">
+          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/filemanager/js/controllers/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4970" max-vertical-offset="6370">
+          <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Frontend/Application/src/app/general/factories/interceptor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2170">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/app/Http/Controllers/FtpWrapper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72440946" vertical-offset="3495" max-vertical-offset="4865">
+          <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+          <folding>
+            <element signature="e#121#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

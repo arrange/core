@@ -25,11 +25,21 @@ class SignUpRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			'name'	=>	'required',
-			'email'		=>	'required|email|unique:users,email',
-			'subdomain' =>  'required|unique:organizations,subdomain'
-		];
+		if( $this->has('google_sign_up') ){
+			return [
+				'name' => 'required' ,
+				'email' => 'required|email|unique:users,email' ,
+				'subdomain' => 'required|unique:organizations,subdomain'
+			];
+		}
+		else {
+			return [
+				'name' => 'required' ,
+				'email' => 'required|email|unique:users,email' ,
+				'subdomain' => 'required|unique:organizations,subdomain',
+				'password' => 'required|confirmed'
+			];
+		}
 	}
 
 	public function response(array $errors)

@@ -15,7 +15,6 @@ Route::get( '/' , 'WelcomeController@index' );
 Route::post('stripe/payment-failed', 'Laravel\Cashier\WebhookController@handleWebhook');
 Route::post('stripe/payment-success', 'WebhookController@handleInvoicePaymentSucceeded');
 Route::get( 'home' , 'HomeController@index' );
-
 Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router $router ) {
 	Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
 
@@ -23,10 +22,11 @@ Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router 
 	Route::post( 'forgot-password' , 'Auth\PasswordController@postEmail' );
 	Route::get( 'user/{token}' , 'Auth\AuthController@getTokenInfo' );
 	Route::post( 'reset' , 'Auth\PasswordController@postReset' );
-	Route::post( 'is-exist' , 'UsersController@postIsExist' );
+	Route::post( 'users/is-exist' , 'UsersController@postIsExist' );
 	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
 
 	Route::group( [ 'middleware' => 'token' ] , function () {
+		Route::any( 'handler' , 'FtpWrapper@anyHandler');
 		Route::controller( 'users' , 'UsersController' );
 		Route::resource( 'projects' , 'ProjectsController' );
 		Route::controller( 'files' , 'FilesController' );
