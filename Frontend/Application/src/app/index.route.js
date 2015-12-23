@@ -49,13 +49,13 @@
                 templateUrl : $config.module.general.view + 'transactions.html',
                 controller : 'transactionCtrl',
                 controllerAs : 'transactions'
-            });
-            /*.state('edit-project-design',{
+            })
+            .state('edit-project-design',{
                 url : '/project/edit/design-mode/:projectId',
                 templateUrl : $config.module.general.view + 'editProjectDesign.html',
                 controller : 'editProjectDesignCtrl',
                 controllerAs : 'editProjectDesign'
-            });*/
+            });
         $urlRouterProvider.otherwise('/');
     }
 

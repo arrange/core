@@ -32,7 +32,7 @@
                  defaultLang: 'en',
 
                  listUrl: api + 'handler',
-                 uploadUrl: api + 'handler',
+                 uploadUrl: api + 'handler1',
                  renameUrl: api + 'handler',
                  copyUrl: api + 'handler',
                  removeUrl: api + 'handler',
@@ -53,10 +53,10 @@
                      changePermissions: true,
                      compress: false,
                      compressChooseName: false,
-                     extract: true,
+                     extract: false,
                      download: true,
-                     preview: true,
-                     remove:false
+                     preview: false,
+                     remove: true
                  },
 
                  enablePermissionsRecursive: true,

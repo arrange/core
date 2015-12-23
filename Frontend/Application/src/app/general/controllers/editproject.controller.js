@@ -8,18 +8,12 @@
             var href = $(this).attr('href');
             var src = $(this).attr('src');
             if( $(this).is('a') ){
-                if( $(this).attr('href') != "#" && $(this).attr('href').substr(0,4) != "http")
+                if( href != "#" && href.substr(0,4) != "http" && href.substr(0,2) != "\/\/")
                     $(this).attr("href","#");
             }
-            else if( href && href != "#"  && href.indexOf('bootstrap') > 0 ){
-                $(this).remove();
-            }
-            else if( href && href != "#"  && href.substr(0,4) != "http" )
+            else if( href && href != "#"  && href.substr(0,4) != "http" && href.substr(0,5) != "https" && href.substr(0,2) != "//")
                 $(this).attr('href',$config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.original_location + href );
-            else if( src && src != "#" && src.substr(0,2) != "//" && src.indexOf('bootstrap') > 0 ){
-                $(this).remove();
-            }
-            else if( src && src != "#" && src.substr(0,2) != "//" && src.substr(0,4) != "http") {
+            else if( src && src != "#" && src.substr(0,2) != "//" && src.substr(0,4) != "http" && src.substr(0,5) != "https" && src.substr(0,2) != "//") {
                 $(this).attr('src', $config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.original_location + src);
             }
         });
@@ -29,9 +23,8 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     angular.module('easywebapp')
-        .controller('editProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', '$config', 'Auth', 'Project', 'toastr', 'File','$uibModal',
-            function ($stateParams, $scope, $state, $rootScope, $config, Auth, Project, toastr, File, $uibModal) {
-
+        .controller('editProjectCtrl', ['$stateParams', '$scope', '$state', '$rootScope', '$config', 'Auth', 'Project', 'toastr', 'File','$uibModal', '$localStorage' ,
+            function ($stateParams, $scope, $state, $rootScope, $config, Auth, Project, toastr, File, $uibModal , $localStorage) {
                 /* codemirror related code start */
                 var __codeMirrorEditor;
                 $scope.codemirrorLoaded = function(_editor) {
@@ -90,12 +83,11 @@
                     $scope.ShowHtml = true;
                     $scope.ShowCss = true;
                     $scope.ShowJs = true;
-                    $scope.ShowView = true;
 
                     /* full path name holders */
-                    $scope.html_file="";
-                    $scope.css_file="";
-                    $scope.js_file="";
+                    $scope.html_file=$localStorage.html_file;
+                    $scope.css_file=$localStorage.css_file;
+                    $scope.js_file=$localStorage.js_file;
 
                     /* extension related files holders */
                     $scope.html_list="";
@@ -105,6 +97,15 @@
                     /* toggle one of the editor part code */
                     $scope.togglePart = function(extension){
                         $scope['Show'+capitalizeFirstLetter(extension)] = !$scope['Show'+capitalizeFirstLetter(extension)];
+                    };
+
+                    /* Show design view */
+                    $scope.showDesignView = function(){
+                        $localStorage.html_file = $scope.html_file;
+                        $localStorage.css_file = $scope.css_file;
+                        $localStorage.js_file = $scope.js_file;
+
+                        $state.go('edit-project-design',{projectId:ProjectObject.id});
                     };
 
                     /* code for browse files */
@@ -136,7 +137,6 @@
                                         else if( name_parts[name_parts.length - 1] == "html" ) {
                                             $scope.html_file = item.currentPathMain;
                                             $scope.editHtml = filterHtml(project,item.content,$config,user_id,organization_id);
-                                            $scope.previewHtml = previewHtml(project,item.content,$config,user_id,organization_id);
                                             generatePreview();
                                         }
                                         else if( name_parts[name_parts.length - 1] == "js" ) {
@@ -149,26 +149,6 @@
                         };
                     }
 
-                    /* PreviewHtml prepare */
-                    function previewHtml(project,resp,$config,organization_id,user_id){
-                        var div = $('<div>');
-                        div.html(resp);
-                        div.find('*').each(function(){
-                            var href = $(this).attr('href');
-                            var src = $(this).attr('src');
-                            if( $(this).is('a') ){
-                                if( $(this).attr('href') != "#" && $(this).attr('href').substr(0,4) != "http")
-                                    $(this).attr("href","#");
-                            }
-                            else if( href && href != "#" && href.substr(0,2) != "//" && href.substr(0,4) != "http" )
-                                $(this).attr('href',$config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.original_location + href );
-                            else if( src && src != "#" && src.substr(0,2) != "//" && src.substr(0,4) != "http") {
-                                $(this).attr('src', $config.clients_path + "/" + organization_id + "/" + user_id + "/" + project.original_location + src);
-                            }
-                        });
-                        return div.html();
-                    }
-
                     /* get html,css,js file content */
                     function getFileContent(extension){
                         if( $scope[extension+'_file'] )
@@ -176,7 +156,6 @@
                             File.index({ mode: 'editfile', 'path': $scope[extension+'_file'] }).then(function (resp) {
                                 if( extension == "html" ) {
                                     $scope.editHtml = filterHtml(ProjectObject, resp.result, $config, user_id, organization_id);
-                                    $scope.previewHtml = previewHtml(ProjectObject, resp.result, $config, user_id, organization_id);
                                     setTimeout(function(){
                                         generatePreview();
                                     },100);
@@ -227,7 +206,7 @@
                         var ifrm = document.getElementById('preview');
                         ifrm = (ifrm.contentWindow) ? ifrm.contentWindow : (ifrm.contentDocument.document) ? ifrm.contentDocument.document : ifrm.contentDocument;
                         ifrm.document.open();
-                        ifrm.document.write($scope.previewHtml);
+                        ifrm.document.write($scope.editHtml);
                         ifrm.document.close();
                     };
                     $scope.renderPreview = generatePreview;
@@ -249,9 +228,22 @@
                         ProjectObject.original_location = project.location;
                         ProjectObject.location = ProjectObject.location.substring(0, ProjectObject.location.length - 1)
                         $scope.project_name = project.name;
-                        getFileList('html');
-                        getFileList('css');
-                        getFileList('js');
+
+                        if( $localStorage.html_file != "" )
+                            getFileContent('html');
+                        else
+                            getFileList('html');
+
+                        if( $localStorage.css_file != "" )
+                            getFileContent('css');
+                        else
+                            getFileList('css');
+
+                        if( $localStorage.js_file != "" )
+                            getFileContent('js');
+                         else
+                            getFileList('js');
+
                         showFileManager(ProjectObject);
                     }, function (data) {
                         $state.go('dashboard');
@@ -268,7 +260,7 @@
                     });
                 }
             }])
-       /* .controller('editProjectDesignCtrl',function($scope,$rootScope,$state,Project,$config,File,$stateParams,Auth){
+        .controller('editProjectDesignCtrl',function($scope,$rootScope,$state,Project,$config,File,$stateParams,Auth,$localStorage){
             function executeProject1(){
                 $scope.editContent = "";
                 var user_id = Auth.getValue('id');
@@ -277,9 +269,14 @@
                     $state.go('dashboard');
 
                 function getFile(project) {
-                    File.index({mode: 'editFile', 'path': project.location + 'index.html'}).then(function (resp) {
+                    /*File.index({mode: 'editFile', 'path': project.location + 'index.html'}).then(function (resp) {
                         $scope.editContent = filterHtml(project,resp,$config,organization_id,user_id);
                     }, function () {
+                    });*/
+                    File.index({ mode: 'editfile', 'path': $localStorage.html_file }).then(function (resp) {
+                        $scope.editContent = filterHtml(project, resp.result, $config, user_id, organization_id);
+                    },function(){
+                        toastr.error("Unable to load file");
                     });
                 }
 
@@ -294,21 +291,30 @@
                     toastr.error('unable to load project');
                 });
 
-                function generateSnapShot(project_id){
-                    return File.saveSnapShot({'id': project_id}).then(function () {
-                    }, function () {
-                        toastr.error("Unable to save snapshot");
-                    });
+                $scope.showDevelopView = function(extension){
+                    $state.go('edit-project',{projectId:$scope.project.id});
                 };
 
                 $scope.saveFile = function()
                 {
-                    File.index({mode: 'saveFile', 'path': $scope.project.location + 'index.html' , 'text': $scope.editContent }).then(function (resp) {
+                   /* File.index({mode: 'saveFile', 'path': $scope.project.location + 'index.html' , 'text': $scope.editContent }).then(function (resp) {
                         generateSnapShot( $scope.project.id ).then(function(){
                             toastr.success("Project saved successfully");
                         });
                     }, function () {
                         toastr.error("Unable to save file");
+                    });*/
+                    File.index({
+                        'mode': 'savefile',
+                        'path': $localStorage.html_file ,
+                        'content': $scope.editContent
+                    }).then(function (resp) {
+                        File.saveSnapShot({'id': $scope.project.id}).then(function () {
+                            toastr.success($localStorage.html_file + " saved successfully");
+                        }, function () {
+                            toastr.error("Unable to save file");
+                        });
+                    }, function () {
                     });
                 };
             };
@@ -320,5 +326,5 @@
                     executeProject1();
                 });
             }
-        }); */
+        });
 })();

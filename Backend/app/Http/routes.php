@@ -11,11 +11,12 @@
 |
 */
 
+
 Route::get( '/' , 'WelcomeController@index' );
 Route::post('stripe/payment-failed', 'Laravel\Cashier\WebhookController@handleWebhook');
 Route::post('stripe/payment-success', 'WebhookController@handleInvoicePaymentSucceeded');
 Route::get( 'home' , 'HomeController@index' );
-Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router $router ) {
+Route::group( [ 'middleware' => 'cors' ] , function () {
 	Route::resource( 'register' , 'Auth\RegistrationController' , array( 'only' => array( 'store' ) ) );
 
 	Route::post( 'auth' , 'Auth\AuthController@postLogin' );
@@ -26,17 +27,15 @@ Route::group( [ 'middleware' => 'cors' ] , function ( Illuminate\Routing\Router 
 	Route::get( 'valid-subdomain' , 'Auth\AuthController@getValidSubdomain' );
 
 	Route::group( [ 'middleware' => 'token' ] , function () {
-		Route::any( 'handler' , 'FtpWrapper@anyHandler');
 		Route::controller( 'users' , 'UsersController' );
 		Route::resource( 'projects' , 'ProjectsController' );
-		Route::controller( 'files' , 'FilesController' );
 		Route::resource( 'admin-presets' , 'PresetsController' );
 		Route::controller( 'preview' , 'PreviewController' );
 		Route::controller( 'stripe' , 'StripeController' );
-		Route::get( 'preset-thumb' , function ( Illuminate\Http\Request $request ) {
-			$name = $request->input( 'name' );
-			return file_get_contents( base_path() . DIRECTORY_SEPARATOR . 'presets' . DIRECTORY_SEPARATOR . $name );
-		} );
+		Route::any( 'files/files' , 'FilesController@anyFiles' );
+		Route::get( 'preset-thumb' , 'FilesController@getThumb' );
+		Route::any( 'handler' , 'FilesController@anyHandler');
+		Route::post('handler1', 'FilesController@postUploadFile');
 	} );
 
 } );

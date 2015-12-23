@@ -1,6 +1,6 @@
 (function(window, angular, $) {
     "use strict";
-    angular.module('FileManagerApp').factory('item', ['$http', '$q', '$translate', 'fileManagerConfig', 'chmod', function($http, $q, $translate, fileManagerConfig, Chmod) {
+    angular.module('FileManagerApp').factory('item', ['$http', '$q', '$translate', 'fileManagerConfig', 'chmod' , '$rootScope','Auth', function($http, $q, $translate, fileManagerConfig, Chmod,$rootScope,Auth) {
 
         var Item = function(model, path) {
             var rawModel = {
@@ -172,7 +172,8 @@
             var data = {
                 mode: "download",
                 preview: preview,
-                path: self.model.fullPath()
+                path: $rootScope.selected_project.location + self.model.fullPath(),
+                token: Auth.getValue('token')
             };
 
             var url = [fileManagerConfig.downloadFileUrl, $.param(data)].join('?');

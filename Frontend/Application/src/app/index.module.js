@@ -13,11 +13,11 @@
           'validation',
           'validation.rule',
           'ui.codemirror',
-          'ngFileUpload',
           'angular-clipboard',
           'ui.bootstrap-slider',
           'FileManagerApp',
-          'ngFileUpload'
+          'ngFileUpload',
+          'ngStorage'
       ]);
 
 

@@ -61,15 +61,17 @@
                         if( valid ) {
                             $scope.enableSubmit = false;
                             $scope.btnText = "Saving..";
+                            $scope.Project.zipFile = $scope.zipFile;
                             if( $scope.zipFile ) {
                                 Upload.upload({
                                     url: $config.api + 'projects',
                                     method: 'POST',
                                     async : false,
                                     headers: {'token': Auth.getValue('token')},
-                                    fields: ($scope.Project).toJSON(),
+                                    data : ($scope.Project).toJSON()
+                                    /*fields: ($scope.Project).toJSON(),
                                     file: $scope.zipFile,
-                                    fileFormDataName: 'zipFile'
+                                    fileFormDataName: 'zipFile'*/
                                 }).then(function(resp){
                                     toastr.success('Project created successfully!', 'Success');
                                     $scope.enableSubmit = true;

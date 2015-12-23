@@ -3,5 +3,27 @@
         float:left;
     }
 </style>
+<div class="row controls_wrap">
+    <div class="back_btn">
+        <a href="" title=""><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <span class="project_title">{{ project_name }}</span>
+    </div>
+    <div class="toggle_btn_wrap mode_toggle_btn_wrap">
+        <div class="changer switcheroo-wrapper switcheroo-wrapper-2">
+            <input class="btn-toggle" type="radio" name="switcheroo1" value="developer" checked ng-click="showDevelopView()"/>
+            <label class="bs-bet-type-label">DEVELOPER</label>
+            <input class="btn-toggle btn-subdued" type="radio" name="switcheroo1" value="designer"/>
+            <label class="btn-toggle" >DESIGNER</label>
+        </div>
+    </div>
+    <div class="right_btns_wrap">
+        <input type="button" class="btn btn-lg save_btn" value="Save"  ng-click="save()">
+    </div>
+</div>
+<div class="row controls_wrap">
+    <div class="col-sm-12">
+        <textarea ng-model="editContent" dante></textarea>
+    </div>
+</div>
 
 

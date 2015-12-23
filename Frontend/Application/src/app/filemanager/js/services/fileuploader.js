@@ -1,6 +1,6 @@
 (function(window, angular) {
-    "use strict";
-    angular.module('FileManagerApp').service('fileUploader', ['$http', '$q', 'fileManagerConfig','$rootScope','Upload', function ($http, $q, fileManagerConfig,$rootScope,Upload) {
+    'use strict';
+    angular.module('FileManagerApp').service('fileUploader', ['$http', '$q', 'fileManagerConfig','$rootScope','Auth',function ($http, $q, fileManagerConfig,$rootScope,Auth) {
 
         function deferredHandler(data, deferred, errorMessage) {
             if (!data || typeof data !== 'object') {
@@ -18,47 +18,38 @@
             deferred.resolve(data);
         }
 
-        this.requesting = false; 
+        this.requesting = false;
         this.upload = function(fileList, path) {
             if (! window.FormData) {
                 throw new Error('Unsupported browser version');
             }
             var self = this;
-            //var form = new window.FormData();
+            var form = new window.FormData();
             var deferred = $q.defer();
-            //form.append('destination', '/' + $rootScope.selected_project.location + path.join('/'));
-            //console.log(form);
-            //for (var i = 0; i < fileList.length; i++) {
-            //    var fileObj = fileList.item(i);
-            //    fileObj instanceof window.File && form.append('file-' + i, fileObj);
-            //}
+            var location = $rootScope.selected_project !== "undefined" ? $rootScope.selected_project.location : "";
+            var pathToUpload = path.join('/') != "" ? '/' + path.join('/') : "";
+            form.append('destination', location + pathToUpload );
+            var token = Auth.getValue('token');
+
+            for (var i = 0; i < fileList.length; i++) {
+                var fileObj = fileList.item(i);
+                fileObj instanceof window.File && form.append('file-' + i, fileObj);
+            }
 
             self.requesting = true;
-            Upload.upload({
-                url: fileManagerConfig.uploadUrl,
-                data: {file: fileList[0], 'destination': $rootScope.selected_project.location + "/" + path.join('/')}
-            }).then(function (resp) {
-                deferredHandler(resp, deferred);
+            $http.post(fileManagerConfig.uploadUrl, form, {
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined,
+                    'token' : token
+                }
+            }).success(function(data) {
+                deferredHandler(data, deferred);
+            }).error(function(data) {
+                deferredHandler(data, deferred, 'Unknown error uploading files');
+            })['finally'](function() {
                 self.requesting = false;
-            }, function (resp) {
-                deferredHandler(resp, deferred, 'Unknown error uploading files');
-                self.requesting = false;
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                $rootScope.$broadcast('upload:progress',{file:evt.config.data.file.name,progress:progressPercentage});
             });
-            //$http.post(fileManagerConfig.uploadUrl, form, {
-            //    transformRequest: angular.identity,
-            //    headers: {
-            //        "Content-Type": undefined
-            //    }
-            //}).success(function(data) {
-            //    deferredHandler(data, deferred);
-            //}).error(function(data) {
-            //    deferredHandler(data, deferred, 'Unknown error uploading files');
-            //})['finally'](function(data) {
-            //    self.requesting = false;
-            //});;
 
             return deferred.promise;
         };

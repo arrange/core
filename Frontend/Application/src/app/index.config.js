@@ -6,7 +6,7 @@
         .config(config)
 
     /** @ngInject */
-    function config($logProvider, toastr,$config,fileManagerConfigProvider,$httpProvider) {
+    function config($logProvider, toastr,$config,fileManagerConfigProvider,$httpProvider,$localStorageProvider) {
         // Enable log
         $logProvider.debugEnabled(true);
 
@@ -21,6 +21,9 @@
         );
 
         $httpProvider.interceptors.push('myHttpInterceptor');
+        $localStorageProvider.set('html_file', '');
+        $localStorageProvider.set('js_file', '');
+        $localStorageProvider.set('css_file', '');
     }
 
 })();

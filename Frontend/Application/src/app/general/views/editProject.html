@@ -15,7 +15,7 @@
             <a href="" title=""><span class="glyphicon glyphicon-chevron-left"></span></a>
             <span class="project_title">{{ project_name }}</span>
         </div>
-        <div class="toggle_btn_wrap" ng-show="ShowView">
+        <div class="toggle_btn_wrap">
             <div class="changer switcheroo-wrapper">
                 <input class="btn-toggle" type="checkbox" name="switcheroo" value="html" ng-checked="ShowHtml" ng-click="togglePart('html')"/>
                 <label class="bs-bet-type-label">HTML</label>
@@ -27,19 +27,19 @@
         </div>
         <div class="toggle_btn_wrap mode_toggle_btn_wrap">
             <div class="changer switcheroo-wrapper switcheroo-wrapper-2">
-                <input class="btn-toggle" type="radio" name="switcheroo1" value="developer" checked ng-click="togglePart('view')"/>
+                <input class="btn-toggle" type="radio" name="switcheroo1" value="developer" checked/>
                 <label class="bs-bet-type-label">DEVELOPER</label>
-                <input class="btn-toggle btn-subdued" type="radio" name="switcheroo1" value="designer" ng-click="togglePart('view')"/>
+                <input class="btn-toggle btn-subdued" type="radio" name="switcheroo1" value="designer" ng-click="showDesignView()"/>
                 <label class="btn-toggle" >DESIGNER</label>
             </div>
         </div>
         <div class="right_btns_wrap">
             <input type="button" class="btn btn-lg save_btn" value="Save"  ng-click="save()">
-            <input type="button" class="btn btn-lg social_icons_btn" value="Social Icons" ng-click="socialIcons()" ng-show="ShowView">
-            <input type="button" class="btn btn-default btn-lg update_preview_btn" value="update preview" ng-click="renderPreview()" ng-show="ShowView">
+            <input type="button" class="btn btn-lg social_icons_btn" value="Social Icons" ng-click="socialIcons()">
+            <input type="button" class="btn btn-default btn-lg update_preview_btn" value="update preview" ng-click="renderPreview()">
         </div>
     </div>
-    <div class="row content_wrap" ng-show="ShowView">
+    <div class="row content_wrap">
         <div class="col-sm-4 editor_wrap"  ng-show="ShowHtml || ShowCss || ShowJs">
             <div class="col-sm-12  editor" ng-show="ShowHtml">
                 <div class="editor_title_row">
@@ -89,10 +89,5 @@
         </div>
         <div class="editor_result_wrap" ng-class="{ 'col-sm-8' : ShowHtml || ShowCss || ShowJs , 'col-sm-12' : !ShowHtml && !ShowCss && !ShowJs }">
                 <iframe name="preview" id="preview" class="full-width"  style="height: 600px;border:0;border:1px solid #cccccc;border-radius:20px;"></iframe>
-        </div>
-    </div>
-    <div class="row controls_wrap" ng-show="!ShowView">
-        <div class="col-sm-12" style="height:600px;">
-            <div ng-model="editHtml" dante ng-show="!ShowView"></div>
         </div>
     </div>
