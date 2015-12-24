@@ -10,11 +10,11 @@
 			$rootScope.$state = $state;
 			$rootScope.Auth = Auth;
 			$rootScope.config = $config;
-           /* var host = $location.host();
+            var host = $location.host();
             var subdomain = "";
             if (host.indexOf('.') > 0)
-                subdomain = host.split('.')[0];*/
-            var subdomain = "qwe1";
+                subdomain = host.split('.')[0];
+            /*var subdomain = "qwe1";*/
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
                window.location = "http://notrie.com";

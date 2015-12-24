@@ -5,11 +5,11 @@
     .module('easywebapp')        
     .controller('LoginCtrl',['$scope','$window','Auth','$state','toastr','$location','$config',function($scope,$window,Auth,$state,toastr,$location,$config){
         var googleLoginWindow;
-         /* var host = $location.host();
+          var host = $location.host();
           var subdomain = "";
           if (host.indexOf('.') > 0)
-              subdomain = host.split('.')[0];*/
-          var subdomain = "qwe1";
+              subdomain = host.split('.')[0];
+          //var subdomain = "qwe1";
           $scope.credentials = { subdomain : subdomain };
           $scope.signIn = function() {
 			Auth.login( $scope.credentials ).then(function(response){

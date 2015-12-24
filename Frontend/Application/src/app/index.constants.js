@@ -7,16 +7,16 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('$config',{
-            url : "http://localhost:3000/",
-            api :  api,
-            preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
-            project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
-            clients_path : "http://localhost/notrierepo/Backend/clients",
-          //  url : "http://notrie.com/",
-          //  api : "http://api.notrie.com/",
-          //  preset_thumb_url :  "http://api.notrie.com/preset-thumb",
-          //  project_thumb_url :  "http://api.notrie.com/preview/file",
-          //  clients_path : "http://api1.notrie.com/clients",
+          //  url : "http://localhost:3000/",
+          //  api :  api,
+          //  preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
+          //  project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
+          //  clients_path : "http://localhost/notrierepo/Backend/clients",
+            url : "http://notrie.com/",
+            api : "http://api.notrie.com/",
+            preset_thumb_url :  "http://api.notrie.com/preset-thumb",
+            project_thumb_url :  "http://api.notrie.com/preview/file",
+            clients_path : "http://api1.notrie.com/clients",
             module : {
                 auth : {
                     controller : 'app/auth/controllers/',
