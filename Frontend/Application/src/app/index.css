@@ -35,8 +35,8 @@ legend{
     background-image: -ms-linear-gradient(top, #79bc64, #578843);
     background-image: -o-linear-gradient(top, #79bc64, #578843);
     background-image: linear-gradient(to bottom, #79bc64, #578843);
-    -webkit-border-radius: 4;
-    -moz-border-radius: 4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
     border-radius: 4px;
     text-shadow: 0px 1px 0px #898a88;
     -webkit-box-shadow: 0px 0px 0px #a4e388;
@@ -297,7 +297,7 @@ html {
     border: none;
     border-radius: 0;
     height: 45px !important;
-    min-height: auto;
+    /*min-height: auto;*/
     margin-bottom: 0;
 }
 
@@ -764,39 +764,49 @@ html {
     .toggle_btn_wrap {
         width: 20.667%;
     }
+
     .mode_toggle_btn_wrap {
         width: 28.2%;
     }
+
     .project_title {
         font-size: 18px;
     }
+
     .back_btn {
         padding: 10px 15px;
     }
+
     .back_btn a {
         font-size: 18px;
     }
+
     .project_title {
         font-size: 18px;
     }
+
     @media screen and (max-width: 991px) {
         .mode_toggle_btn_wrap {
             width: 35%;
         }
+
         .toggle_btn_wrap {
             width: 23%;
             padding-left: 0px;
             padding-right: 0px;
         }
+
         .back_btn {
             width: 15%;
             padding-right: 0px;
         }
+
         .project_title {
             padding-left: 0px;
             padding-right: 10px;
             font-size: 17px;
         }
+
         .right_btns_wrap input {
             width: 90px;
             margin-left: 4px;
@@ -807,30 +817,37 @@ html {
         .controls_wrap {
             height: auto;
         }
+
         .toggle_btn_wrap {
             width: 35%;
         }
+
         .back_btn {
             width: 30%;
         }
+
         .mode_toggle_btn_wrap .switcheroo-wrapper {
             float: right;
             margin-right: 15px;
         }
+
         .right_btns_wrap {
             width: 100%;
             padding-left: 15px;
             padding-right: 15px;
         }
+
         .right_btns_wrap input {
             width: 27.33333%;
             margin-right: 9.00005%;
             margin-left: 0px !important;
             font-size: 13px;
         }
+
         .save_btn {
             margin-right: 0px !important;
         }
+
         .custom_navbar {
             height: auto !important;
         }
@@ -838,9 +855,11 @@ html {
         .switcheroo-wrapper {
             width: 80%;
         }
+
         .project_title {
             font-size: 15px;
         }
+
         .custom_navbar .navbar-right > li.dropdown {
             margin-left: 0px;
         }
@@ -851,6 +870,7 @@ html {
             margin-top: 13px;
             padding-left: 0px;
         }
+
         .custom_collapse {
             float: left;
             margin: 0 !important;
@@ -861,28 +881,35 @@ html {
         .back_btn {
             width: 100%;
         }
+
         .project_title {
             padding-left: 15px;
         }
+
         .toggle_btn_wrap {
             width: 50%;
             padding-left: 15px;
         }
+
         .switcheroo-wrapper {
             width: 90%;
         }
+
         .back_btn span {
             float: left;
             display: block;
         }
+
         .back_btn a span {
             width: 2%;
         }
+
         .project_title {
             width: 98%;
             text-align: center;
             padding-left: 0px;
         }
+
         .back_btn {
             padding-right: 15px;
         }
@@ -892,20 +919,25 @@ html {
             float: left;
             display: block;
         }
+
         .back_btn a span {
             width: 4%;
         }
+
         .project_title {
             width: 96%;
             text-align: center;
             padding-left: 0px;
         }
+
         .back_btn {
             padding-right: 15px;
         }
+
         .switcheroo-wrapper {
             width: 95%;
         }
+
         .right_btns_wrap input {
             margin-left: 0 !important;
             margin-right: 3%;
@@ -917,3 +949,4 @@ html {
             font-size: 11px;
         }
     }
+}

@@ -44,8 +44,8 @@
                     <li class="btn-group" uib-dropdown is-open="status.isopen">
                         <a href="#" class="dropdown-toggle" id="single-button" uib-dropdown-toggle ng-disabled="disabled" role="button"><span class="glyphicon glyphicon-user"></span> Welcome , {{ User.firstname }}</a>
                         <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
-                            <li role="menuitem"><a href="#" ng-click="editProfile()">Edit Profile</a></li>
-                            <li role="menuitem"><a href="#" ng-click="upgradePlan()">Upgrade Plan</a></li>
+                            <li role="menuitem"><a ui-sref="profile">Edit Profile</a></li>
+                            <li role="menuitem"><a ui-sref="upgradePlan">Upgrade Plan</a></li>
                             <li role="menuitem"><a href="#" ng-click="getlogout()">Sign Out</a></li>
                             <li role="separator" class="divider"></li>
                             <li role="menuitem"><a href="#">Separated link</a></li>

@@ -14,7 +14,7 @@
             var subdomain = "";
             if (host.indexOf('.') > 0)
                 subdomain = host.split('.')[0];
-            /*var subdomain = "qwe1";*/
+            /*var subdomain = "demo";*/
             
             Auth.checkSubdomain( subdomain ). then(function(successResp){},function(errorResp){
                window.location = "http://notrie.com";
@@ -89,13 +89,7 @@
                     }
                 } );
 
-            $rootScope.editProfile = function(){
-                $state.go('profile');
-            };
 
-            $rootScope.upgradePlan = function(){
-                $state.go('upgradePlan');
-            };
 		} ] );
 
   /** @ngInject */

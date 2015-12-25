@@ -7,7 +7,7 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('$config',{
-          //  url : "http://localhost:3000/",
+           // url : "http://localhost:3000/",
           //  api :  api,
           //  preset_thumb_url :  "http://localhost/notrierepo/Backend/public/preset-thumb",
           //  project_thumb_url :  "http://localhost/notrierepo/Backend/public/preview/file",
