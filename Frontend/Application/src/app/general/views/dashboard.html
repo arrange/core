@@ -9,7 +9,7 @@
         <form  method="post" accept-charset="utf-8" class="form" role="form" name="form1" novalidate>
                 <div class="col-sm-3"  data-ng-repeat="project in projects">
                     <div class="col-sm-12">{{ project.name }}</div>
-                    <div class="col-sm-12"><img ng-src="{{ project_thumb_url }}?name={{ project.thumb }}&token={{ token }}" ng-click="editProject(project.id)" class="img-responsive" style="border:2px solid #999999;cursor:pointer;"></div>
+                    <div class="col-sm-12"><img ng-src="{{ project_thumb_url + '?name=' + project.thumb + '&token='+ token }}" ng-click="editProject(project.id)" class="img-responsive" style="border:2px solid #999999;cursor:pointer;"></div>
                 </div>
         </form>
     </div>

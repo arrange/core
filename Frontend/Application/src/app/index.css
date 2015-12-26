@@ -297,7 +297,7 @@ html {
     border: none;
     border-radius: 0;
     height: 45px !important;
-    /*min-height: auto;*/
+    min-height: auto;
     margin-bottom: 0;
 }
 

@@ -10494,14 +10494,14 @@ button.close {
 
 @font-face {
   font-family: "dante";
-  src: url("../fonts/dante/fontello.eot");
-  src: url("../fonts/dante/fontello.eot?#iefix") format("embedded-opentype"), url("../fonts/dante/fontello.woff") format("woff"), url("../fonts/dante/fontello.ttf") format("truetype"), url("../fonts/dante/fontello.svgfontello") format("svg");
+  src: url("../fonts/fontello.eot");
+  src: url("../fonts/fontello.eot?#iefix") format("embedded-opentype"), url("../fonts/fontello.woff") format("woff"), url("../fonts/fontello.ttf") format("truetype"), url("../fonts/fontello.svg") format("svg");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: "dante-tooltip";
-  src: url("../fonts/dante/dante.eot");
-  src: url("../fonts/dante/dante.eot?#iefix") format("embedded-opentype"), url("../fonts/dante/dante.woff") format("woff"), url("../fonts/dante/dante.ttf") format("truetype"), url("../fonts/dante/dante.svgdante") format("svg");
+  src: url("../fonts/dante.eot");
+  src: url("../fonts/dante.eot?#iefix") format("embedded-opentype"), url("../fonts/dante.woff") format("woff"), url("../fonts/dante.ttf") format("truetype"), url("../fonts/dante.svg") format("svg");
   font-weight: normal;
   font-style: normal; }
 @-webkit-keyframes pop-upwards {
