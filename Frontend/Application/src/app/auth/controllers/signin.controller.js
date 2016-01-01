@@ -6,10 +6,10 @@
     .controller('LoginCtrl',['$scope','$window','Auth','$state','toastr','$location','$config',function($scope,$window,Auth,$state,toastr,$location,$config){
         var googleLoginWindow;
           var host = $location.host();
-          var subdomain = "";
-          if (host.indexOf('.') > 0)
+          var subdomain = "qwe1";
+          console.log(host.split('.')[0]);
+          if (host.indexOf('.') > 0 && host.split('.')[0] != "localhost")
               subdomain = host.split('.')[0];
-          /*var subdomain = "qwe1";*/
           $scope.credentials = { subdomain : subdomain };
           $scope.signIn = function() {
 			Auth.login( $scope.credentials ).then(function(response){
