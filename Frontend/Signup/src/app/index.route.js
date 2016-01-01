@@ -17,7 +17,10 @@
                 url: '/start/:param1',
                 templateUrl: 'app/auth/views/option.html',
                 controller: 'AuthController',
-                controllerAs: 'auth'
+                controllerAs: 'auth',
+                params:{
+                    'param1' : null
+                }
             })
             .state('Signin',{
                 url: '/signin',
@@ -43,7 +46,7 @@
                 controllerAs: 'sgoogle'
             });
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/start');
     }
 
 })();
