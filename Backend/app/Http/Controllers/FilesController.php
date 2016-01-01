@@ -184,7 +184,7 @@ class FilesController extends Controller
 		if( !empty($list) ){
 			foreach( $list as $item ){
 				$item = base_path('clients'.DIRECTORY_SEPARATOR.$item);
-				if( !is_dir($item) &&  !empty($extenstions) && !in_array(pathinfo($item,PATHINFO_EXTENSION),$extenstions) )
+				if( !is_dir($item) &&  !empty($extenstions) && !in_array(strtolower(pathinfo($item,PATHINFO_EXTENSION)),$extenstions) )
 					continue;
 				$item_temp = str_replace('/',DIRECTORY_SEPARATOR,$item);
 				$item_temp = str_replace('\\',DIRECTORY_SEPARATOR,$item_temp);

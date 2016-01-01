@@ -259,12 +259,12 @@ label.has-error.control-label {
 
 @font-face {
     font-family: 'open_sansregular';
-    src: url('../app/fonts/opensans-regular-webfont.eot');
-    src: url('../app/fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../app/fonts/opensans-regular-webfont.woff2') format('woff2'),
-    url('../app/fonts/opensans-regular-webfont.woff') format('woff'),
-    url('../app/fonts/opensans-regular-webfont.ttf') format('truetype'),
-    url('../app/fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    src: url('fonts/opensans-regular-webfont.eot');
+    src: url('fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/opensans-regular-webfont.woff2') format('woff2'),
+    url('fonts/opensans-regular-webfont.woff') format('woff'),
+    url('fonts/opensans-regular-webfont.ttf') format('truetype'),
+    url('fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -953,11 +953,11 @@ html {
 
 @font-face {
 	font-family: "Flaticon";
-	src: url("../app/social_icons/flaticon.eot");
-	src: url("../app/social_icons/flaticon.eot#iefix") format("embedded-opentype"),
-	url("../app/social_icons/flaticon.woff") format("woff"),
-	url("../app/social_icons/flaticon.ttf") format("truetype"),
-	url("../app/social_icons/flaticon.svg") format("svg");
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
