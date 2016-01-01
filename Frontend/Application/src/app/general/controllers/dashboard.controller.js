@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('easywebapp')
-        .controller('dashboardCtrl', ['$stateParams' , 'Auth', '$scope', '$rootScope', '$state', 'Project', '$config', function ( $stateParams , Auth, $scope, $rootScope, $state, Project, $config) {
+        .controller('dashboardCtrl', ['$stateParams' , 'Auth', '$scope', '$rootScope', '$state', 'Project', '$config', '$localStorage' , function ( $stateParams , Auth, $scope, $rootScope, $state, Project, $config, $localStorage) {
 
             function executeDashborad() {
                 $scope.User = $rootScope.User;
@@ -11,6 +11,9 @@
                 };
 
                 $scope.token = Auth.getValue('token');
+                $localStorage.html_file = '';
+                $localStorage.css_file = '';
+                $localStorage.js_file = '';
                 Project.query().$promise.then(function (aProjects) {
                     $scope.projects = aProjects;
                 }, function () {});

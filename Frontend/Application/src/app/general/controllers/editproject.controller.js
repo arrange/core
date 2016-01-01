@@ -8,7 +8,7 @@
             var href = $(this).attr('href');
             var src = $(this).attr('src');
             if( $(this).is('a') ){
-                if( href != "#" && href.substr(0,4) != "http" && href.substr(0,2) != "\/\/")
+                if( href && href != "#" && href.substr(0,4) != "http" && href.substr(0,2) != "\/\/")
                     $(this).attr("href","#");
             }
             else if( href && href != "#"  && href.substr(0,4) != "http" && href.substr(0,5) != "https" && href.substr(0,2) != "//")
@@ -292,7 +292,7 @@
                 });
 
                 $scope.showDevelopView = function(extension){
-                    $state.go('edit-project',{projectId:$scope.project.id});
+                    $state.go('edit-project',{projectId: project.id});
                 };
 
                 $scope.saveFile = function()
