@@ -55,7 +55,8 @@ class FilesController extends Controller
 	public function anyHandler( Request $request , Guard $auth )
 	{
 		if ( $request->has( 'mode' ) && $request->has( 'path' ) ) {
-			if ( $full_path = 	$this->isValidUser( $request->input( 'path' ) ) ) {
+			$path = str_replace('\\','/',$request->input( 'path' ));
+			if ( $full_path = 	$this->isValidUser( $path ) ) {
 				switch($request->input('mode')){
 					case "savefile":
 						if($request->has( 'content' )) {
